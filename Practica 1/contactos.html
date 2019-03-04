@@ -15,9 +15,27 @@
             <li><a href="./contactos.html">Contactos</a></li>
         </ul>
 
-
-        <h1>Hola soy Contactos</h1>
-
+		<div id="formulario">
+			<form action="mailto:amaliare@ucm.es">
+				<fieldset>
+					<legend>Datos personales</legend>
+						Nombre: <input type="text" name="nom">
+						E-mail: <input type="text" name="mail">
+				</fieldset>
+				<fieldset>
+					<legend>Motivo de la consulta</legend>
+					<input type="radio" name="motivo" value="evaluacion" checked/> Evaluación
+					<input type="radio" name="motivo" value="sugerencias"/> Sugerencias
+					<input type="radio" name="motivo" value="criticas"/> Críticas
+				</fieldset>
+				<fieldset>
+					<legend>Consulta</legend>
+					<textarea name="cons" rows="6" cols="70"></textarea>
+				</fieldset>
+				<input type="checkbox" name="condi" value="ok">Marque esta casilla para verificar que ha leido nuestros términos y condiciones del servicio.</br>
+				<input type="submit" name="aceptar">
+			</form>
+		</div>
 
     </body>
 
