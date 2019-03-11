@@ -17,14 +17,21 @@ div#contenido {
 	background-color: white;
 }
 
+#icono {
+	position: relative;
+	top: 0px;
+
+}
+
 div#cabecera {
-	padding: 40px;
-	height: 80px;
+	position: relative;
+	padding: 20px;
+	height: 230px;
 	border: 5px solid black;
 	border-bottom: none;
 	background-color: #D0D0D0;
 	text-align: center;
-	color: white;
+	color: black;
 	font-size: 50px;
 }
 
