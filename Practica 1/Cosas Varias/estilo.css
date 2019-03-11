@@ -1,0 +1,63 @@
+body {
+	background-image: url("fondo.jpg");
+}
+
+div#contenedor {
+	width: 1000px;
+	margin: auto;
+	margin-top: 20px;
+}
+
+div#contenido {
+	padding: 10px;
+	float: left;
+	min-height: 600px;
+	border: 5px solid black;
+	width: 775px;
+	background-color: white;
+}
+
+div#cabecera {
+	padding: 40px;
+	height: 80px;
+	border: 5px solid black;
+	border-bottom: none;
+	background-color: #D0D0D0;
+	text-align: center;
+	color: white;
+	font-size: 50px;
+}
+
+div#cabecera a, div#cabecera a:visited {
+	color: white;
+	font-weight: bold;
+	text-decoration: none;
+} 
+
+div#cabecera a:hover {
+	color: red;
+	font-weight: bold;
+	text-decoration: underline;
+} 
+
+
+div#barraEtiquetas {
+	padding: 10px;
+	float: left;
+	width: 170px;
+	height: 600px;	
+	border: 5px solid black;
+	border-right: none;
+	background-color: #dddddd;
+}
+
+div#barraEtiquetas a, div#sidebar-left a:visited {
+	color: red;
+	font-weight: bold;
+	text-decoration: none;
+} 
+
+div#barraEtiquetas a:hover {
+	color: red;
+	text-decoration: underline;
+} 
