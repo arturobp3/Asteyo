@@ -18,14 +18,13 @@
 	<div id="contenido">
 		<h1>Página principal</h1>
 		<p> Aquí está el contenido público, visible para todos los usuarios. </p>
+		
+		<?php
+			require("sidebarDer.php");
+		?>
 	</div>
 
-<?php
 
-	//require("sidebarDer.php");
-	//require("pie.php");
-
-?>
 
 
 </div>

@@ -2,8 +2,54 @@ body {
 	background-image: url("fondo.jpg");
 }
 
+.container {
+  display: inline-block;
+  cursor: pointer;
+}
+
+.bar1, .bar2, .bar3 {
+  width: 35px;
+  height: 5px;
+  background-color: #333;
+  margin: 6px 0;
+  transition: 0.4s;
+}
+
+.change .bar1 {
+  -webkit-transform: rotate(-45deg) translate(-9px, 6px);
+  transform: rotate(-45deg) translate(-9px, 6px);
+}
+
+.change .bar2 {opacity: 0;}
+
+.change .bar3 {
+  -webkit-transform: rotate(45deg) translate(-8px, -8px);
+  transform: rotate(45deg) translate(-8px, -8px);
+}
+
+.derecha {
+	position: relative;
+	margin-right: -200;
+	width: 200;
+}
+
+.active .derecha {
+	transition: width 2s;
+	
+}
+
+div#der{
+	position: relative;
+	float: right;
+	width: 60px;
+	height: 60px;	
+	border-right: none;
+	background-color: #ffffff;
+	
+}
+
 div#contenedor {
-	width: 1000px;
+	width: 1200px;
 	margin: auto;
 	margin-top: 20px;
 }
