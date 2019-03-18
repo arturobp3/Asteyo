@@ -20,8 +20,10 @@ require_once("includes/formularioLogin.php");
 <div id="contenedor">
 
 <?php
+
 	require("includes/comun/cabecera.php");
 	require("includes/comun/sidebarIzq.php");
+
 ?>
 
 	<div id="contenido">
@@ -35,8 +37,10 @@ require_once("includes/formularioLogin.php");
 	</div>
 
 <?php
+
 	require("includes/comun/sidebarDer.php");
 	require("includes/comun/pie.php");
+
 ?>
 
 
