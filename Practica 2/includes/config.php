@@ -5,10 +5,10 @@ require_once('aplicacion.php');
 /**
  * Parámetros de conexión a la BD
  */
-define('BD_HOST', 'localhost');
+/*define('BD_HOST', 'localhost');
 define('BD_NAME', 'ejercicio3');
 define('BD_USER', 'ejercicio3');
-define('BD_PASS', 'ejercicio3');
+define('BD_PASS', 'ejercicio3');*/
 
 
 /**
@@ -21,7 +21,8 @@ date_default_timezone_get();
 
 // Inicializa la aplicación
 $app = Aplicacion::getInstance();
-$app->init(array('host'=>BD_HOST, 'bd'=>BD_NAME, 'user'=>BD_USER, 'pass'=>BD_PASS));
+
+//$app->init(array('host'=>BD_HOST, 'bd'=>BD_NAME, 'user'=>BD_USER, 'pass'=>BD_PASS));
 
 
 register_shutdown_function(array($app, 'shutdown'));
