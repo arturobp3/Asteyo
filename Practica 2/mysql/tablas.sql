@@ -22,8 +22,8 @@ CREATE TABLE users(
 	id int(32) NOT NULL,
 	username varchar(32) UNIQUE NOT NULL,
 	password varchar(32) NOT NULL,
-	/*email varchar(32),
-	last_connect datetime,*/
+	email varchar(32),
+	last_connect datetime,
 	rol ENUM( 'normal', 'moderador', 'administrador')
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -40,7 +40,7 @@ ALTER TABLE users
 
 /*¿Por qué tenemos esta tabla y la de usuarios? No pueden tener nada de esto repetido, nos sobra una tabla creo.
 Si crees que nos sobra la tabla borrala y descomenta lo de la tabla users, si crees que no sobra borra lo comentado
-de la tabla users*/
+de la tabla users
 		
 CREATE TABLE users_data (
 	id int(32) NOT NULL,
@@ -48,14 +48,14 @@ CREATE TABLE users_data (
 	last_connect datetime
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-/*Sinceramente esto no se si esta bien del todo, sale algo parecido en internet, me parece raro añadir dos KEY a (id)*/
+/*Sinceramente esto no se si esta bien del todo, sale algo parecido en internet, me parece raro añadir dos KEY a (id)
 ALTER TABLE users_data
 	ADD PRIMARY KEY (id),
 	ADD KEY users_id (id);
 	
 	
 ALTER TABLE users_data
-	ADD CONSTRAINT users_data_ibfk_1 FOREIGN KEY (id) REFERENCES users (id);
+	ADD CONSTRAINT users_data_ibfk_1 FOREIGN KEY (id) REFERENCES users (id);*/
 	
 	
 	
@@ -183,19 +183,21 @@ ALTER TABLE usr_reports
 si se te ocurren distintos utiliza la tabla comentada de abajo para reportes a 
 comentarios y utiliza esta para los memes, solo hay que cambiar el nombre en esta tabla, si no, borrala*/
 
-CREATE TABLE co_me_reports (
+CREATE TABLE me_reports (
 	id_report int(32) NOT NULL,
-	cause ENUM ('Spam', 'Ofensivo')
+	cause ENUM ('Spam', 'Ofensivo'),
+	id_meme int(32)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
-ALTER TABLE co_me_reports
+ALTER TABLE me_reports
 	ADD PRIMARY KEY (id_report),
 	ADD KEY report (id_report);
 
 
-ALTER TABLE co_me_reports
+ALTER TABLE me_reports
 	ADD CONSTRAINT co_me_igfk_1 FOREIGN KEY (id_report) REFERENCES reports(id_report);
+	ADD CONSTRAINT co_me_igfk_2 FOREIGN KEY (id_meme) REFERENCES memes(id_meme);
 	
 
 	
@@ -203,10 +205,11 @@ ALTER TABLE co_me_reports
 /*------------------TABLA REPORTES A COMENTARIOS-----------------------------*/
 /*---------------------------------------------------------------------------*/
 	
-/*
+
 CREATE TABLE co_reports (
-	id_report int(32) NOT NULL;
-	cause ENUM ('Spam', 'Ofensivo')
+	id_report int(32) NOT NULL,
+	cause ENUM('Spam', 'Ofensivo'),
+	id_comment int(32)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
@@ -217,8 +220,8 @@ ALTER TABLE co_reports
 
 ALTER TABLE co_reports
 	ADD CONSTRAINT co_reports_igfk_1 FOREIGN KEY (id_report) REFERENCES reports(id_report);
-	
-*/
+	ADD CONSTRAINT co_reports_igfk_2 FOREIGN KEY (id_comment) REFERENCES comments(id_comment);
+
 /*---------------------------------------------------------------------------*/
 /*-----------------------------TABLA ETIQUETAS-------------------------------*/
 /*---------------------------------------------------------------------------*/
@@ -300,6 +303,8 @@ ALTER TABLE achievement_img
 	
 ALTER TABLE achievement_img
 	ADD CONSTRAINT achievement_img_ibfk_1 FOREIGN KEY (name) REFERENCES achievement (name);
+	
+COMMIT;
 
 
 
