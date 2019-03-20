@@ -5,15 +5,15 @@ require_once('aplicacion.php');
 class Usuario {
 
     private $id;
-    private $nombreUsuario;
-    private $nombre;
+    private $username;
+    private $email;
     private $password;
     private $rol;
 
 
-    private function __construct($nombreUsuario, $nombre, $password, $rol){
-        $this->nombreUsuario= $nombreUsuario;
-        $this->nombre = $nombre;
+    private function __construct($username, $email, $password, $rol){
+        $this->username= $username;
+        $this->email = $email;
         $this->password = $password;
         $this->rol = $rol;
     }
@@ -35,18 +35,18 @@ class Usuario {
     }
 
 
-    /* Devuelve un objeto Usuario con la información del usuario $nombreUsuario,
+    /* Devuelve un objeto Usuario con la información del usuario $username,
      o false si no lo encuentra*/
-    public static function buscaUsuario($nombreUsuario){
+    public static function buscaUsuario($username){
         $app = Aplicacion::getInstance();
         $conn = $app->conexionBD();
-        $query = sprintf("SELECT * FROM Usuarios U WHERE U.nombreUsuario = '%s'", $conn->real_escape_string($nombreUsuario));
+        $query = sprintf("SELECT * FROM users U WHERE U.username = '%s'", $conn->real_escape_string($username));
         $rs = $conn->query($query);
         $result = false;
         if ($rs) {
             if ( $rs->num_rows == 1) {
                 $fila = $rs->fetch_assoc();
-                $user = new Usuario($fila['nombreUsuario'], $fila['nombre'], $fila['password'], $fila['rol']);
+                $user = new Usuario($fila['username'], $fila['email'], $fila['password'], $fila['rol']);
                 $user->id = $fila['id'];
                 $result = $user;
             }
@@ -65,8 +65,8 @@ class Usuario {
 
     /* Devuelve un objeto Usuario si el usuario existe y coincide su contraseña. En caso contrario,
      devuelve false.*/
-    public static function login($nombreUsuario, $password){
-        $user = self::buscaUsuario($nombreUsuario);
+    public static function login($username, $password){
+        $user = self::buscaUsuario($username);
         if ($user && $user->compruebaPassword($password)) {
             return $user;
         }
@@ -74,12 +74,12 @@ class Usuario {
     }
     
     /* Crea un nuevo usuario con los datos introducidos por parámetro. */
-    public static function crea($nombreUsuario, $nombre, $password, $rol){
-        $user = self::buscaUsuario($nombreUsuario);
+    public static function crea($username, $email, $password, $rol){
+        $user = self::buscaUsuario($username);
         if ($user) {
             return false;
         }
-        $user = new Usuario($nombreUsuario, $nombre, password_hash($password, PASSWORD_DEFAULT), $rol);
+        $user = new Usuario($username, $email, password_hash($password, PASSWORD_DEFAULT), $rol);
         return self::guarda($user);
     }
     
@@ -94,9 +94,9 @@ class Usuario {
     private static function inserta($usuario){
         $app = Aplicacion::getInstance();
         $conn = $app->conexionBD();
-        $query=sprintf("INSERT INTO Usuarios(nombreUsuario, nombre, password, rol) VALUES('%s', '%s', '%s', '%s')"
-            , $conn->real_escape_string($usuario->nombreUsuario)
-            , $conn->real_escape_string($usuario->nombre)
+        $query=sprintf("INSERT INTO users(username, email, password, rol) VALUES('%s', '%s', '%s', '%s')"
+            , $conn->real_escape_string($usuario->username)
+            , $conn->real_escape_string($usuario->email)
             , $conn->real_escape_string($usuario->password)
             , $conn->real_escape_string($usuario->rol));
 
@@ -112,9 +112,9 @@ class Usuario {
     private static function actualiza($usuario){
         $app = Aplicacion::getInstance();
         $conn = $app->conexionBD();
-        $query=sprintf("UPDATE Usuarios U SET nombreUsuario = '%s', nombre='%s', password='%s', rol='%s' WHERE U.id=%i"
-            , $conn->real_escape_string($usuario->nombreUsuario)
-            , $conn->real_escape_string($usuario->nombre)
+        $query=sprintf("UPDATE users U SET username = '%s', email='%s', password='%s', rol='%s' WHERE U.id=%i"
+            , $conn->real_escape_string($usuario->username)
+            , $conn->real_escape_string($usuario->email)
             , $conn->real_escape_string($usuario->password)
             , $conn->real_escape_string($usuario->rol)
             , $usuario->id);
