@@ -5,7 +5,7 @@ body {
 /* contenedor */
 .contenedor {
 	display: flex;
-	flex-flow: column;
+	flex-direction: column;
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -15,7 +15,7 @@ body {
 /* cabecera */
 .cabecera {
 	display: flex;
-	flex-flow: row;
+	flex-direction: row;
 	background-color: black;
 	color: #e8edf3;
 }
@@ -23,13 +23,13 @@ body {
 /* logo */
 .cabecera img{
 	padding: 1px;
-	width: 50px;
+	width: 800px;
 	height: 50px;
 }
 
 /* cabecer nombre*/
 .cabecera p{
-	flex-grow: 5;
+	flex-grow: 10;
 	text-align: center;
 	font-weight: bold;
 	
@@ -38,14 +38,14 @@ body {
 /*links de la cabecera */
 .cabecera #link{
 	display: flex;
-	flex-flow: row;
+	flex-direction: row;
 	justify-content: right;
 	align-items: center;
 	flex-grow: 30;
 }
 
 .cabecera #link a{
-	padding: 17px 10px;
+	padding: 0.5103% 2%;
 	text-decoration: none;
 	color: #e8edf3;
 }
@@ -59,14 +59,15 @@ body {
 /*principal*/
 .principal{
 	display: flex;
-	flex-flow: row;
+	flex-direction: row;
 	min-height: 800px; 
 }
 
 .sidebarIzq{
 	display: flex;
-	flex-flow: column;
+	flex-direction: column;
 	width: 250px;
+	height: 700px;
 	background-color: #e8edf3;
 }
 

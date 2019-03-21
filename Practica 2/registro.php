@@ -9,7 +9,7 @@ require_once("includes/formularioRegistro.php");
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" type="text/css" href="estilos/estilo.css" />
+<link rel="stylesheet" type="text/css" href="css/estilo.css" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>Registro</title>
 </head>
@@ -23,7 +23,7 @@ require_once("includes/formularioRegistro.php");
 	require("includes/comun/sidebarIzq.php");
 ?>
 
-	<div id="contenido">
+	<div class="principal">
 		<h1>Registro de usuario</h1>
 
 		<?php

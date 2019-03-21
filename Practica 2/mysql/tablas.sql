@@ -176,7 +176,7 @@ ALTER TABLE usr_reports
 	
 	
 /*---------------------------------------------------------------------------*/
-/*------------------TABLA REPORTES A COMENTARIOS Y A MEME--------------------*/
+/*--------------------------TABLA REPORTES A MEME----------------------------*/
 /*---------------------------------------------------------------------------*/
 	
 /*Estos los he puesto juntos porque se me ocurren los mismos motivos de reporte para los dos, 
@@ -196,8 +196,8 @@ ALTER TABLE me_reports
 
 
 ALTER TABLE me_reports
-	ADD CONSTRAINT co_me_igfk_1 FOREIGN KEY (id_report) REFERENCES reports(id_report);
-	ADD CONSTRAINT co_me_igfk_2 FOREIGN KEY (id_meme) REFERENCES memes(id_meme);
+	ADD CONSTRAINT me_igfk_1 FOREIGN KEY (id_report) REFERENCES reports(id_report),
+	ADD CONSTRAINT me_igfk_2 FOREIGN KEY (id_meme) REFERENCES memes(id_meme);
 	
 
 	
@@ -219,7 +219,7 @@ ALTER TABLE co_reports
 
 
 ALTER TABLE co_reports
-	ADD CONSTRAINT co_reports_igfk_1 FOREIGN KEY (id_report) REFERENCES reports(id_report);
+	ADD CONSTRAINT co_reports_igfk_1 FOREIGN KEY (id_report) REFERENCES reports(id_report),
 	ADD CONSTRAINT co_reports_igfk_2 FOREIGN KEY (id_comment) REFERENCES comments(id_comment);
 
 /*---------------------------------------------------------------------------*/
