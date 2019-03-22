@@ -73,6 +73,20 @@ class formularioRegistro extends Form{
                 $_SESSION['login'] = true;
                 $_SESSION['nombre'] = $username;
                 //header('Location: index.php');
+
+                /*Crea la carpeta correspondiente al usuario en /mysql/img/ (relacionado con
+                el procesamiento del formularioSubirMeme)*/
+
+                
+                $carpeta = './mysql/img/'.$username;
+            
+                var_dump($carpeta);
+
+                if (!file_exists($carpeta)) {
+                    mkdir($carpeta, 0777, true);
+                }
+
+
                 return "index.php";
             }
         }

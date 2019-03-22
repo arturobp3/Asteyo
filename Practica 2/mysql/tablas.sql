@@ -21,7 +21,7 @@ acaso*/
 CREATE TABLE users(
 	id int(32) NOT NULL,
 	username varchar(32) UNIQUE NOT NULL,
-	password varchar(32) NOT NULL,
+	password varchar(80) NOT NULL,
 	email varchar(32),
 	last_connect datetime,
 	rol ENUM( 'normal', 'moderador', 'administrador')
@@ -75,7 +75,7 @@ CREATE TABLE memes (
 	num_megustas int(64) NOT NULL,
 	id_autor int(32) NOT NULL,
 	upload_date datetime,
-	link_img varchar(32)
+	link_img varchar(255)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
@@ -85,7 +85,7 @@ ALTER TABLE memes
 	
 	
 ALTER TABLE memes
-	ADD CONSTRAINT memes_ibfk_1 FOREIGN KEY (id_autor) REFERENCES users (id);
+	ADD CONSTRAINT memes_ibfk_1 FOREIGN KEY (id_autor) REFERENCES users (id) ON DELETE CASCADE;
 	
 	
 ALTER TABLE memes
@@ -114,8 +114,8 @@ ALTER TABLE comments
 
 	
 ALTER TABLE comments
-	ADD CONSTRAINT comments_ibfk_1 FOREIGN KEY (id_autor) REFERENCES users (id),
-	ADD CONSTRAINT comments_ibfk_2 FOREIGN KEY (id_meme) REFERENCES memes (id_meme);
+	ADD CONSTRAINT comments_ibfk_1 FOREIGN KEY (id_autor) REFERENCES users (id) ON DELETE CASCADE,
+	ADD CONSTRAINT comments_ibfk_2 FOREIGN KEY (id_meme) REFERENCES memes (id_meme) ON DELETE CASCADE;
 	
 	
 ALTER TABLE comments
@@ -144,8 +144,8 @@ ALTER TABLE reports
 
 	
 ALTER TABLE reports
-	ADD CONSTRAINT reports_ibfk_1 FOREIGN KEY (usr_that_reports) REFERENCES users (id),
-	ADD CONSTRAINT reports_ibfk_2 FOREIGN KEY (usr_reported) REFERENCES users (id);
+	ADD CONSTRAINT reports_ibfk_1 FOREIGN KEY (usr_that_reports) REFERENCES users (id) ON DELETE CASCADE,
+	ADD CONSTRAINT reports_ibfk_2 FOREIGN KEY (usr_reported) REFERENCES users (id) ON DELETE CASCADE;
 	
 	
 ALTER TABLE reports
@@ -171,7 +171,7 @@ ALTER TABLE usr_reports
 
 
 ALTER TABLE usr_reports
-	ADD CONSTRAINT usr_reports_igfk_1 FOREIGN KEY (id_report) REFERENCES reports(id_report);
+	ADD CONSTRAINT usr_reports_igfk_1 FOREIGN KEY (id_report) REFERENCES reports(id_report) ON DELETE CASCADE;
 	
 	
 	
@@ -196,8 +196,8 @@ ALTER TABLE me_reports
 
 
 ALTER TABLE me_reports
-	ADD CONSTRAINT me_igfk_1 FOREIGN KEY (id_report) REFERENCES reports(id_report),
-	ADD CONSTRAINT me_igfk_2 FOREIGN KEY (id_meme) REFERENCES memes(id_meme);
+	ADD CONSTRAINT me_igfk_1 FOREIGN KEY (id_report) REFERENCES reports(id_report) ON DELETE CASCADE,
+	ADD CONSTRAINT me_igfk_2 FOREIGN KEY (id_meme) REFERENCES memes(id_meme) ON DELETE CASCADE;
 	
 
 	
@@ -219,8 +219,8 @@ ALTER TABLE co_reports
 
 
 ALTER TABLE co_reports
-	ADD CONSTRAINT co_reports_igfk_1 FOREIGN KEY (id_report) REFERENCES reports(id_report),
-	ADD CONSTRAINT co_reports_igfk_2 FOREIGN KEY (id_comment) REFERENCES comments(id_comment);
+	ADD CONSTRAINT co_reports_igfk_1 FOREIGN KEY (id_report) REFERENCES reports(id_report) ON DELETE CASCADE,
+	ADD CONSTRAINT co_reports_igfk_2 FOREIGN KEY (id_comment) REFERENCES comments(id_comment) ON DELETE CASCADE;
 
 /*---------------------------------------------------------------------------*/
 /*-----------------------------TABLA ETIQUETAS-------------------------------*/
@@ -260,8 +260,8 @@ ALTER TABLE hashtag_meme
 
 	
 ALTER TABLE hashtag_meme
-	ADD CONSTRAINT hashtag_meme_ibfk_1 FOREIGN KEY (name_hash) REFERENCES hashtags (name),
-	ADD CONSTRAINT hashtag_meme_ibfk_2 FOREIGN KEY (id_meme) REFERENCES memes (id_meme);
+	ADD CONSTRAINT hashtag_meme_ibfk_1 FOREIGN KEY (name_hash) REFERENCES hashtags (name) ON DELETE CASCADE,
+	ADD CONSTRAINT hashtag_meme_ibfk_2 FOREIGN KEY (id_meme) REFERENCES memes (id_meme) ON DELETE CASCADE;
 	
 
 /*---------------------------------------------------------------------------*/
@@ -281,7 +281,7 @@ ALTER TABLE achievement
 	
 	
 ALTER TABLE achievement
-	ADD CONSTRAINT achievement_ibfk_1 FOREIGN KEY (id_user) REFERENCES users (id);
+	ADD CONSTRAINT achievement_ibfk_1 FOREIGN KEY (id_user) REFERENCES users (id) ON DELETE CASCADE;
 	
 
 
@@ -302,7 +302,7 @@ ALTER TABLE achievement_img
 	
 	
 ALTER TABLE achievement_img
-	ADD CONSTRAINT achievement_img_ibfk_1 FOREIGN KEY (name) REFERENCES achievement (name);
+	ADD CONSTRAINT achievement_img_ibfk_1 FOREIGN KEY (name) REFERENCES achievement (name) ON DELETE CASCADE;
 	
 COMMIT;
 
