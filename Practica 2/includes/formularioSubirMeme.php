@@ -11,14 +11,7 @@ class formularioSubirMeme extends Form{
         parent::__construct($formId, $opciones);
     }
 
-
-    /**
-     * Genera el HTML necesario para presentar los campos del formulario.
-     *
-     * @param string[] $datosIniciales Datos iniciales para los campos del formulario (normalmente <code>$_POST</code>).
-     * 
-     * @return string HTML asociado a los campos del formulario.
-     */
+    
     protected function generaCamposFormulario($datosIniciales){
 
         $html = '<fieldset>';
@@ -49,16 +42,21 @@ class formularioSubirMeme extends Form{
         }
 
         
-        $imagenMeme = isset($_POST['imagen']) ? $_POST['imagen'] : null;
+        $imagenMeme = isset($_FILES['imagen']) ? $_FILES['imagen'] : null;
 
+        //Comprueba si se ha seleccionado un archivo
+        if ( empty($imagenMeme) || $_FILES['imagen']['size'] == 0 ) {
+            $erroresFormulario[] = "¡Debes seleccionar una imagen!";
+        }
 
-        //COMPROBAR SI ES UNA IMAGEN VALIDA?????
-        /*
-        if ( empty($imagenMeme) || !filter_var($email, FILTER_VALIDATE_EMAIL) ) {
-            $erroresFormulario[] = "El email no tiene un formato valido.";
-        }*/
+        //Comprueba si el archivo seleccionado es una imagen y no otra cosa distinta
+        $imageFileType = strtolower(pathinfo($_FILES['imagen']['name'], PATHINFO_EXTENSION));
+
+        if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif" ) {
+            $erroresFormulario[] = "Solo se permiten archivos con extension: JPG, JPEG, PNG ó GIF";
+        }
+
         
-
         //Likes del meme
         $num_megustas = 0;
 
@@ -74,43 +72,41 @@ class formularioSubirMeme extends Form{
         //Creamos la fecha actual se subida
         $datetime = date('Y-m-d H:i:s');
 
-        //Ruta asociada a las carpetas de usuarios en la que cada una contiene los memes
-        //subidos por cada uno.
-        $link_img = "./mysql/img/".$username."/".$imagenMeme;
+
+
+        //PREPARAMOS LAS VARIABLES NECESARIAS PARA EL GUARDADO DE LA IMAGEN
+
+        //Nombre original del fichero en la máquina del cliente.
+        $imagename = $_FILES["imagen"]["name"];
+
+        //Nombre temporal de la ruta en la cual se almacena el fichero subido.
+        $imagetemp = $_FILES["imagen"]["tmp_name"];
+
+        //Ruta asociada a las carpeta del usuario, que contiene los memes subidos.
+        $link_img = "./mysql/img/".$username."/".$imagename;
 
 
         if (count($erroresFormulario) === 0) {
         
-            $meme = Meme::crea($tituloMeme, $num_megustas, $id_autor, $datetime, $link_img);
+            if(is_uploaded_file($imagetemp)) {
+                if(move_uploaded_file($imagetemp, $link_img)) {
 
-            if (! $meme ) {
-                $erroresFormulario[] = "El meme ya existe";
-            } else {
-
-                //REALIZAMOS EL GUARDADO DE LA IMAGEN EN LA CARPETA ADECUADA
-                /*$imagename = $_FILES['imagen']['name'];
-
-                $imagetemp = $_FILES['imagen']['tmp_name'];
-
-
-                if(is_uploaded_file($imagetemp)) {
-                    if(move_uploaded_file($imagetemp, $link_img)) {
-                        echo "Meme subido correctamente";
-                    }
-                    else {
-                        echo "Ha habido un error al subir tu meme.";
-                        exit();
-                    }
+                    //Se guardan los datos en la BBDD
+                    $meme = Meme::crea($tituloMeme, $num_megustas, $id_autor, $datetime, $link_img);
+                    echo "Meme subido correctamente";
                 }
                 else {
-                    echo "Ha habido un error al subir tu meme";
+                    echo "Ha habido un error al subir tu meme.";
                     exit();
-                }*/
-
-
-               //Aqui debería retornar a perfil cuando esté hecho
-                return "index.php";
+                }
             }
+            else {
+                echo "Ha habido un error al subir tu meme.";
+                exit();
+            }
+
+
+            return "index.php";
         }
 
         return $erroresFormulario;   
