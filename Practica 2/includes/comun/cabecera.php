@@ -1,6 +1,6 @@
 <div class="cabecera">
 
-	<img src="img/logoasteyonombre.png" />
+	<a href="index.php"><img src="img/logoasteyonombre.png" /></a>
 
 	<div id="link">
 		<?php

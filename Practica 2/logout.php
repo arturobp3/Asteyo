@@ -15,31 +15,32 @@ session_destroy();
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" type="text/css" href="estilos/estilo.css" />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>Portada</title>
+	<link rel="stylesheet" type="text/css" href="css/estilo.css" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>Logout | Asteyo</title>
 </head>
 
 <body>
 
-<div id="contenedor">
+	<div id="contenedor">
 
-<?php
-	require("includes/comun/cabecera.php");
-	require("includes/comun/sidebarIzq.php");
-?>
+		<?php require("includes/comun/cabecera.php"); ?>
 
-	<div id="contenido">
-		<h1>Hasta pronto!</h1>
+		<div id="principal">
+
+			<?php require("includes/comun/sidebarIzq.php"); ?>
+
+			<div id="contenido">
+				<h1>Hasta pronto!</h1>
+			</div>
+
+		</div>
+
+		<?php
+			require("includes/comun/pie.php");
+		?>
+
 	</div>
-
-<?php
-	require("includes/comun/sidebarDer.php");
-	require("includes/comun/pie.php");
-?>
-
-
-</div>
 
 </body>
 </html>
