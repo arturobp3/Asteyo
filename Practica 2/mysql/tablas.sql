@@ -21,7 +21,7 @@ acaso*/
 CREATE TABLE users(
 	id int(32) NOT NULL,
 	username varchar(32) UNIQUE NOT NULL,
-	password varchar(32) NOT NULL,
+	password varchar(64) NOT NULL,
 	email varchar(32),
 	last_connect datetime,
 	rol ENUM( 'normal', 'moderador', 'administrador')
