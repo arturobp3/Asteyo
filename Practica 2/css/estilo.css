@@ -1,47 +1,53 @@
+/*--------------------------------------------------------------------------------------------------------------------------------------*/
+/*
+	- para centrar cosas dentro de los div: usad los atributos "justify-content: center;" y "align-items: center;"
+*/
+/*--------------------------------------------------------------------------------------------------------------------------------------*/
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
 body {
 	background-color: white;
 }
 
-/* contenedor */
+/*--------------------------------------------------------------------------------------------------------------------------------------*/
+
+/* contenedor : div principal donde está contenido todo aquello que se visualiza por pantalla*/
 .contenedor {
 	display: flex;
 	flex-direction: column;
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100%;
+	/* le damos una altura mínima de 100vh (= 100% del viewport height) para que abarque toda la pantalla y pudea crecer sin problemas */
+	min-height: 100vh;
 }
+
+/*--------------------------------------------------------------------------------------------------------------------------------------*/
 
 /* cabecera */
 .cabecera {
 	display: flex;
 	flex-direction: row;
+	text-align: center;
 	background-color: black;
 	color: #e8edf3;
+
 }
 
 /* logo */
 .cabecera img{
-	padding: 1px;
-	width: 800px;
 	height: 50px;
-}
-
-/* cabecer nombre*/
-.cabecera p{
-	flex-grow: 10;
-	text-align: center;
-	font-weight: bold;
-	
 }
 
 /*links de la cabecera */
 .cabecera #link{
 	display: flex;
 	flex-direction: row;
-	justify-content: right;
+	justify-content: flex-end;
 	align-items: center;
-	flex-grow: 30;
+	width: 50%;
+	padding-right: 30px;
 }
 
 .cabecera #link a{
@@ -56,25 +62,31 @@ body {
 	border-radius: 5px;
 }
 
+/*--------------------------------------------------------------------------------------------------------------------------------------*/
+
 /*principal*/
 .principal{
 	display: flex;
 	flex-direction: row;
-	min-height: 800px; 
+	min-height: 700px;
 }
+
+/*--------------------------------------------------------------------------------------------------------------------------------------*/
 
 .sidebarIzq{
 	display: flex;
 	flex-direction: column;
 	width: 250px;
-	height: 700px;
+	min-height: 700px;
 	background-color: #e8edf3;
 }
+
+/*--------------------------------------------------------------------------------------------------------------------------------------*/
 
 .pie{
 	display: flex;
 	justify-content: center;
-	align-items: center; /* vertical */
+	align-items: center;
 	height: 45px;
 	background-color: #22264b;
 	font-weight: bold;
