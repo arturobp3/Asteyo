@@ -83,7 +83,7 @@ class formularioRegistro extends Form{
         }
         
         if (count($erroresFormulario) === 0) {
-            $usuario = Usuario::crea($username, $email, $password, 'user');
+            $usuario = Usuario::crea($username, $email, $password, 'normal');
             
             if (! $usuario ) {
                 $erroresFormulario[] = "El usuario ya existe";

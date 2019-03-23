@@ -26,8 +26,8 @@ class Usuario {
         return $this->rol;
      }
 
-    public function nombreUsuario(){
-        return $this->nombreUsuario;
+    public function username(){
+        return $this->username;
     }
 
     public function cambiaPassword($nuevoPassword){
@@ -129,6 +129,15 @@ class Usuario {
         }
         
         return $usuario;
+    }
+
+    public static function memes($username){
+        $usuario = buscaUsuario($username);
+        $app = Aplicacion::getInstance();
+        $conn = $app->conexionBD();
+        $query=sprintf("SELECT * FROM users U where id_autor= '%s'", $conn->real_escape_string($username));
+
+        }
     }
     
 }
