@@ -22,17 +22,34 @@
 
 				<?php require("includes/comun/sidebarIzq.php"); ?>
 
-				<div id="contenido">
+				<div id="contenido">						
+					<a href='editarPerfil.php' class='edit'>Editar</a>
+					<div id="foto">
+						<?php
+							$imgPerfil = "mysql/img/".$_SESSION["nombre"]."/fotoPerfil.jpg";
+							echo "<img src=".$imgPerfil." width='100' height='115'>";
+						?>
+                		
+                	</div>
+                	<div id="perfil">
+						<?php
+							$usuario = Usuario::BuscaUsuario($_SESSION["nombre"]);
+							//echo "Nombre: ".$_SESSION["nombre"];
 
-					<?php
-						$usuario = Usuario::BuscaUsuario($_SESSION["nombre"]);
-						//echo "Nombre: ".$_SESSION["nombre"];
-						echo "Nombre: ".$usuario->username();
-						$rango = $usuario->rol();
-						echo "Rango: ".$rango;
+							echo "<p>Nombre: ".$usuario->username()."</p>";
+							$rango = $usuario->rol();
+							echo "<p>Rango: ".$rango."</p>";
 
-					?>
-
+						?>
+					</div>
+					<div id="memes">
+						<?php
+							$rtMemes= Usuario::memes($usuario->username());
+							foreach ($rtMemes as $key => $value) {
+								echo "<img src=".$value." width='100' height='115'>";
+							}
+						?>
+					</div>
 				</div>
 
 			</div>

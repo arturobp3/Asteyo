@@ -132,12 +132,26 @@ class Usuario {
     }
 
     public static function memes($username){
-        $usuario = buscaUsuario($username);
+        $usuario = self::buscaUsuario($username);
         $app = Aplicacion::getInstance();
         $conn = $app->conexionBD();
-        $query=sprintf("SELECT * FROM users U where id_autor= '%s'", $conn->real_escape_string($username));
-
+        $query=sprintf("SELECT link_img FROM memes where id_autor= '%s'", $conn->real_escape_string($usuario->id));
+        $rs = $conn->query($query);
+        $rt=false;
+        if ($rs){
+            if($rs->num_rows>0){
+                $rt=array();
+                for ( $i=0; $i<$rs->num_rows ; $i++){
+                    $rt[$i]= $rs->fetch_assoc();
+                }
+            }
+            $rs->free();
         }
+        else{
+            echo "Error al consultar en la BD: (" . $conn->errno . ") " . utf8_encode($conn->error);
+            exit(); 
+        }
+        return $rt;
     }
     
 }
