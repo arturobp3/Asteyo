@@ -22,12 +22,12 @@
 
 				<?php require("includes/comun/sidebarIzq.php"); ?>
 
-				<div id="contenido">						
+				<div class="contenido">						
 					<a href='editarPerfil.php' class='edit'>Editar</a>
 					<div id="foto">
 						<?php
 							$imgPerfil = "mysql/img/".$_SESSION["nombre"]."/fotoPerfil.jpg";
-							echo "<img src=".$imgPerfil." width='100' height='115'>";
+							echo '<img id="img-perfil" src='.$imgPerfil.'>';
 						?>
                 		
                 	</div>
@@ -45,8 +45,11 @@
 					<div id="memes">
 						<?php
 							$rtMemes= Usuario::memes($usuario->username());
-							foreach ($rtMemes as $key => $value) {
-								echo "<img src=".$value." width='100' height='115'>";
+							
+							if($rtMemes){
+								foreach ($rtMemes as $key => $value) {
+									echo '<img id="meme"src='.$value.'>';
+								}
 							}
 						?>
 					</div>
@@ -54,6 +57,7 @@
 
 			</div>
 
+		<?php require("includes/comun/pie.php"); ?>
 		</body>
 	</html>
 

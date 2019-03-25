@@ -22,11 +22,11 @@ session_destroy();
 
 <body>
 
-	<div id="contenedor">
+	<div class="contenedor">
 
 		<?php require("includes/comun/cabecera.php"); ?>
 
-		<div id="principal">
+		<div class="principal">
 
 			<?php require("includes/comun/sidebarIzq.php"); ?>
 

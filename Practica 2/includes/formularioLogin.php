@@ -51,6 +51,8 @@ class formularioLogin extends Form{
 
         if (count($erroresFormulario) === 0) {
             //$app esta incluido en config.php
+
+
             $usuario = Usuario::buscaUsuario($username);
 			
             if (!$usuario) {

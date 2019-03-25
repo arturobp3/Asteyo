@@ -1,7 +1,8 @@
 <div class="cabecera">
 
-	<a href="index.php"><img src="img/logoasteyonombre.png" /></a>
-
+	<div id="logo">
+		<a href="index.php"><img src="img/logoasteyonombre.png" /></a>
+	</div>
 	<div id="link">
 		<?php
 			if (isset($_SESSION["login"]) && ($_SESSION["login"]===true)) {

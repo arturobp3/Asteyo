@@ -40,6 +40,7 @@ class Usuario {
     public static function buscaUsuario($username){
         $app = Aplicacion::getInstance();
         $conn = $app->conexionBD();
+
         $query = sprintf("SELECT * FROM users U WHERE U.username = '%s'", $conn->real_escape_string($username));
         $rs = $conn->query($query);
         $result = false;
@@ -135,14 +136,18 @@ class Usuario {
         $usuario = self::buscaUsuario($username);
         $app = Aplicacion::getInstance();
         $conn = $app->conexionBD();
-        $query=sprintf("SELECT link_img FROM memes where id_autor= '%s'", $conn->real_escape_string($usuario->id));
+        $query=sprintf("SELECT link_img FROM memes WHERE id_autor= '%s'", $conn->real_escape_string($usuario->id()));
         $rs = $conn->query($query);
         $rt=false;
+      
         if ($rs){
             if($rs->num_rows>0){
+                
                 $rt=array();
-                for ( $i=0; $i<$rs->num_rows ; $i++){
-                    $rt[$i]= $rs->fetch_assoc();
+                $i = 0;
+                while($row = mysqli_fetch_assoc($rs)){
+                    $rt[$i] = $row['link_img'];
+                    $i = $i + 1;
                 }
             }
             $rs->free();

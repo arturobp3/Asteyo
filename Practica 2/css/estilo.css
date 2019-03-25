@@ -35,6 +35,14 @@ body {
 
 }
 
+/*divi imagen*/
+.cabecera #logo {
+	display: flex;
+	align-items: flex-start;
+	width: 50%;
+}
+
+
 /* logo */
 .cabecera img{
 	height: 50px;
@@ -68,7 +76,16 @@ body {
 .principal{
 	display: flex;
 	flex-direction: row;
-	min-height: 700px;
+	min-height: 800px;
+}
+
+.contenido #foto #img-perfil {
+	width: 120px;
+	height: 120px;
+}
+.contenido #memes #meme {
+	width: 150px;
+	height: 150px;
 }
 
 /*--------------------------------------------------------------------------------------------------------------------------------------*/
@@ -77,7 +94,7 @@ body {
 	display: flex;
 	flex-direction: column;
 	width: 250px;
-	min-height: 700px;
+	min-height: 800px;
 	background-color: #e8edf3;
 }
 
