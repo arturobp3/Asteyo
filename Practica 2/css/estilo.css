@@ -7,6 +7,7 @@
 	box-sizing: border-box;
 	margin: 0;
 	padding: 0;
+	font-family: 'Ubuntu', sans-serif;
 }
 
 body {
@@ -59,7 +60,8 @@ body {
 }
 
 .cabecera #link a{
-	padding: 0.5103% 2%;
+	margin: 0 3px;
+	padding: 1% 2%;
 	text-decoration: none;
 	color: #e8edf3;
 }
@@ -87,25 +89,50 @@ body {
 }
 
 /*editar perfil*/
-.principal #contenido a #id {
+.principal #contenido a {
 	display: flex;
-	justify-content: flex-end;
+	justify-content: center;
 	align-items: center;
-	padding: 0.5103% 2%;
+	padding: 1% 1%;
+	width: 100px;
+	color: black;
+	border: 1px solid black;
+	border-radius: 5px;
 	text-decoration: none;
 }
 
-.principal #contenido a #id:hover {
+.principal #contenido a:hover {
 	background-color: black;
 	color: white;
 	border-radius: 5px;
 }
 
-.principal #contenido #foto #img-perfil {
+/* panel del perfil con al foto y los datos del usuario*/
+.principal #contenido #panel-perfil {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+}
+
+.principal #contenido #panel-perfil #foto #img-perfil {
 	width: 120px;
 	height: 120px;
 }
-.principal #contenido #memes #meme {
+
+.principal #contenido #panel-perfil #perfil {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	width: 300px;
+	padding: 2% 2%;
+}
+
+.principal #contenido #panel-perfil #perfil p {
+	padding: 1% 1%; 
+}
+
+/*panel del perfil donde estan contenidos los memes de usuario */
+.principal #contenido #panel-memes #meme {
 	width: 150px;
 	height: 150px;
 }

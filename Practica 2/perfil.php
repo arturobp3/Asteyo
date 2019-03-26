@@ -24,25 +24,27 @@
 
 				<div id="contenido">						
 					<a href='editarPerfil.php' id='edit'>Editar</a>
-					<div id="foto">
+					<div id="panel-perfil">
+						<div id="foto">
 						<?php
 							$imgPerfil = "mysql/img/".$_SESSION["nombre"]."/fotoPerfil.jpg";
 							echo '<img id="img-perfil" src='.$imgPerfil.'>';
 						?>
-                		
-                	</div>
-                	<div id="perfil">
-						<?php
-							$usuario = Usuario::BuscaUsuario($_SESSION["nombre"]);
-							//echo "Nombre: ".$_SESSION["nombre"];
+	                	</div>
+	                	<div id="perfil">
+							<?php
+								$usuario = Usuario::BuscaUsuario($_SESSION["nombre"]);
+								//echo "Nombre: ".$_SESSION["nombre"];
 
-							echo "<p>Nombre: ".$usuario->username()."</p>";
-							$rango = $usuario->rol();
-							echo "<p>Rango: ".$rango."</p>";
+								echo "<p>Nombre: ".$usuario->username()."</p>";
+								$rango = $usuario->rol();
+								echo "<p>Rango: ".$rango."</p>";
 
-						?>
+							?>
+						</div>
 					</div>
-					<div id="memes">
+					<div id="panel-memes">
+						<h3>Memes</h3>
 						<?php
 							$rtMemes= Usuario::memes($usuario->username());
 							
