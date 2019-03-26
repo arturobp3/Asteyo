@@ -72,18 +72,40 @@ body {
 
 /*--------------------------------------------------------------------------------------------------------------------------------------*/
 
-/*principal*/
+/*principal: contenedor principal sobre el cual tenemos nuestro sidebar y el contenido de la página */
 .principal{
 	display: flex;
 	flex-direction: row;
 	min-height: 800px;
 }
 
-.contenido #foto #img-perfil {
+/* div contenido*/
+.principal #contenido {
+	display: flex;
+	flex-direction: column;
+	padding: 2% 2%;
+}
+
+/*editar perfil*/
+.principal #contenido a #id {
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	padding: 0.5103% 2%;
+	text-decoration: none;
+}
+
+.principal #contenido a #id:hover {
+	background-color: black;
+	color: white;
+	border-radius: 5px;
+}
+
+.principal #contenido #foto #img-perfil {
 	width: 120px;
 	height: 120px;
 }
-.contenido #memes #meme {
+.principal #contenido #memes #meme {
 	width: 150px;
 	height: 150px;
 }
@@ -96,6 +118,7 @@ body {
 	width: 250px;
 	min-height: 800px;
 	background-color: #e8edf3;
+	padding: 2% 2%;
 }
 
 /*--------------------------------------------------------------------------------------------------------------------------------------*/

@@ -22,8 +22,8 @@
 
 				<?php require("includes/comun/sidebarIzq.php"); ?>
 
-				<div class="contenido">						
-					<a href='editarPerfil.php' class='edit'>Editar</a>
+				<div id="contenido">						
+					<a href='editarPerfil.php' id='edit'>Editar</a>
 					<div id="foto">
 						<?php
 							$imgPerfil = "mysql/img/".$_SESSION["nombre"]."/fotoPerfil.jpg";
