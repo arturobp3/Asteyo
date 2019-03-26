@@ -1,0 +1,116 @@
+body {
+	background-image: url("fondo.jpg");
+}
+
+.container {
+  display: inline-block;
+  cursor: pointer;
+}
+
+.bar1, .bar2, .bar3 {
+  width: 35px;
+  height: 5px;
+  background-color: #333;
+  margin: 6px 0;
+  transition: 0.4s;
+}
+
+.change .bar1 {
+  -webkit-transform: rotate(-45deg) translate(-9px, 6px);
+  transform: rotate(-45deg) translate(-9px, 6px);
+}
+
+.change .bar2 {opacity: 0;}
+
+.change .bar3 {
+  -webkit-transform: rotate(45deg) translate(-8px, -8px);
+  transform: rotate(45deg) translate(-8px, -8px);
+}
+
+.derecha {
+	position: relative;
+	margin-right: -200;
+	width: 200;
+}
+
+.active .derecha {
+	transition: width 2s;
+	
+}
+
+div#der{
+	position: relative;
+	float: right;
+	width: 60px;
+	height: 60px;	
+	border-right: none;
+	background-color: #ffffff;
+	
+}
+
+div#contenedor {
+	width: 1200px;
+	margin: auto;
+	margin-top: 20px;
+}
+
+div#contenido {
+	padding: 10px;
+	float: left;
+	min-height: 600px;
+	border: 5px solid black;
+	width: 775px;
+	background-color: white;
+}
+
+#icono {
+	position: relative;
+	top: 0px;
+
+}
+
+div#cabecera {
+	position: relative;
+	padding: 20px;
+	height: 230px;
+	border: 5px solid black;
+	border-bottom: none;
+	background-color: #D0D0D0;
+	text-align: center;
+	color: black;
+	font-size: 50px;
+}
+
+div#cabecera a, div#cabecera a:visited {
+	color: white;
+	font-weight: bold;
+	text-decoration: none;
+} 
+
+div#cabecera a:hover {
+	color: red;
+	font-weight: bold;
+	text-decoration: underline;
+} 
+
+
+div#barraEtiquetas {
+	padding: 10px;
+	float: left;
+	width: 170px;
+	height: 600px;	
+	border: 5px solid black;
+	border-right: none;
+	background-color: #dddddd;
+}
+
+div#barraEtiquetas a, div#sidebar-left a:visited {
+	color: red;
+	font-weight: bold;
+	text-decoration: none;
+} 
+
+div#barraEtiquetas a:hover {
+	color: red;
+	text-decoration: underline;
+} 

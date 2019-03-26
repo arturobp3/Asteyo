@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+  <head>
+		<meta charset="UTF-8">
+		<title> Bocetos | Asteyo </title>
+  </head>
+
+  <body>
+
+		<div class="menu">
+			<ul>
+				<li><a href="./index.html">Index</a></li>
+				<li><a href="./detalles.html">Detalles</a></li>
+				<li><a href="./bocetos.html">Bocetos</a></li>
+				<li><a href="./miembros.html">Miembros</a></li>
+				<li><a href="./planificacion.html">Planificación</a></li>
+				<li><a href="./contacto.html">Contacto</a></li>
+			</ul>
+		</div>
+
+		<div class="contenedor">
+
+      <h1 align="center">BOCETOS</h1>
+		
+			<!--Boceto Pantalla Principal-->
+			<u><h3 id="principal" align="center">PANTALLA PRINCIPAL</h3></u>
+			<p align="center">En la cabecera sale el nombre de la página. En este boceto hemos hecho que el usuario haya iniciado sesión
+			para ver mejor los elementos de la pantalla, si no hubiera iniciado sesión el botón salir se convertiría en <a href="#log">"Log in"</a>. En siguientes pantallas cambiamos la cabecera porque el usuario no ha iniciado sesión. En
+			este caso en la cabecera sale el <a href="#perfil">nombre de usuario</a>, una opción para salir y otros dos símbolos, uno para entrar en la <a href="#mensajes">bandeja de entrada</a> y leer
+			los mensajes (si fuera administrador <a href="#administrador">la pantalla mensajes sería distinta</a>) y otro para <a href="#publicar">publicar un meme nuevo</a>. 
+			Aparte tenemos una barra en la izquierda donde se podrán buscar etiquetas de memes y una serie de <a href="#etiqueta">"hashtag"</a> en los cuales podremos pinchar para ver los memes
+			con esas etiquetas. Este elemento estará visible durante toda la navegación en la página.
+			En la barra de la derecha tenemos 3 botones. Estos botones están visibles ya que antes debemos haber pinchado en el menú burguer. Los 3 botones son <a href="#perfil">perfil</a>, <a href="#ranking">ránking</a> 
+			y <a href="#principal">últimos</a>. Se puede pulsar en cualquier <a href="#meme">meme</a> 
+			para verlo más ampliado, con más información y comentarios
+			Si el usuario no estuviera registrado al pinchar en perfil nos llevaría a la pantalla de <a href="#log">"Log in"</a>, si está registrado le llevará a su perfil. Los demás botones nos dirigiran 
+			a las pantallas con el nombre del botón.
+			En la parte central tenemos por defecto los últimos memes publicados.</p>
+			<div align="center"><img src="img/Principal.png"></div>
+		
+		
+			<!--Boceto Login-->
+			<u><h3 id="log" align="center">LOG IN</h3></u>
+			<p align="center">En la pantalla de "Log In"" vemos un panel para insertar el nombre y otro para la contraseña, en caso de no tener cuenta
+			se puede clickar en <a href="#registro">registrarse</a> para crear una nueva.
+			Al pinchar en <a href="#principal">"Asteyo"</a> debería de llevarnos a la página principal, por si no queremos iniciar sesión. Esto sucederá durante toda
+			la navegación en la página.</p>
+			<div align="center"><img src="img/LogIn.png"></div>
+		
+		
+			<!--Boceto Registro-->
+			<u><h3 id="registro" align="center">REGISTRO</h3></u>
+			<p align="center">Tiene campos para rellenar: el correo, nombre de usuario, contraseña y repetirla para asegurarnos que no haya cometido el usuario
+			ningún fallo al introducirla por primera vez, y dos checkbox para aceptar las condiciones y decir que no eres un robot. Si ya tienes una cuenta se podrá pulsar en <a href="#log">Iniciar Sesión</a></p>
+			<div align="center"><img src="img/Registrarse.png"></div>
+		
+		
+			<!--Boceto Ranking-->
+			<u><h3 id="ranking" align="center">RANKING</h3></u>
+			<p align="center">Vemos un enumerado con los Memes ordenados por número de likes para poder ver los que más likes tienen. Se puede pulsar en cualquier <a href="#meme">meme</a> 
+			para verlo más ampliado, con más información y comentarios.</p>
+			<div align="center"><img src="img/Ranking.png"></div>
+			
+			<!--Boceto Perfil-->
+			<u><h3 id="perfil" align="center">PERFIL</h3></u>
+			<p align="center">Hay una foto de perfil e información del usuario: el nombre de usuario, el rango, el número de lokes totales de sus publicaciones y el número de memes publicados.
+			Además de todas las publicaciones subidas por ese usuario. Hay un botón editar (No hemos creado una pantalla Editar ya que sería como la de Perfil pero pudiendo cambiar algún campo).</p>
+			<div align="center"><img src="img/Perfil.png"></div>
+		
+			<!--Boceto Meme-->
+			<u><h3 id="meme" align="center">MEME</h3></u>
+			<p align="center">En el centro de la pantalla veremos el meme, a su izquierda un corazón para dar like y los likes totales de la publicación, el usuario que lo ha subido (pinchando en el usuario
+			iremos directamente a su <a href="#perfil">perfil<a>) y por últimos las <a href="#etiqueta">etiquetas</a> a las que pertenece. En la parte inferior tendremos la opción para comentar y además los comentarios 
+			de las demás personas, podremos <a href="reportar">reportar</a> o responder a los mensajes. En la parte izquierda tenemos la opción de <a href="reportar">reportar</a> el meme. La ubicación de estas opciones
+			puede variar.</p>
+			<div align="center"><img src="img/Meme.png"></div>
+			
+			<!--Boceto Mensajes-->
+			<u><h3 id="mensajes" align="center">MENSAJES</h3></u>
+			<p align="center">En esta pantalla tenemos todas las interacciones con nuestro perfil y nuestras publicaciones. Como vemos en el ejemplo este usuario tiene 4 comentarios nuevos en sus publicaciones. Si fuera
+			administrador <a href="#administrador">la pantalla sería distinta</a>.</p>
+			<div align="center"><img src="img/Mensajes.png"></div>
+			
+			<!--Boceto Publicar-->
+			<u><h3 id="publicar" align="center">PUBLICAR</h3></u>
+			<p align="center">Aquí vemos dos posibles variantes para subir un archivo: creándolo con título y etiquetas más subiendo un archivo de tu ordenador; y por otro lado utilizando alguna plantilla (no hemos creado
+			boceto de las plantillas ya que no sabemos cuales utilizaremos.) Una vez creado el meme pulsaremos en publicar, se subirá y nos redirigirá a la <a href="principal">pantalla principal</a>.</p>
+			<div align="center"><img src="img/Publicar.png"></div>
+		
+				<!--Boceto Mensajes del Administrador-->
+			<u><h3 id="administrador" align="center">MENSAJES DEL ADMINISTRADOR</h3></u>
+			<p align="center">Esta es una pantalla muy parecida a la pantalla mensjaes de los usuarios corrientes, pero en la parte derecha de los mensajes nos saldrán los reportes de los usuarios, habrá opción de eliminar
+			(el dedo hacia abajo) o permitir el comentario (el dedo hacia arriba).</p>
+			<div align="center"><img src="img/MensajesAdministrador.png"></div>
+			
+			<!--Boceto Hashtags-->
+			<u><h3 id="etiqueta" align="center">HASHTAGS</h3></u>
+			<p align="center">En la parte central de la cabecera pondrá el nombre de la etiqueta en la que hemos pulsado. El resto será todo igual. Nos saldrán los memes más recientes publicados con la 
+			etiqueta que hemos buscado.</p>
+			<div align="center"><img src="img/etiquetas.png"></div>
+			
+			<!--Boceto Reportar-->
+			<u><h3 id="reportar" align="center">REPORTAR</h3></u>
+			<p align="center">Nos saldrá el comentario que queremos reportar (En este caso). También tendremos una tabla con las opciones de reporte que le llegarán al administrador, y un botón para finalizar el reporte. Una vez
+			reportado nos llevará de nuevo al <a href="meme">meme</a> en el que estábamos.</p>
+			<div align="center"><img src="img/reportar.png"></div>
+
+		</div>
+
+  </body>
+
+</html>
