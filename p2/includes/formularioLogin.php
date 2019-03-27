@@ -19,17 +19,14 @@ class formularioLogin extends Form{
      * @return string HTML asociado a los campos del formulario.
      */
     protected function generaCamposFormulario($datosIniciales){
-
-        $html = '<fieldset>';
-        $html .= '<legend>Usuario y contraseña</legend>';
-        $html .= '<div class="grupo-control">';                            
+		
+        $html = '<div class="grupo-control">';                            
         $html .= '<label>Nombre de usuario:</label> <input type="text" name="nombreUsuario" />';
         $html .= '</div>';
         $html .= '<div class="grupo-control">';
-        $html .= '<label>Password:</label> <input type="password" name="password" />';
+        $html .= '<label>Contraseña:</label> <input type="password" name="password" />';
         $html .= '</div>';
         $html .= '<div class="grupo-control"><button type="submit" name="login">Entrar</button></div>';
-        $html .= '</fieldset>';
 
         return $html;
     }

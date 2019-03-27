@@ -29,8 +29,7 @@ require_once("includes/formularioLogin.php");
 
 				<?php require("includes/comun/sidebarIzq.php"); ?>
 
-				<div id="contenido">
-					<h1>Acceso al sistema</h1>
+				<div class="FLogin">
 
 					<?php
 						$formulario = new formularioLogin("login", array( 'action' => 'login.php'));
