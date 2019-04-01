@@ -43,14 +43,17 @@
 							?>
 						</div>
 					</div>
+					<h3>Memes</h3>
 					<div id="panel-memes">
-						<h3>Memes</h3>
 						<?php
 							$rtMemes= Usuario::memes($usuario->username());
-							
 							if($rtMemes){
 								foreach ($rtMemes as $key => $value) {
-									echo '<img id="meme"src='.$value.'>';
+									echo '<div id="meme">
+									<img id="imagen-meme"src='.$value[2].'>
+									<p>Título: '.$value[0].'</p>
+									<p>'.$value[1].' Me Gusta</p>
+									</div>';
 								}
 							}
 						?>

@@ -111,14 +111,21 @@ body {
 .principal #contenido #panel-perfil {
 	display: flex;
 	flex-direction: row;
-	justify-content: space-around;
+	justify-content: flex-start;
 }
 
+/*div de la foto del perfil*/
+.principal #contenido #panel-perfil #foto {
+	padding: 5px 5px;
+}
+
+/*imagen de perfil*/
 .principal #contenido #panel-perfil #foto #img-perfil {
 	width: 120px;
 	height: 120px;
 }
 
+/*info del usuario*/
 .principal #contenido #panel-perfil #perfil {
 	display: flex;
 	flex-direction: column;
@@ -128,11 +135,28 @@ body {
 }
 
 .principal #contenido #panel-perfil #perfil p {
-	padding: 1% 1%; 
+	padding: 2% 2%; 
+}
+
+/*panel de previsualizaciónm de los memes */
+.principal #contenido #panel-memes {
+	display: flex;
+	flex-direction: row-reverse;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	width: 1000px;
 }
 
 /*panel del perfil donde estan contenidos los memes de usuario */
 .principal #contenido #panel-memes #meme {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+}
+
+/*imagen del meme*/
+.principal #contenido #panel-memes #imagen-meme {
 	width: 150px;
 	height: 150px;
 }

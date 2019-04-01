@@ -136,17 +136,20 @@ class Usuario {
         $usuario = self::buscaUsuario($username);
         $app = Aplicacion::getInstance();
         $conn = $app->conexionBD();
-        $query=sprintf("SELECT link_img FROM memes WHERE id_autor= '%s'", $conn->real_escape_string($usuario->id()));
+        $query=sprintf("SELECT * FROM memes WHERE id_autor= '%s'", $conn->real_escape_string($usuario->id()));
         $rs = $conn->query($query);
         $rt=false;
       
         if ($rs){
             if($rs->num_rows>0){
-                
+                /*array de memes*/
                 $rt=array();
                 $i = 0;
                 while($row = mysqli_fetch_assoc($rs)){
-                    $rt[$i] = $row['link_img'];
+                    /*array de cada meme*/
+                    $rj=array();
+                    $rj[0] = $row['title']; $rj[1] = $row['num_megustas']; $rj[2] = $row['link_img']; 
+                    $rt[$i] = $rj;
                     $i = $i + 1;
                 }
             }
