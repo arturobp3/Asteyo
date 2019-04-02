@@ -22,6 +22,9 @@ class formularioSubirMeme extends Form{
         $html .= '<input type="file" name="imagen" accept="image/*"/>';
         $html .= '</div>';
         $html .= '<div class="grupo-control">';
+        $html .= '<label>Hastags</label><input type="text" name"hastags">';
+        $html .= '</div>';
+        $html .= '<div class="grupo-control">';
         $html .= '<button type="submit" name="meme">Enviar</button>';
         $html .= '</div>';
         $html .= '</fieldset>';
@@ -85,6 +88,20 @@ class formularioSubirMeme extends Form{
         //Ruta asociada a las carpeta del usuario, que contiene los memes subidos.
         $link_img = "./mysql/img/".$username."/".$imagename;
 
+        $hashtags=array();
+        $hashtags= isset($_FILES['hastags'])? explode(' ', $_FILES['hastags'] ) : null;
+        $formato = true;
+
+        if(!empty($hastags)){
+            foreach ($hashtags as $key => $value) {
+                $formato = (substr($values, 0, 1)=== '#' && $formato)? true : false;
+            } 
+        }
+        
+        
+        if(!$formato){
+            $erroresFormulario[]='El formato de los hashtags no es el adecuado.';
+        }
 
         if (count($erroresFormulario) === 0) {
         
@@ -94,6 +111,11 @@ class formularioSubirMeme extends Form{
                     //Se guardan los datos en la BBDD
                     $meme = Meme::crea($tituloMeme, $num_megustas, $id_autor, $datetime, $link_img);
                     echo "Meme subido correctamente";
+                    //comprobar si existe el hashtag si no se sube y si ya existe
+                    foreach ($hashtags as $key => $value) {
+                        $hashtag = new Hastag($value, $meme->id());
+                        $hashtag->create();
+                    }
                 }
                 else {
                     echo "Ha habido un error al subir tu meme.";
