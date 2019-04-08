@@ -14,7 +14,7 @@ class Meme {
     private $formato;
 
     
-    private function __construct($titulo, $num_megustas, $id_autor, $datetim, $formato){
+    private function __construct($titulo, $num_megustas, $id_autor, $datetime, $formato){
         $this->titulo= $titulo;
         $this->num_megustas = $num_megustas;
         $this->id_autor = $id_autor;
@@ -24,6 +24,10 @@ class Meme {
 
     public function id(){ 
         return $this->id; 
+    }
+
+    public function titulo(){
+        return $this->titulo;
     }
 
     public function num_megustas(){ 

@@ -1,6 +1,8 @@
 <?php
 
-require_once('aplicacion.php');
+    require_once('aplicacion.php');
+    require_once('meme.php');
+
 
 class Hashtag {
 
@@ -42,16 +44,55 @@ class Hashtag {
         $app = Aplicacion::getInstance();
         $conn = $app->conexionBD();
 
-        $query = sprintf("SELECT * FROM hashtags U WHERE U.name = '%s'", $conn->real_escape_string($name));
+        $query = sprintf("SELECT * FROM hashtags U WHERE U.name LIKE '%%s%'", $conn->real_escape_string($name));
         $rs = $conn->query($query);
         $result = false;
         if ($rs) {
-            if ( $rs->num_rows == 1) {
+            if ( $rs->num_rows > 0) {
                 $fila = $rs->fetch_assoc();
                 $hashtag = new Hashtag($name);
                 $result = $hashtag;
             }
             $rs->free();
+        } else {
+            echo "Error al consultar en la BD: (" . $conn->errno . ") " . utf8_encode($conn->error);
+            exit();
+        }
+        return $result;
+    }
+
+
+   //Devuelve los memes que utilicen dicho hashtag
+    public static function searchMemeHashtag($nombreHashtag){
+
+         $app = Aplicacion::getInstance();
+        $conn = $app->conexionBD();
+
+        $query = sprintf("SELECT * 
+                        FROM hashtag_meme U JOIN memes M 
+                        WHERE U.id_meme = M.id_meme AND U.name_hash = '%s'", $conn->real_escape_string($nombreHashtag));
+
+        $rs = $conn->query($query);
+        $result = false;
+
+        if ($rs) {
+
+            //Si la consulta devuelve muchos memes
+            if ( $rs->num_rows > 0) {
+
+                for($i = 0; $i < $rs->num_rows; $i++){
+                    $fila = $rs->fetch_assoc();
+
+                    $meme = new Meme($fila['title'],  $fila['num_megustas'], $fila['id_autor'],
+                                        $fila['upload_date'], $fila['link_img']);
+                    $meme->id = $fila['id'];
+
+                    $result[] = $producto;
+                }
+            }
+            $rs->free();
+            return $result;
+            
         } else {
             echo "Error al consultar en la BD: (" . $conn->errno . ") " . utf8_encode($conn->error);
             exit();

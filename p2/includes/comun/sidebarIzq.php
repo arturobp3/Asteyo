@@ -1,3 +1,5 @@
 <div class="sidebarIzq">
-	<h3>Navegación</h3>
+	<form id="buscador" name="buscador" method="post" action="buscador.php"> 
+    	<input id="buscar" name="buscar" type="search" placeholder="Buscar aquí..." autofocus >
+	</form>
 </div>
