@@ -148,7 +148,7 @@ class Usuario {
                 while($row = mysqli_fetch_assoc($rs)){
                     /*array de cada meme*/
                     $rj=array();
-                    $rj[0] = $row['title']; $rj[1] = $row['num_megustas']; $rj[2] = $row['link_img']; 
+                    $rj[0] = $row['title']; $rj[1] = $row['num_megustas']; $rj[2] = "mysql/img/".$username."/".$row['id_meme'].".".$row['formato']; 
                     $rt[$i] = $rj;
                     $i = $i + 1;
                 }

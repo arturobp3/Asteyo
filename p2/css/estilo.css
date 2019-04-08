@@ -141,8 +141,7 @@ body {
 /*panel de previsualizaciónm de los memes */
 .principal #contenido #panel-memes {
 	display: flex;
-	flex-direction: row-reverse;
-	justify-content: space-between;
+	flex-direction: row;
 	flex-wrap: wrap;
 	width: 1000px;
 }
@@ -153,11 +152,12 @@ body {
 	flex-direction: column;
 	justify-content: space-between;
 	align-items: center;
+	border: 1px solid black;
 }
 
 /*imagen del meme*/
 .principal #contenido #panel-memes #imagen-meme {
-	width: 150px;
+	width: auto;
 	height: 150px;
 }
 

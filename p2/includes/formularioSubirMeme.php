@@ -85,9 +85,6 @@ class formularioSubirMeme extends Form{
         //Nombre temporal de la ruta en la cual se almacena el fichero subido.
         $imagetemp = $_FILES["imagen"]["tmp_name"];
 
-        //Ruta asociada a las carpeta del usuario, que contiene los memes subidos.
-        $link_img = "./mysql/img/".$username."/".$imagename;
-
         $hashtags=array();
         $hashtags= isset($_FILES['hastags'])? explode(' ', $_FILES['hastags'] ) : null;
         $formato = true;
@@ -106,10 +103,9 @@ class formularioSubirMeme extends Form{
         if (count($erroresFormulario) === 0) {
         
             if(is_uploaded_file($imagetemp)) {
-                if(move_uploaded_file($imagetemp, $link_img)) {
-
-                    //Se guardan los datos en la BBDD
-                    $meme = Meme::crea($tituloMeme, $num_megustas, $id_autor, $datetime, $link_img);
+                //Se guardan los datos en la BBDD
+                $meme = Meme::crea($tituloMeme, $num_megustas, $id_autor, $datetime, $imageFileType);
+                if($meme && move_uploaded_file($imagetemp,"mysql/img/".$username."/".$meme->id().".".$imageFileType)) {
                     echo "Meme subido correctamente";
                     //comprobar si existe el hashtag si no se sube y si ya existe
                     foreach ($hashtags as $key => $value) {

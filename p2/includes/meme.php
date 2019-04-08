@@ -10,16 +10,16 @@ class Meme {
     private $id_autor;
     //fecha y hora de subida
     private $datetime;
-    //link a la imagen
-    private $link_img;
+    //formato de la imagen
+    private $formato;
 
     
-    private function __construct($titulo, $num_megustas, $id_autor, $datetime, $link_img){
+    private function __construct($titulo, $num_megustas, $id_autor, $datetim, $formato){
         $this->titulo= $titulo;
         $this->num_megustas = $num_megustas;
         $this->id_autor = $id_autor;
         $this->datetime = $datetime;
-        $this->link_img = $link_img;
+        $this->formato = $formato;
     }
 
     public function id(){ 
@@ -35,9 +35,9 @@ class Meme {
     }
 
     /* Crea un nuevo meme con los datos introducidos por parámetro. */
-    public static function crea($titulo, $num_megustas, $id_autor, $datetime, $link_img){
+    public static function crea($titulo, $num_megustas, $id_autor, $datetime, $formato){
 
-        $meme = new Meme($titulo, $num_megustas, $id_autor, $datetime, $link_img);
+        $meme = new Meme($titulo, $num_megustas, $id_autor, $datetime, $formato);
 
         return self::guarda($meme);
     }
@@ -46,15 +46,13 @@ class Meme {
         $app = Aplicacion::getInstance();
         $conn = $app->conexionBD();
 
-        $query=sprintf("INSERT INTO memes(title, num_megustas, id_autor, upload_date, link_img)
+        $query=sprintf("INSERT INTO memes(title, num_megustas, id_autor, upload_date, formato)
                         VALUES('%s', '%s', '%s', '%s', '%s')",
                             $conn->real_escape_string($meme->titulo),
                             $conn->real_escape_string($meme->num_megustas),
                             $conn->real_escape_string($meme->id_autor),
                             $conn->real_escape_string($meme->datetime),
-                            $conn->real_escape_string($meme->link_img));
-        
-
+                            $conn->real_escape_string($meme->formato));
         if ( $conn->query($query) ){
             $meme->id = $conn->insert_id;
 
