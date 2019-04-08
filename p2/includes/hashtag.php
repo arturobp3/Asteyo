@@ -11,9 +11,9 @@ class Hashtag {
     private $n_mg;
     private $n_memes;
     
-    private function __construct($name, $id_meme, $n_mg = 0, $n_memes=0){
+    private function __construct($name, $id_meme, $n_mg = 0, $n_memes = 0){
         $this->name = $name;
-        $this->id_user = $id_meme;
+        $this->id_meme = $id_meme;
         $this->n_mg = $n_mg;
         $this->n_memes = $n_memes;
     }
@@ -35,22 +35,25 @@ class Hashtag {
     }
 
     /* Crea un nuevo meme con los datos introducidos por parámetro. */
-    public static function create(){
+    public static function create($name, $id_meme){
 
-        return self::save($this->name, $this->id_meme);
+        $hastag = new Hashtag($name, $id_meme);
+        return self::save($hastag);
     }
 
-    public static function searchHashtag($name){
+    public static function searchHashtag($hashtag){
         $app = Aplicacion::getInstance();
         $conn = $app->conexionBD();
 
-        $query = sprintf("SELECT * FROM hashtags U WHERE U.name LIKE '%%s%'", $conn->real_escape_string($name));
+
+        $query = sprintf("SELECT * FROM hashtags U WHERE U.name = '%s'", $conn->real_escape_string($hashtag->name()));
+
         $rs = $conn->query($query);
         $result = false;
         if ($rs) {
             if ( $rs->num_rows > 0) {
                 $fila = $rs->fetch_assoc();
-                $hashtag = new Hashtag($name);
+                $result = new Hashtag($fila['name'], $hashtag->id_meme, $fila['n_mg'], $fila['n_memes']);
                 $result = $hashtag;
             }
             $rs->free();
@@ -107,8 +110,8 @@ class Hashtag {
         $query=sprintf("INSERT INTO hashtag_meme(name_hash, id_meme)
                             VALUES('%s', '%s')",
                                 $conn->real_escape_string($hashtag->name),
-                                $conn->real_escape_string($hashtag->id_user));
-        if ( !$conn->query($query) )
+                                $conn->real_escape_string($hashtag->id_meme));
+        if ( !$conn->query($query) ){
             echo "Error al insertar en la BD: (" . $conn->errno . ") " . utf8_encode($conn->error);
             exit();
         }
@@ -116,16 +119,14 @@ class Hashtag {
         return $hashtag;
     }
 
-    private static function insert($name, $id_meme){
+    private static function insert($hashtag){
         $app = Aplicacion::getInstance();
         $conn = $app->conexionBD();
 
-        $hashtag = new Hashtag($name, $id_meme);
-
         $query=sprintf("INSERT INTO hashtags(name, n_memes, n_mg) VALUES('%s', '%d', '%d')"
             , $conn->real_escape_string($hashtag->name)
-            , $conn->real_escape_string($usuario->n_memes)
-            , $conn->real_escape_string($usuario->n_mg));
+            , $conn->real_escape_string($hashtag->n_memes)
+            , $conn->real_escape_string($hashtag->n_mg));
 
         if ( !$conn->query($query) ){
             echo "Error al insertar en la BD: (" . $conn->errno . ") " . utf8_encode($conn->error);
@@ -134,19 +135,17 @@ class Hashtag {
         return $hashtag;
     }
 
-    private static function save($name, $id_meme){
-
-        $existe = self::searchHashtag($name);
-        self::createRelation($name, $id_meme);
-
+    private static function save($hashtag){
+        
+        $existe = self::searchHashtag($hashtag);
+        
+        
         if (!$existe){
             
-           $hashtag = self::insert($name, $id_meme);
-            
+           self::insert($hashtag);
         }
-
+        self::createRelation($hashtag);
         $hashtag = self::update($hashtag);
-    
         return $hashtag;
     }
 
@@ -173,22 +172,20 @@ class Hashtag {
     }
     
     //Esta funcion debe actualizar el numero de memes asociados al hashtag
-    public static function update($name){
+    public static function update($hashtag){
         
         $app = Aplicacion::getInstance();
         $conn = $app->conexionBD();
 
-        $hashtag = self::searchHashtag($name);
 
-        $hastag->n_memes+=1;
+        $hashtag->n_memes+=1;
 
-        $query=sprintf("UPDATE hashtags M SET M.n_memes = '%s' WHERE M.name=%i"
-            , $conn->real_escape_string($hashtag->n_memes)
+        $query=sprintf("UPDATE hashtags M SET M.n_memes = M.n_memes+1 WHERE M.name='%s'"
             , $hashtag->name);
 
         if ( $conn->query($query) ) {
             if ( $conn->affected_rows != 1) {
-                echo "No se ha podido actualizar el meme: " . $meme->id;
+                echo "No se ha podido actualizar el meme: " . $hashtag->id_meme();
                 exit();
             }
         } else {
