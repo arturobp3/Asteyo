@@ -3,6 +3,7 @@
 require_once('form.php');
 require_once('usuario.php');
 require_once('meme.php');
+require_once('hashtag.php');
 
 
 class formularioSubirMeme extends Form{
@@ -22,7 +23,7 @@ class formularioSubirMeme extends Form{
         $html .= '<input type="file" name="imagen" accept="image/*"/>';
         $html .= '</div>';
         $html .= '<div class="grupo-control">';
-        $html .= '<label>Hastags</label><input type="text" name"hastags">';
+        $html .= '<label>Hastags:</label> <input type="text" name="hashtags"  />';
         $html .= '</div>';
         $html .= '<div class="grupo-control">';
         $html .= '<button type="submit" name="meme">Enviar</button>';
@@ -86,12 +87,14 @@ class formularioSubirMeme extends Form{
         $imagetemp = $_FILES["imagen"]["tmp_name"];
 
         $hashtags=array();
-        $hashtags= isset($_FILES['hastags'])? explode(' ', $_FILES['hastags'] ) : null;
+        $hashtags= isset($_POST['hashtags'])? explode(" ", $_POST['hashtags'] ) : null;
         $formato = true;
 
         if(!empty($hastags)){
             foreach ($hashtags as $key => $value) {
                 $formato = (substr($values, 0, 1)=== '#' && $formato)? true : false;
+                var_dump($value);
+                echo $formato;
             } 
         }
         
@@ -109,8 +112,8 @@ class formularioSubirMeme extends Form{
                     echo "Meme subido correctamente";
                     //comprobar si existe el hashtag si no se sube y si ya existe
                     foreach ($hashtags as $key => $value) {
-                        $hashtag = new Hastag($value, $meme->id());
-                        $hashtag->create();
+                        $hashtag = Hashtag::create($value, $meme->id());
+                        
                     }
                 }
                 else {
@@ -124,7 +127,7 @@ class formularioSubirMeme extends Form{
             }
 
 
-            return "index.php";
+           # return "index.php";
         }
 
         return $erroresFormulario;   

@@ -12,6 +12,7 @@ class Meme {
     private $datetime;
 
     
+
     private function __construct($titulo, $num_megustas, $id_autor, $datetime){
         $this->titulo= $titulo;
         $this->num_megustas = $num_megustas;
@@ -22,6 +23,10 @@ class Meme {
 
     public function id(){ 
         return $this->id; 
+    }
+
+    public function titulo(){
+        return $this->titulo;
     }
 
     public function num_megustas(){ 
@@ -88,8 +93,7 @@ class Meme {
         $app = Aplicacion::getInstance();
         $conn = $app->conexionBD();
 
-        $query=sprintf("UPDATE memes M SET num_megustas = '%s' WHERE M.id_meme=%i"
-            , $conn->real_escape_string($meme->num_megustas)
+        $query=sprintf("UPDATE memes M SET num_megustas = num_megustas + 1 WHERE M.id_meme=%i"
             , $meme->id);
 
         if ( $conn->query($query) ) {
