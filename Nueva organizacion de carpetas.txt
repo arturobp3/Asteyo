@@ -1,4 +1,0 @@
-assets (js, css, img)
-includes
-upload (cosas que suben los usuarios)
-mysql

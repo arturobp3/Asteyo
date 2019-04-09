@@ -18,7 +18,6 @@ class Meme {
         $this->num_megustas = $num_megustas;
         $this->id_autor = $id_autor;
         $this->datetime = $datetime;
-        $this->formato = $formato;
     }
 
     public function id(){ 
@@ -50,7 +49,7 @@ class Meme {
         $conn = $app->conexionBD();
 
         $query=sprintf("INSERT INTO memes(title, num_megustas, id_autor, upload_date)
-                        VALUES('%s', '%s', '%s', '%s', '%s')",
+                        VALUES('%s', '%s', '%s', '%s')",
                             $conn->real_escape_string($meme->titulo),
                             $conn->real_escape_string($meme->num_megustas),
                             $conn->real_escape_string($meme->id_autor),
@@ -108,4 +107,131 @@ class Meme {
         
         return $meme;
     }
+
+    //Devuelve un meme en base a su id
+    public static function getMeme($id){
+        
+        $app = Aplicacion::getInstance();
+        $conn = $app->conexionBD();
+
+        $query = sprintf("SELECT * 
+                        FROM memes M 
+                        WHERE M.id_meme=".$id);
+
+       $rs = $conn->query($query);
+       $result = false;
+
+        if ($rs) {
+           //Si la consulta devuelve muchos memes
+
+           if ( $rs->num_rows > 0) {
+
+                $fila = $rs->fetch_assoc();
+
+                //Cogemos la información del meme
+                $meme = new Meme($fila['title'],  $fila['num_megustas'], $fila['id_autor'],
+                    $fila['upload_date']);
+
+                $meme->id = $fila['id_meme'];
+                
+                $result = $meme;
+            }
+            $rs->free();
+           
+        } else {
+            echo "Error al consultar en la BD: (" . $conn->errno . ") " . utf8_encode($conn->error);
+            exit();
+        }
+        
+
+        return $result;
+
+    }
+
+
+
+    //Devuelve los ultimos memes subidos (DEVUELVE TODOS). Se utiliza en la pantalla principal
+    public static function lastMemes(){
+
+        $app = Aplicacion::getInstance();
+        $conn = $app->conexionBD();
+
+        $query = sprintf("SELECT * 
+                       FROM users U JOIN memes M
+                       WHERE U.id = M.id_autor 
+                       ORDER BY upload_date DESC");
+
+       $rs = $conn->query($query);
+       $result = false;
+
+        if ($rs) {
+           //Si la consulta devuelve muchos memes
+           if ( $rs->num_rows > 0) {
+
+                for($i = 0; $i < $rs->num_rows; $i++){
+                    $fila = $rs->fetch_assoc();
+
+                    $memes[] = array(
+                        'username' => $fila['username'],
+                        'id' => $fila['id_meme'],
+                        'nameMeme' => $fila['title']
+                    );
+                }
+            }
+            $rs->free();
+
+            return $memes;
+           
+        } else {
+            echo "Error al consultar en la BD: (" . $conn->errno . ") " . utf8_encode($conn->error);
+            exit();
+        }
+        
+
+        return $result;
+    }
+
+
+    //Devuelve los memes que utilicen dicho hashtag (UTILIZADO EN EL BUSCADOR)
+    public static function searchMemeHashtag($nombreHashtag){
+
+        $app = Aplicacion::getInstance();
+       $conn = $app->conexionBD();
+
+       $query = sprintf("SELECT * 
+                       FROM hashtag_meme H JOIN memes M JOIN users U
+                       WHERE H.id_meme = M.id_meme 
+                            AND U.id = M.id_autor
+                            AND H.name_hash = '%s'
+                       ORDER BY upload_date DESC", $conn->real_escape_string($nombreHashtag));
+
+       $rs = $conn->query($query);
+       $result = false;
+
+       if ($rs) {
+
+           //Si la consulta devuelve muchos memes
+           if ( $rs->num_rows > 0) {
+
+                for($i = 0; $i < $rs->num_rows; $i++){
+                    $fila = $rs->fetch_assoc();
+
+                    $memes[] = array(
+                        'username' => $fila['username'],
+                        'id' => $fila['id_meme'],
+                        'nameMeme' => $fila['title']
+                    );
+                }
+                $rs->free();
+                return $memes;
+            }
+       } else {
+           echo "Error al consultar en la BD: (" . $conn->errno . ") " . utf8_encode($conn->error);
+           exit();
+       }
+       return $result;
+   }
+
+
+
 }

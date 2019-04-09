@@ -3,17 +3,6 @@ SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
-
-/*He comentado todo en lo que dudaba por el codigo. Cuando lo mires borralo.
-He incluido "ENGINE=InnoDB DEFAULT CHARSET=utf8;" en todos los CREATE TABLE porque
-asi lo hacia phpMyAdmin, supongo que lo de DEFAULT CHARSET=utf8 se podria poner global
-o algo aasi pero no se, asi estan las cosas*/
-
-/*En phpMyAdmin ya se puede importar sin fallos, me ha costao la vida ver los fallos porque
-no te explica nada pero bueno, ya se puede, asi que supongo que la declaración de las foreign key y
-todo eso será correcto, aún así te dejo los comentarios para que veas donde estaba dudando por si
-acaso*/
-
 /*---------------------------------------------------------------------------*/
 /*-----------------------------TABLA USUARIOS--------------------------------*/
 /*---------------------------------------------------------------------------*/
@@ -34,40 +23,12 @@ ALTER TABLE users
 	 MODIFY id int(32) NOT NULL AUTO_INCREMENT;
 	
 	
-/*---------------------------------------------------------------------------*/
-/*--------------------------TABLA DATOS USUARIOS-----------------------------*/
-/*---------------------------------------------------------------------------*/
+	
 
-/*¿Por qué tenemos esta tabla y la de usuarios? No pueden tener nada de esto repetido, nos sobra una tabla creo.
-Si crees que nos sobra la tabla borrala y descomenta lo de la tabla users, si crees que no sobra borra lo comentado
-de la tabla users
-		
-CREATE TABLE users_data (
-	id int(32) NOT NULL,
-	email varchar(32),
-	last_connect datetime
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-/*Sinceramente esto no se si esta bien del todo, sale algo parecido en internet, me parece raro añadir dos KEY a (id)
-ALTER TABLE users_data
-	ADD PRIMARY KEY (id),
-	ADD KEY users_id (id);
-	
-	
-ALTER TABLE users_data
-	ADD CONSTRAINT users_data_ibfk_1 FOREIGN KEY (id) REFERENCES users (id);*/
-	
-	
-	
 /*---------------------------------------------------------------------------*/
 /*---------------------------------TABLA MEMES-------------------------------*/
 /*---------------------------------------------------------------------------*/
 
-/*En esta tabla almacenamos todos los datos relacionados con los memes subidos por los usuarios*/
-
-
-/*Soy consciente de que hay 3 ALTER TABLE seguidos, supogno que se podrán poner juntos algunos de ellos, si tal
-ponlos que yo no estoy seguro jeje*/
 	
 CREATE TABLE memes (
 	id_meme int(32) NOT NULL, 
@@ -128,7 +89,6 @@ ALTER TABLE comments
 /*Yo lo he hecho en forma de relacion "is a" que se me ocurrio haciendo mi bbdd, si ves otra forma mejor
 todo tuyo*/
 
-/*POR ESTUDIAR, mirar como diferenciar ids(US_,ME_,CO_)*/ /*NO SE PUEDE PAYASO*/ /*/ /*In dè independència*/
 CREATE TABLE reports (
 	usr_that_reports int(32) NOT NULL,
 	usr_reported int(32) NOT NULL,
@@ -228,6 +188,7 @@ ALTER TABLE co_reports
 /*He puesto NOT NULL en el numero de memes porque las etiquetas se crearan segun se vayan
 subiendo memes no? Como no lo se seguro te lo comento. Y en el numero de mg porque si no tienen
 ninguno será 0 no null digo yo nu se*/
+
 CREATE TABLE hashtags (
 	name varchar(32) NOT NULL,
 	n_memes int(255) NOT NULL,

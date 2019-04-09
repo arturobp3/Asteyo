@@ -16,29 +16,28 @@ require_once("includes/formularioSubirMeme.php");
 
 <body>
 
-    <div class="contenedor">
+<div class="contenedor">
 
-        <?php require("includes/comun/cabecera.php"); ?>
+    <?php require("includes/comun/cabecera.php"); ?>
 
-        <div class="principal">
+    <div class="principal">
 
-            <?php require("includes/comun/sidebarIzq.php");?>
+        <?php require("includes/comun/sidebarIzq.php");?>
 
-            <div id="contenido">
+        <div id="contenido">
+        <?php
 
-                <?php
-                    $formulario = new formularioSubirMeme("subirMeme", array( 'action' => 'subirMeme.php'));
-                    $formulario->gestiona();
-                ?>
+            $formulario = new formularioSubirMeme("subirMeme", array( 'action' => 'subirMeme.php'));
+            $formulario->gestiona();
 
-
-            </div>
-
+        ?>
         </div>
 
-        <?php require("includes/comun/pie.php"); ?>
-
     </div>
+
+    <?php require("includes/comun/pie.php"); ?>
+    
+</div>
 
 </body>
 </html>

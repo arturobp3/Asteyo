@@ -7,7 +7,7 @@
 		<?php
 			if (isset($_SESSION["login"]) && ($_SESSION["login"]===true)) {
 				echo "Bienvenido, " . $_SESSION['nombre'] . "." .
-				"<a href='subirMeme.php' class='subirMeme'>Subir Meme</a>
+				"<a href='subirMeme.php' class='subirMeme'>"."\u{1F4E4}"."</a>
 				<a href='perfil.php' class='perfil'>Perfil</a>
 				<a href='logout.php' class='salir'>Salir</a>";		
 			} else {
