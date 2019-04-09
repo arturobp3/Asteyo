@@ -9,7 +9,7 @@
 	<title>Inicio | Asteyo</title>
 	<meta charset="UTF-8">
 
-	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<link rel="stylesheet" type="text/css" href="assets/css/estilo.css">
 </head>
 <body>
 

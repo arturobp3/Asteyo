@@ -1,7 +1,7 @@
 <div class="cabecera">
 
 	<div id="logo">
-		<a href="index.php"><img src="img/logoasteyonombre.png" /></a>
+		<a href="index.php"><img src="assets/img/logoasteyonombre.png" /></a>
 	</div>
 	<div id="link">
 		<?php
