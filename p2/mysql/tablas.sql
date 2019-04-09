@@ -74,8 +74,7 @@ CREATE TABLE memes (
 	title varchar(100) NOT NULL,
 	num_megustas int(64) NOT NULL,
 	id_autor int(32) NOT NULL,
-	upload_date datetime,
-	link_img varchar(255)
+	upload_date datetime
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 

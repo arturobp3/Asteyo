@@ -27,33 +27,37 @@
 					<div id="panel-perfil">
 						<div id="foto">
 						<?php
-							$imgPerfil = "mysql/img/".$_SESSION["nombre"]."/fotoPerfil.jpg";
+							$imgPerfil = "uploads/".$_SESSION["nombre"]."/fotoPerfil.jpg";
 							echo '<img id="img-perfil" src='.$imgPerfil.'>';
 						?>
 	                	</div>
 	                	<div id="perfil">
 							<?php
-								$usuario = Usuario::BuscaUsuario($_SESSION["nombre"]);
+								$usuario = Usuario::buscaUsuario($_SESSION["nombre"]);
 								//echo "Nombre: ".$_SESSION["nombre"];
 
-								echo "<p>Nombre: ".$usuario->username()."</p>";
-								$rango = $usuario->rol();
-								echo "<p>Rango: ".$rango."</p>";
+								echo "<div id='user-info'><p>Nombre: </p>".$usuario->username()."</div>";
+								echo "<div id='user-info'><p>Rango: </p>".$usuario->rol()."</div>";
 
 							?>
 						</div>
 					</div>
 					<h3>Memes</h3>
-					<div id="panel-memes">
+					<div class="memes-perfil">
 						<?php
 							$rtMemes= Usuario::memes($usuario->username());
 							if($rtMemes){
 								foreach ($rtMemes as $key => $value) {
-									echo '<div id="meme">
-									<img id="imagen-meme"src='.$value[2].'>
-									<p>Título: '.$value[0].'</p>
-									<p>'.$value[1].' Me Gusta</p>
-									</div>';
+									$meme = "uploads/".$usuario->username()."/".$value[2].".jpg";
+									echo <<< END
+									<div class="responsive">
+										<div id="meme">
+											<img id="imagen-meme"src=$meme>
+											<p>Título: $value[0]</p>
+											<p>$value[1] Me Gusta</p>
+										</div>
+									</div>
+									END;
 								}
 							}
 						?>
