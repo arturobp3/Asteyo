@@ -10,11 +10,9 @@ class Meme {
     private $id_autor;
     //fecha y hora de subida
     private $datetime;
-    //formato de la imagen
-    private $formato;
 
     
-    private function __construct($titulo, $num_megustas, $id_autor, $datetim, $formato){
+    private function __construct($titulo, $num_megustas, $id_autor, $datetime){
         $this->titulo= $titulo;
         $this->num_megustas = $num_megustas;
         $this->id_autor = $id_autor;
@@ -35,9 +33,9 @@ class Meme {
     }
 
     /* Crea un nuevo meme con los datos introducidos por parámetro. */
-    public static function crea($titulo, $num_megustas, $id_autor, $datetime, $formato){
+    public static function crea($titulo, $num_megustas, $id_autor, $datetime){
 
-        $meme = new Meme($titulo, $num_megustas, $id_autor, $datetime, $formato);
+        $meme = new Meme($titulo, $num_megustas, $id_autor, $datetime);
 
         return self::guarda($meme);
     }
@@ -46,13 +44,12 @@ class Meme {
         $app = Aplicacion::getInstance();
         $conn = $app->conexionBD();
 
-        $query=sprintf("INSERT INTO memes(title, num_megustas, id_autor, upload_date, formato)
+        $query=sprintf("INSERT INTO memes(title, num_megustas, id_autor, upload_date)
                         VALUES('%s', '%s', '%s', '%s', '%s')",
                             $conn->real_escape_string($meme->titulo),
                             $conn->real_escape_string($meme->num_megustas),
                             $conn->real_escape_string($meme->id_autor),
-                            $conn->real_escape_string($meme->datetime),
-                            $conn->real_escape_string($meme->formato));
+                            $conn->real_escape_string($meme->datetime));
         if ( $conn->query($query) ){
             $meme->id = $conn->insert_id;
 

@@ -104,8 +104,8 @@ class formularioSubirMeme extends Form{
         
             if(is_uploaded_file($imagetemp)) {
                 //Se guardan los datos en la BBDD
-                $meme = Meme::crea($tituloMeme, $num_megustas, $id_autor, $datetime, $imageFileType);
-                if($meme && move_uploaded_file($imagetemp,"mysql/img/".$username."/".$meme->id().".".$imageFileType)) {
+                $meme = Meme::crea($tituloMeme, $num_megustas, $id_autor, $datetime);
+                if($meme && move_uploaded_file($imagetemp,"uploads/".$username."/".$meme->id().".jpg")) {
                     echo "Meme subido correctamente";
                     //comprobar si existe el hashtag si no se sube y si ya existe
                     foreach ($hashtags as $key => $value) {

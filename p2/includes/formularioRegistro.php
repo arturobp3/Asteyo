@@ -95,7 +95,7 @@ class formularioRegistro extends Form{
                 /*Crea la carpeta correspondiente al usuario en /mysql/img/ (relacionado con
                 el procesamiento del formularioSubirMeme)*/
 
-                $carpeta = './mysql/img/'.$username;
+                $carpeta = './uploads/'.$username;
             
                 if (!file_exists($carpeta)) {
                     mkdir($carpeta, 0777, true);
