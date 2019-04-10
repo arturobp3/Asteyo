@@ -136,7 +136,7 @@ class Usuario {
         $usuario = self::buscaUsuario($username);
         $app = Aplicacion::getInstance();
         $conn = $app->conexionBD();
-        $query=sprintf("SELECT * FROM memes WHERE id_autor= '%s'", $conn->real_escape_string($usuario->id()));
+        $query=sprintf("SELECT * FROM memes WHERE id_autor= '%s' ORDER BY id_meme DESC", $conn->real_escape_string($usuario->id()));
         $rs = $conn->query($query);
         $rt=false;
       

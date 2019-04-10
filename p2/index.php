@@ -24,7 +24,7 @@ require_once("includes/meme.php");
 	<div class="principal">
 		<?php require("includes/comun/sidebarIzq.php");?>
 
-		<div id="contenido">
+		<div id="contenido-index">
 		<?php
 
 			$result;
@@ -47,8 +47,8 @@ require_once("includes/meme.php");
 
 					echo "<a class='memes' href='./meme.php?name=".$meme['username']."&id=".$meme['id']."'>
 							<div id='panelMeme'>
-								<p>".$meme['nameMeme']."</p>
 								<img id='img-meme' src='uploads/".$meme['username']."/".$meme['id'].".jpg'/>
+								<p>".$meme['nameMeme']."</p>
 							</div>
 						</a>";
 				}

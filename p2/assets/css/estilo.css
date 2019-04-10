@@ -127,10 +127,67 @@ body {
 .principal #contenido {
 	display: flex;
 	flex-direction: column;
-	align-items: center;
 	padding: 2% 2%;
 	width: 100%;
 }
+
+/*----------------------------------------------------------------------------------------------------------------------*/
+/*																														*/
+/*										Index: página de inicio de la página Asteyo										*/
+/*																														*/
+/*----------------------------------------------------------------------------------------------------------------------*/
+
+/* estilo del div del contenido del index */
+
+.principal #contenido-index{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+/* estilo del enlace que contiene cada div con un meme ?????????????????????????????????????????????????????????*/
+.principal #contenido-index .memes {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	width: 40%;
+	margin: 15px;
+	padding: 1% 1%;
+	border: 1px solid black;
+	border-radius: 5px;
+
+	color: black;
+	text-decoration: none; 
+}
+
+.principal #contenido-index .memes:hover {
+	background-color: #cccccc;
+}
+
+.principal #contenido-index .memes #panelMeme {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+
+	width: 100%;
+	border: 1px solid coral;
+}
+
+.principal #contenido-index .memes #panelMeme p {
+	
+}
+
+.principal #contenido-index .memes #panelMeme #img-meme {
+	height: auto;
+	max-width:50%;
+}
+
+/*----------------------------------------------------------------------------------------------------------------------*/
+/*																														*/
+/*										Perfil: página de perfil de los usuarios										*/
+/*																														*/
+/*----------------------------------------------------------------------------------------------------------------------*/
 
 /*editar perfil*/
 .principal #contenido a {
@@ -152,52 +209,6 @@ body {
 	color: white;
 	border-radius: 5px;
 }
-
-/*----------------------------------------------------------------------------------------------------------------------*/
-/*																														*/
-/*										Index: página de inicio de la página Asteyo										*/
-/*																														*/
-/*----------------------------------------------------------------------------------------------------------------------*/
-
-/* estilo del enlace que contiene cada div con un meme ?????????????????????????????????????????????????????????*/
-.principal #contenido .memes {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-
-	width: 40%;
-	margin: 15px;
-	padding: 1% 1%;
-	border: 1px solid black;
-	border-radius: 5px;
-
-	color: black;
-	text-decoration: none; 
-}
-
-.principal #contenido .memes #panelMeme {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-
-	width: 100%;
-	border: 1px solid coral;
-}
-
-.principal #contenido .memes #panelMeme p {
-	
-}
-
-.principal #contenido .memes #panelMeme #img-meme {
-	height: auto;
-	width:50%;
-}
-
-/*----------------------------------------------------------------------------------------------------------------------*/
-/*																														*/
-/*										Perfil: página de perfil de los usuarios										*/
-/*																														*/
-/*----------------------------------------------------------------------------------------------------------------------*/
 
 /* panel del perfil con al foto y los datos del usuario*/
 .principal #contenido #panel-perfil {
@@ -279,6 +290,17 @@ body {
 .principal #contenido #imagen-meme {
 	width: auto;
 	height: 150px;
+}
+
+/*----------------------------------------------------------------------------------------------------------------------*/
+/*																														*/
+/*									Meme: página donde se visualiza un meme y toda su info								*/
+/*																														*/
+/*----------------------------------------------------------------------------------------------------------------------*/
+
+.principal #contenido img {
+	width: 150px;
+	height: auto;
 }
 
 /*----------------------------------------------------------------------------------------------------------------------*/
