@@ -30,8 +30,13 @@ class Usuario {
         return $this->username;
     }
 
+    public function setUserName($username){
+
+        $this->username = $username;
+    }
+
     public function cambiaPassword($nuevoPassword){
-        $this->password = self::hashPassword($nuevoPassword);
+        $this->password = password_hash($nuevoPassword, PASSWORD_DEFAULT);
     }
 
 
@@ -87,7 +92,7 @@ class Usuario {
     
     public static function guarda($usuario){
         if ($usuario->id !== null) {
-            return self::actualiza($usuario);
+            return self::update($usuario);
         }
         return self::inserta($usuario);
     }
@@ -110,15 +115,15 @@ class Usuario {
         return $usuario;
     }
     
-    private static function actualiza($usuario){
+    public static function update($usuario){
         $app = Aplicacion::getInstance();
         $conn = $app->conexionBD();
-        $query=sprintf("UPDATE users U SET username = '%s', email='%s', password='%s', rol='%s' WHERE U.id=%i"
+        $query=sprintf("UPDATE users U SET U.username = '%s', U.email='%s', U.password='%s', U.rol='%s' WHERE U.id=%d"
             , $conn->real_escape_string($usuario->username)
             , $conn->real_escape_string($usuario->email)
             , $conn->real_escape_string($usuario->password)
             , $conn->real_escape_string($usuario->rol)
-            , $usuario->id);
+            , $conn->real_escape_string($usuario->id));
         if ( $conn->query($query) ) {
             if ( $conn->affected_rows != 1) {
                 echo "No se ha podido actualizar el usuario: " . $usuario->id;

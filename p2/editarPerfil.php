@@ -2,7 +2,7 @@
 
 //Inicio del procesamiento
 require_once("includes/config.php");
-require_once("includes/formularioRegistro.php");
+require_once("includes/formularioEdit.php");
 
 ?>
 
@@ -27,11 +27,12 @@ require_once("includes/formularioRegistro.php");
 				<?php require("includes/comun/sidebarIzq.php"); ?>
 
 				<div id="contenido">
-					<h1>EN CONSTRUCCIÓN!</h1>
+					<h1>Registro de usuario</h1>
+					<h4>Solo rellena los campos que quieras modificar</h4>
 
 					<?php
-						#$formulario = new formularioRegistro("registro", array( 'action' => 'registro.php'));
-						#$formulario->gestiona();
+						$formulario = new formularioEdit("edit", array( 'action' => 'editarPerfil.php'));
+						$formulario->gestiona();
 					?>
 				</div>
 
