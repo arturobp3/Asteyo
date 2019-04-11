@@ -177,10 +177,11 @@ class Meme {
                         'nameMeme' => $fila['title']
                     );
                 }
+                    $rs->free();
+                    return $memes;
             }
-            $rs->free();
+            
 
-            return $memes;
            
         } else {
             echo "Error al consultar en la BD: (" . $conn->errno . ") " . utf8_encode($conn->error);
@@ -233,5 +234,39 @@ class Meme {
    }
 
 
+   //Ordena los hashtags por numero de memes, se utiliza en el sidebar
+   public static function rankHashtag(){
 
+        $app = Aplicacion::getInstance();
+       $conn = $app->conexionBD();
+
+       $query = sprintf("SELECT * 
+                       FROM hashtags
+                       ORDER BY n_memes DESC LIMIT 10");
+
+       $rs = $conn->query($query);
+       $result = false;
+
+       if ($rs) {
+
+           //Si la consulta devuelve muchos hashtags
+           if ( $rs->num_rows > 0) {
+
+                for($i = 0; $i < $rs->num_rows; $i++){
+                    $fila = $rs->fetch_assoc();
+
+                    $hashtags[] = array(
+                        'name' => $fila['name']
+                    );
+                }
+                $rs->free();
+                return $hashtags;
+            }
+       } else {
+           echo "Error al consultar en la BD: (" . $conn->errno . ") " . utf8_encode($conn->error);
+           exit();
+       }
+       return $result;
+   }
 }
+
