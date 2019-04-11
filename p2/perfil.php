@@ -7,7 +7,9 @@
 <!DOCTYPE html>
 	<html>
 		<head>
-			<link rel="stylesheet" type="text/css" href="assets/css/estilo.css" />
+			<link rel="stylesheet" type="text/css" href="assets/css/estilo-general.css" />
+			<link rel="stylesheet" type="text/css" href="assets/css/estilo-perfil.css" />
+			<link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
 			<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 			<title>Perfil | Asteyo</title>
 		</head>

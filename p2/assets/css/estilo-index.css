@@ -1,0 +1,51 @@
+/*----------------------------------------------------------------------------------------------------------------------*/
+/*																														*/
+/*										Index: página de inicio de la página Asteyo										*/
+/*																														*/
+/*----------------------------------------------------------------------------------------------------------------------*/
+
+/* estilo del div del contenido del index */
+
+.contenido-index{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+/* estilo del enlace que contiene cada div con un meme ?????????????????????????????????????????????????????????*/
+.contenido-index .memes {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	width: 40%;
+	margin: 15px;
+	padding: 1% 1%;
+	border: 1px solid black;
+	border-radius: 5px;
+
+	color: black;
+	text-decoration: none; 
+}
+
+.contenido-index .memes:hover {
+	background-color: #cccccc;
+}
+
+.contenido-index .memes #panelMeme {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+
+	width: 100%;
+	border: 1px solid coral;
+}
+
+.contenido-index .memes #panelMeme p {
+	
+}
+
+.contenido-index .memes #panelMeme #img-meme {
+	height: auto;
+	max-width:50%;
+}

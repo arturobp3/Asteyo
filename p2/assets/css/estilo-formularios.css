@@ -1,0 +1,99 @@
+/*----------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------*/
+/*																														*/
+/*						Formularios: estilos de los diferentes formularios de la página									*/
+/*																														*/
+/*----------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------*/
+
+
+.contenido-formularios {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+
+	padding-top: 75px;
+
+	width: 100%;
+}
+
+.contenido-formularios h2{
+	margin: 5px; 
+
+	font-style: italic;
+}
+
+.contenido-formularios h4 {
+	margin: 5px;
+
+	color: grey;
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------*/
+
+.formulario {
+	margin-top: 15px;
+	padding: 20px;
+
+	width: 500px; 
+
+	border-top: 2px solid coral;
+	border-radius: 2px;
+	box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.grupo-control{
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.grupo-control input {
+	margin-left: 2px;
+	margin: 5px;
+	padding: 1px;
+}
+
+.grupo-control label{
+	margin: 5px;
+	padding: 8px;
+}
+
+.grupo-control button{
+	margin-top: 8px;
+	padding: 8px 14px;
+
+	text-decoration: none;
+    color: white;
+    background-color: coral;
+    border-radius: 6px;
+    border: 0px;
+}
+
+.grupo-control button:hover{
+	text-decoration: none;
+    color: white;
+    background-color: #22264b;
+    border-radius: 6px;
+    border: 0px;
+ }
+
+/* estilo para las checkbox de los formularios */
+ .grupo-control-checkbox {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+
+	padding: 4px;
+}
+
+/* estilo para las etiquetas de las checkbox de los formularios */
+.grupo-control-checkbox label{
+	padding: 4px;
+}
+
+/*----------------------------------------------------------------------------------------------------------------------*/

@@ -19,33 +19,33 @@ class formularioRegistro extends Form{
      */
     protected function generaCamposFormulario($datosIniciales){
 
-        $html = '<fieldset>';
+        $html = '<div class="formulario">';
 
         $html .= '<div class="grupo-control">';
-        $html .= '<label>Nombre de usuario:</label> <input class="control" type="text" name="username" />';
+        $html .= '<label>Nombre de usuario:</label> <input class="control" type="text" name="username" placeholder="Nombre" />';
         $html .= '</div>';
 
         $html .= '<div class="grupo-control">';
-        $html .= '<label>Email:</label> <input class="control" type="text" name="email" />';
+        $html .= '<label>Email:</label> <input class="control" type="text" name="email" placeholder="Email" />';
         $html .= '</div>';
 
         $html .= '<div class="grupo-control">';
-        $html .= '<label>Password:</label> <input class="control" type="password" name="password" />';
+        $html .= '<label>Contraseña:</label> <input class="control" type="password" name="password" placeholder="Contraseña" />';
         $html .= '</div>';
 
-        $html .= '<div class="grupo-control"><label>Vuelve a introducir el Password:</label> <input class="control" type="password" name="password2" /><br /></div>';
+        $html .= '<div class="grupo-control"><label>Vuelve a introducir la contraseña:</label> <input class="control" type="password" name="password2" placeholder="Contraseña repetida" /></div>';
 
-        $html .= '<div class="grupo-control">';
+        $html .= '<div class="grupo-control-checkbox">';
         $html .= '<input class="control" type="checkbox" name="accept"/><label>Acepto los términos y condiciones.</label>';
         $html .= '</div>';
 
-        $html .= '<div class="grupo-contol">';
+        $html .= '<div class="grupo-control-checkbox">';
         $html .= '<input class="control" type="checkbox" name="robot"/><label>No soy un robot.</label>';
         $html .= '</div>';
 
         $html .= '<div class="grupo-control"><button type="submit" name="registro">Registrar</button></div>';
 
-        $html .= '</fieldset>';
+        $html .= '</div>';
         return $html;
     }
 

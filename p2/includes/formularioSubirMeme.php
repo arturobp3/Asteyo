@@ -15,23 +15,25 @@ class formularioSubirMeme extends Form{
     
     protected function generaCamposFormulario($datosIniciales){
 
-        $html = '<div class="grupo-control">';                            
-        $html .= '<h1> Sube tu meme </h1>';
-        $html .= '</div>';
-        $html .= '<fieldset>';
+        $html = '<div class="formulario">';
+
         $html .= '<div class="grupo-control">';                            
-        $html .= '<label>Título del meme:</label> <input type="text" name="tituloMeme"  />';
+        $html .= '<label>Título del meme:</label> <input type="text" name="tituloMeme" placeholder="Título"  />';
         $html .= '</div>';
+
         $html .= '<div class="grupo-control">';
         $html .= '<input type="file" name="imagen" accept="image/*"/>';
         $html .= '</div>';
+
         $html .= '<div class="grupo-control">';
-        $html .= '<label>Escribe tus hashtags separados por espacio</label> <input type="text" name="hashtags"  />';
+        $html .= '<label>Escribe tus hashtags separados por espacio</label> <input type="text" name="hashtags" placeholder="#... " />';
         $html .= '</div>';
+
         $html .= '<div class="grupo-control">';
         $html .= '<button type="submit" name="meme">Enviar</button>';
         $html .= '</div>';
-        $html .= '</fieldset>';
+
+        $html .= '</div>';
 
         return $html;
     }

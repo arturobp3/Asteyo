@@ -9,7 +9,9 @@ require_once("includes/formularioRegistro.php");
 <!DOCTYPE html>
 <html>
 <head>
-	<link rel="stylesheet" type="text/css" href="assets/css/estilo.css" />
+	<link rel="stylesheet" type="text/css" href="assets/css/estilo-general.css" />
+	<link rel="stylesheet" type="text/css" href="assets/css/estilo-formularios.css" />
+	<link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<title>Registro | Asteyo</title>
 </head>
@@ -26,8 +28,8 @@ require_once("includes/formularioRegistro.php");
 
 				<?php require("includes/comun/sidebarIzq.php"); ?>
 
-				<div id="contenido">
-					<h1>Registro de usuario</h1>
+				<div class="contenido-formularios">
+					<h2>REGISTRARSE</h2>
 
 					<?php
 						$formulario = new formularioRegistro("registro", array('action' => 'registro.php'));

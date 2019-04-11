@@ -20,13 +20,19 @@ class formularioLogin extends Form{
      */
     protected function generaCamposFormulario($datosIniciales){
 		
-        $html = '<div class="grupo-control">';                            
-        $html .= '<label>Nombre de usuario:</label> <input type="text" name="nombreUsuario" />';
+        $html = '<div class="formulario">';
+
+        $html .= '<div class="grupo-control">';                            
+        $html .= '<label>Nombre de usuario:</label> <input type="text" name="nombreUsuario" placeholder="Nombre" />';
         $html .= '</div>';
+
         $html .= '<div class="grupo-control">';
-        $html .= '<label>Contraseña:</label> <input type="password" name="password" />';
+        $html .= '<label>Contraseña:</label> <input type="password" name="password" placeholder="Contraseña" />';
         $html .= '</div>';
+
         $html .= '<div class="grupo-control"><button type="submit" name="login">Entrar</button></div>';
+
+        $html .= '</div>';
 
         return $html;
     }

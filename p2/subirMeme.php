@@ -9,7 +9,9 @@ require_once("includes/formularioSubirMeme.php");
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" type="text/css" href="assets/css/estilo.css" />
+    <link rel="stylesheet" type="text/css" href="assets/css/estilo-general.css" />
+    <link rel="stylesheet" type="text/css" href="assets/css/estilo-formularios.css" />
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>Sube tu meme | Asteyo</title>
 </head>
@@ -24,9 +26,10 @@ require_once("includes/formularioSubirMeme.php");
 
         <?php require("includes/comun/sidebarIzq.php");?>
 
-        <div id="contenido">
-        <?php
+        <div class="contenido-formularios">
+            <h2>SUBE TU MEME</h2>
 
+        <?php
             $formulario = new formularioSubirMeme("subirMeme", array( 'action' => 'subirMeme.php'));
             $formulario->gestiona();
 

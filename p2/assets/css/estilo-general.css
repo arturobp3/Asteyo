@@ -14,6 +14,24 @@ body {
 	background-color: white;
 }
 
+@media only screen and (max-width: 1280px) {
+  body {
+    size: 74.99999%;
+  }
+}
+
+@media only screen and (max-width: 960) {
+  body {
+    size: 49.99999%;
+  }
+}
+
+@media only screen and (max-width: 480) {
+  body {
+    size: 24.99999%;
+  }
+}
+
 /*----------------------------------------------------------------------------------------------------------------------*/
 /*----------------------------------------------------------------------------------------------------------------------*/
 /*----------------------------------------------------------------------------------------------------------------------*/
@@ -31,24 +49,6 @@ body {
 	/* le damos una altura mínima de 100vh (= 100% del viewport height) para que abarque toda la pantalla y
 	pudea crecer sin problemas */
 	min-height: 100vh;
-}
-
-@media only screen and (max-width: 1280px) {
-  .contenedor {
-    width: 74.99999%;
-  }
-}
-
-@media only screen and (max-width: 960) {
-  .contenedor {
-    width: 49.99999%;
-  }
-}
-
-@media only screen and (max-width: 480) {
-  .contenedor {
-    width: 24.99999%;
-  }
 }
 
 /*----------------------------------------------------------------------------------------------------------------------*/
@@ -106,6 +106,7 @@ body {
 	border-radius: 5px;
 }
 
+/*ESTE ES EL QUE DUDO SOBRE SU VA A AQUI O EN INDEZ*/
 /*----------------------------------------------------------------------------------------------------------------------*/
 /*----------------------------------------------------------------------------------------------------------------------*/
 /*----------------------------------------------------------------------------------------------------------------------*/
@@ -120,7 +121,7 @@ body {
 .principal{
 	display: flex;
 	flex-direction: row;
-	min-height: 800px;
+	min-height: 600px;
 }
 
 /* div contenido*/
@@ -129,58 +130,6 @@ body {
 	flex-direction: column;
 	padding: 2% 2%;
 	width: 100%;
-}
-
-/*----------------------------------------------------------------------------------------------------------------------*/
-/*																														*/
-/*										Index: página de inicio de la página Asteyo										*/
-/*																														*/
-/*----------------------------------------------------------------------------------------------------------------------*/
-
-/* estilo del div del contenido del index */
-
-.principal #contenido-index{
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-}
-
-/* estilo del enlace que contiene cada div con un meme ?????????????????????????????????????????????????????????*/
-.principal #contenido-index .memes {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-
-	width: 40%;
-	margin: 15px;
-	padding: 1% 1%;
-	border: 1px solid black;
-	border-radius: 5px;
-
-	color: black;
-	text-decoration: none; 
-}
-
-.principal #contenido-index .memes:hover {
-	background-color: #cccccc;
-}
-
-.principal #contenido-index .memes #panelMeme {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-
-	width: 100%;
-	border: 1px solid coral;
-}
-
-.principal #contenido-index .memes #panelMeme p {
-	
-}
-
-.principal #contenido-index .memes #panelMeme #img-meme {
-	height: auto;
-	max-width:50%;
 }
 
 /*----------------------------------------------------------------------------------------------------------------------*/
@@ -293,17 +242,6 @@ body {
 }
 
 /*----------------------------------------------------------------------------------------------------------------------*/
-/*																														*/
-/*									Meme: página donde se visualiza un meme y toda su info								*/
-/*																														*/
-/*----------------------------------------------------------------------------------------------------------------------*/
-
-.principal #contenido img {
-	width: 150px;
-	height: auto;
-}
-
-/*----------------------------------------------------------------------------------------------------------------------*/
 /*----------------------------------------------------------------------------------------------------------------------*/
 /*----------------------------------------------------------------------------------------------------------------------*/
 /*																														*/
@@ -316,10 +254,35 @@ body {
 .sidebarIzq{
 	display: flex;
 	flex-direction: column;
-	width: 250px;
-	min-height: 800px;
-	background-color: #e8edf3;
+
 	padding: 2% 2%;
+
+	width: 250px;
+	min-height: 600px;
+
+	background-color: #e8edf3;
+}
+
+/* estilo de los hashtag */
+.sidebarIzq a {
+	color: #22264b;
+}
+
+/* estilo de los hashtag al ser pulsados */
+.sidebarIzq a:active {
+	color: coral;
+}
+
+/* estilo del nombre de la columna */
+.sidebarIzq th {
+	padding: 10px;
+
+	border-bottom: 2px solid coral;
+}
+
+/* estilo de las celdas de las filas */
+.sidebarIzq td {
+	padding: 10px;
 }
 
 /*----------------------------------------------------------------------------------------------------------------------*/
@@ -340,52 +303,4 @@ body {
 	background-color: #22264b;
 	font-weight: bold;
 	color: white;
-}
-
-/*----------------------------------------------------------------------------------------------------------------------*/
-/*----------------------------------------------------------------------------------------------------------------------*/
-/*----------------------------------------------------------------------------------------------------------------------*/
-/*																														*/
-/*						Formularios: estilos de los diferentes formularios de la página									*/
-/*																														*/
-/*----------------------------------------------------------------------------------------------------------------------*/
-/*----------------------------------------------------------------------------------------------------------------------*/
-/*----------------------------------------------------------------------------------------------------------------------*/
-
-.FLogin{
-	padding-top: 150px;
-	padding-left: 400px;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-}
-
-/*----------------------------------------------------------------------------------------------------------------------*/
-.grupo-control{
-	display:flex;
-	align-items: center;
-	flex-direction: column;
-}
-
-.grupo-control label{
-	padding: 8px;
-}
-
-.grupo-control button{
-	margin-top: 8px;
-	text-decoration: none;
-	font-weight: bold;
-	padding: 5px;
-    color: #000000;
-    background-color: #e6cf8b;
-    border-radius: 6px;
-    border: 2px solid #22264b;
-}
-
-.grupo-control button:hover{
-	text-decoration: none;
-    color: #ffffff;
-    background-color: #22264b;
-    border-radius: 6px;
-    border: 2px solid #0016b0;
 }

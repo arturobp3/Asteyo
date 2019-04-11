@@ -19,25 +19,25 @@ class formularioEdit extends Form{
      */
     protected function generaCamposFormulario($datosIniciales){
 
-        $html = '<fieldset>';
+        $html = '<div class="formulario">';
 
         $html .= '<div class="grupo-control">';
         $html .= '<label>Nuevo nombre de usuario:</label> <input class="control" type="text" name="username" />';
         $html .= '</div>';
 
         $html .= '<div class="grupo-control">';
-        $html .= '<label>Password antigüa:</label> <input class="control" type="password" name="old-password" />';
+        $html .= '<label>Contraseña actual:</label> <input class="control" type="password" name="old-password" />';
         $html .= '</div>';
 
         $html .= '<div class="grupo-control">';
-        $html .= '<label>Password nueva:</label> <input class="control" type="password" name="new-password" />';
+        $html .= '<label>Contraseña nueva:</label> <input class="control" type="password" name="new-password" />';
         $html .= '</div>';
 
-        $html .= '<div class="grupo-control"><label>Vuelve a introducir la nueva Password:</label> <input class="control" type="password" name="new-password2" /><br /></div>';
+        $html .= '<div class="grupo-control"><label>Vuelve a introducir la nueva contraseña:</label> <input class="control" type="password" name="new-password2" /><br /></div>';
 
         $html .= '<div class="grupo-control"><button type="submit" name="registro">Editar</button></div>';
 
-        $html .= '</fieldset>';
+        $html .= '</div>';
         return $html;
     }
 
