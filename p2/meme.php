@@ -43,7 +43,7 @@ require_once("includes/meme.php");
                     
                     echo '<img id="img-meme" src="'.$url.'"/>
                     <div id="info">
-                        <img id="user-profile-picture" src="#"/>
+                        <img id="user-profile-picture" src="./uploads/'.$usuario.'/fotoPerfil.jpg"/>
                         <div id="meme-info">
                             <p id="title">'.$title.'</p>
                             <p> by '.$usuario.'</p>

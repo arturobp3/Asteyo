@@ -59,7 +59,7 @@
 											<p>$value[1] Me Gusta</p>
 										</div>
 									</div>
-									END;
+END;
 								}
 							}
 						?>

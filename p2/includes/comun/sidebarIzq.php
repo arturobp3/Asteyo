@@ -30,21 +30,19 @@ require_once("includes/meme.php");
 	<tbody>
 		<?php
 			foreach ($result as $hashtag){
-		?>
-		<tr>
-
-			
-			
-			<td align="center">
-			<a href='./index.php?buscar=<?php echo $hashtag['name']; ?>' >
-				<?php echo $hashtag['name']; ?> 
-			</a>
-			<br>
-			</td>
-				
-			
-		</tr>
-		<?php
+				//Elimina el hashtag para utilizarlo en la url, ya que no lo pilla bien
+				$name = $hashtag['name'];
+				$name = substr($name,1);
+		
+				echo "<tr>
+						<td>
+							<a href='./index.php?buscar=%23".$name."' >
+								".$hashtag['name']."
+							</a>
+							<br>
+						</td>
+					</tr>";
+	
 			} //Final foreach
 		?>
 	</tbody>

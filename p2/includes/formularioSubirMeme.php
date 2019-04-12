@@ -85,9 +85,6 @@ class formularioSubirMeme extends Form{
 
         //PREPARAMOS LAS VARIABLES NECESARIAS PARA EL GUARDADO DE LA IMAGEN
 
-        //Nombre original del fichero en la máquina del cliente.
-        $imagename = $_FILES["imagen"]["name"];
-
         //Nombre temporal de la ruta en la cual se almacena el fichero subido.
         $imagetemp = $_FILES["imagen"]["tmp_name"];
 

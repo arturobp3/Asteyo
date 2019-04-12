@@ -33,9 +33,18 @@ class formularioEdit extends Form{
         $html .= '<label>Contraseña nueva:</label> <input class="control" type="password" name="new-password" />';
         $html .= '</div>';
 
-        $html .= '<div class="grupo-control"><label>Vuelve a introducir la nueva contraseña:</label> <input class="control" type="password" name="new-password2" /><br /></div>';
+        $html .= '<div class="grupo-control">';
+        $html .='<label>Vuelve a introducir la nueva contraseña:</label>';
+        $html .='<input class="control" type="password" name="new-password2"/>';
+        $html .= '</div>';
+
+        $html .= '<div class="grupo-control">';
+        $html .= '<label>Cambia tu foto de perfil</label>';
+        $html .= '<input type="file" name="imagen" accept="image/*"/>';
+        $html .= '</div>';
 
         $html .= '<div class="grupo-control"><button type="submit" name="registro">Editar</button></div>';
+
 
         $html .= '</div>';
         return $html;
@@ -69,6 +78,24 @@ class formularioEdit extends Form{
                 $erroresFormulario[] = "Para campar la Password deben estar rellenos los tres campos";
             }
         }
+
+        $imagenPerfil = isset($_FILES['imagen']) ? $_FILES['imagen'] : null;
+
+        //Comprueba si el archivo seleccionado es una imagen y no otra cosa distinta
+        $imageExtension = strtolower(pathinfo($_FILES['imagen']['name'], PATHINFO_EXTENSION));
+
+        //Ha habido un cambio en la imagen
+        $cambioImagen = false;
+        if($imageExtension != ""){
+            
+            if($imageExtension != "jpg"){
+                $erroresFormulario[] = "Solo se permiten archivos con extension: JPG";
+            }
+            else{
+                $cambioImagen = true;
+            }
+        }
+
         
         if (count($erroresFormulario) === 0) {
             $usuario = Usuario::buscaUsuario($_SESSION['nombre']);
@@ -77,6 +104,7 @@ class formularioEdit extends Form{
             if ($new && $old && $new2){
                 if ($usuario->compruebaPassword($old)){
                     $usuario->cambiaPassword($new);
+                    echo "Contraseña cambiada correctamente";
                     $hacerUpdate=true;
                 }
                 else{
@@ -99,8 +127,27 @@ class formularioEdit extends Form{
                 $carpetaNueva='./uploads/'.$username;
                 rename($carpetaVieja, $carpetaNueva);
 
-                $_SESSION['nombre']=$username;
+                echo "Nombre de usuario cambiado correctamente";
 
+                $_SESSION['nombre']=$username;
+            }
+
+            if($cambioImagen){
+                //Nombre temporal de la ruta en la cual se almacena el fichero subido.
+                $imagetemp = $_FILES["imagen"]["tmp_name"];
+
+                //Borramos la foto antigua: ./uploads/nombre/fotoPerfil.Extension
+                if(unlink('./uploads/'.$_SESSION['nombre'].'/fotoPerfil.jpg')){
+                    if(move_uploaded_file($imagetemp,"uploads/".$_SESSION['nombre']."/fotoPerfil.jpg")){
+                        echo "Imagen cambiada correctamente";
+                    }
+                    else{
+                        $erroresFormulario[]="Ha habido un error al cambiar la imagen.";
+                    }
+                }
+                else{
+                    $erroresFormulario[]="Ha habido un error al borrar la imagen antigua.";
+                }
             }
             
             if($hacerUpdate){

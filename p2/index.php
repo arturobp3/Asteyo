@@ -31,6 +31,7 @@ require_once("includes/meme.php");
 			$result;
 			if(isset($_GET['buscar'])){
 				//Se ha recibido una petición de busqueda de memes por el buscador
+
 				$result = Meme::searchMemeHashtag($_GET['buscar']);
 			}
 			else{
