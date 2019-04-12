@@ -4,7 +4,87 @@
 /*																														*/
 /*----------------------------------------------------------------------------------------------------------------------*/
 
-.principal #contenido img {
-	width: 150px;
+.contenido-meme {
+	display: flex;
+	flex-direction: column;
+
+	padding-top: 25px;
+	padding-left: 25px;
+	padding-right: 60px;
+
+	width: 100%;
+}
+
+/* meme */
+.contenido-meme #img-meme {
+	min-width: 150px;
+	max-width: 500px;
 	height: auto;
+
+	border-radius: 2px;
+	box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+/*----------------------------------------------------------------------------------------------------------------------*/
+
+/* div que contiene el avatar del usuario y otro div con el título y le autor del meme*/
+.contenido-meme #info {
+	display: flex;
+	flex-direction: row;
+
+	margin-top: 20px;
+	margin-bottom: 10px;
+}
+
+/*imagen de perfil del usuario */
+.contenido-meme #info #user-profile-picture {
+	width: 75px;
+	height: 75px;
+}
+
+/* div con el titulo y el autor del meme */
+.contenido-meme #info #meme-info {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+
+	padding-left: 10px;
+}
+
+/* estilo del titulo del meme */
+.contenido-meme #info #meme-info #title {
+	font-weight: bold;
+	padding: 4px 0px;
+}
+
+/* div con los metadatos del meme */
+.contenido-meme #meme-data {
+	display: flex;
+	flex-direction: column;
+
+	margin-top: 10px;
+	margin-bottom: 25px;
+	padding: 5px 0px;
+
+	color: grey;
+	border-top: 1px solid grey;
+}
+
+/*----------------------------------------------------------------------------------------------------------------------*/
+
+/* estilo del titulo de la sección de comentarios*/
+.contenido-meme h3 {
+	font-style: italic;
+	padding-left: 10px;
+}
+
+/* seccion de comentarios */
+.contenido-meme #comment-section {
+	display: flex;
+	flex-direction: column;
+
+	margin-top: 10px;
+	margin-bottom: 25px;
+
+	border-top: 2px solid coral;
 }

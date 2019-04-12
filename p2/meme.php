@@ -25,7 +25,7 @@ require_once("includes/meme.php");
 	<div class="principal">
 		<?php require("includes/comun/sidebarIzq.php");?>
 
-		<div id="contenido">
+		<div class="contenido-meme">
 		<?php
 
             if(isset($_GET['name']) && isset($_GET['id'])){
@@ -37,16 +37,25 @@ require_once("includes/meme.php");
                 if (file_exists($url)) {
                     //Obtiene la información relevante del meme para mostrarla.
                     $info_meme = Meme::getMeme($id_meme);
-
-                    echo " <p> Titulo: ".$info_meme->titulo()."</p>
-                            <p> Usuario: ".$usuario."</p>
-                            <img id='img-meme' src='".$url."'/>
-                            <p>Me gustas: ".$info_meme->num_megustas()."</p>
-                            <p>Fecha de subida: ".$info_meme->fechaSubida()."</p>
-                            
-                            <p>COMENTARIOS</p>";
-
-
+                    $title = $info_meme->titulo();
+                    $num_likes = $info_meme->num_megustas();
+                    $date = $info_meme->fechaSubida();
+                    
+                    echo '<img id="img-meme" src="'.$url.'"/>
+                    <div id="info">
+                        <img id="user-profile-picture" src="#"/>
+                        <div id="meme-info">
+                            <p id="title">'.$title.'</p>
+                            <p> by '.$usuario.'</p>
+                        </div>
+                    </div>
+                    <div id="meme-data">
+                        <p>'.$num_likes.' me gustas</p>
+                        <p>Fecha de subida: '.$date.'</p>
+                    </div>
+                    <h3>COMENTARIOS</h3>
+                    <div id="comment-section">
+                    </div>';
                 } 
                 else {
                     echo "<h1 class='mensaje'> ¡No se ha encontrado el meme! </h1>";
