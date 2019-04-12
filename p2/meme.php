@@ -41,7 +41,9 @@ require_once("includes/meme.php");
                     $num_likes = $info_meme->num_megustas();
                     $date = $info_meme->fechaSubida();
                     
-                    echo '<img id="img-meme" src="'.$url.'"/>
+                    echo '<div id="container-meme">
+                    <img id="img-meme" src="'.$url.'"/>
+                    </div>
                     <div id="info">
                         <img id="user-profile-picture" src="./uploads/'.$usuario.'/fotoPerfil.jpg"/>
                         <div id="meme-info">

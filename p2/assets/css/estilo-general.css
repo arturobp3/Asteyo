@@ -106,7 +106,6 @@ body {
 	border-radius: 5px;
 }
 
-/*ESTE ES EL QUE DUDO SOBRE SU VA A AQUI O EN INDEZ*/
 /*----------------------------------------------------------------------------------------------------------------------*/
 /*----------------------------------------------------------------------------------------------------------------------*/
 /*----------------------------------------------------------------------------------------------------------------------*/
@@ -130,115 +129,6 @@ body {
 	flex-direction: column;
 	padding: 2% 2%;
 	width: 100%;
-}
-
-/*----------------------------------------------------------------------------------------------------------------------*/
-/*																														*/
-/*										Perfil: página de perfil de los usuarios										*/
-/*																														*/
-/*----------------------------------------------------------------------------------------------------------------------*/
-
-/*editar perfil*/
-.principal #contenido a {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	padding: 1% 1%;
-	width: 100px;
-	color: black;
-	border: 1.5px solid black;
-	border-radius: 5px;
-	text-decoration: none;
-	font-weight: bold; 
-}
-
-/* estilo del hover de editar perfil */
-.principal #contenido a:hover {
-	background-color: black;
-	color: white;
-	border-radius: 5px;
-}
-
-/* panel del perfil con al foto y los datos del usuario*/
-.principal #contenido #panel-perfil {
-	display: flex;
-	flex-direction: row;
-	justify-content: flex-start;
-	margin-top: 20px;
-	margin-bottom: 20px;
-	padding-top: 10px;
-	border-top: 2px solid coral;
-}
-
-/*imagen de perfil*/
-.principal #contenido #panel-perfil #foto #img-perfil {
-	width: 120px;
-	height: 120px;
-}
-
-/*info del usuario*/
-.principal #contenido #panel-perfil #perfil {
-	display: flex;
-	flex-direction: column;
-	justify-content: flex-start;
-	width: 300px;
-	padding: 2% 2%;
-}
-
-/*estilo de los div que van a contener la información del usuario dentro del perfil*/
-.principal #contenido #panel-perfil #perfil #user-info{
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-}
-
-.principal #contenido #panel-perfil #perfil p {
-	margin: 5px 10px;
-	font-weight: bold;
-}
-
-/*----------------------------------------------------------------------------------------------------------------------*/
-
-/*panel de memes del perfil*/
-.memes-perfil {
-	margin-top:5px;
-	padding-top: 5px;
-	border-top: 2px solid coral;
-}
-
-/*memes responsive div */
-.responsive {
-	padding: 0 6px;
-	float: left;
-	width: 24.99999%;
-	border: 1px solid blue;
-}
-
-@media only screen and (max-width: 700px) {
-  .responsive {
-    width: 49.99999%;
-    margin: 6px 0;
-  }
-}
-
-@media only screen and (max-width: 500px) {
-  .responsive {
-    width: 100%;
-  }
-}
-
-/*panel del perfil donde estan contenidos los memes de usuario */
-.principal #contenido #meme {
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-	align-items: center;
-}
-
-/*imagen del meme*/
-.principal #contenido #imagen-meme {
-	width: auto;
-	height: 150px;
 }
 
 /*----------------------------------------------------------------------------------------------------------------------*/
@@ -283,6 +173,8 @@ body {
 /* estilo de las celdas de las filas */
 .sidebarIzq td {
 	padding: 10px;
+
+	/*border-right: 0.5px solid grey;*/
 }
 
 /*----------------------------------------------------------------------------------------------------------------------*/

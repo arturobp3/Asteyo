@@ -137,17 +137,28 @@ class formularioEdit extends Form{
                 $imagetemp = $_FILES["imagen"]["tmp_name"];
 
                 //Borramos la foto antigua: ./uploads/nombre/fotoPerfil.Extension
-                if(unlink('./uploads/'.$_SESSION['nombre'].'/fotoPerfil.jpg')){
-                    if(move_uploaded_file($imagetemp,"uploads/".$_SESSION['nombre']."/fotoPerfil.jpg")){
-                        echo "Imagen cambiada correctamente";
+                if (file_exists('./uploads/'.$_SESSION['nombre'].'/fotoPerfil.jpg')) {
+                    if(unlink('./uploads/'.$_SESSION['nombre'].'/fotoPerfil.jpg')){
+                        if(move_uploaded_file($imagetemp,"uploads/".$_SESSION['nombre']."/fotoPerfil.jpg")){
+                            echo "Imagen cambiada correctamente";
+                        }
+                        else{
+                            $erroresFormulario[]="Ha habido un error al cambiar la imagen.";
+                        }
                     }
                     else{
-                        $erroresFormulario[]="Ha habido un error al cambiar la imagen.";
+                       $erroresFormulario[]="Ha habido un error al borrar la imagen antigua.";
                     }
                 }
                 else{
-                    $erroresFormulario[]="Ha habido un error al borrar la imagen antigua.";
+                    if(move_uploaded_file($imagetemp,"uploads/".$_SESSION['nombre']."/fotoPerfil.jpg")){
+                        echo "Imagen subida correctamente";
+                    }
+                    else{
+                         $erroresFormulario[]="Ha habido un error al subir la imagen.";
+                    }
                 }
+                
             }
             
             if($hacerUpdate){

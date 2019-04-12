@@ -15,14 +15,21 @@
 	width: 100%;
 }
 
-/* meme */
-.contenido-meme #img-meme {
-	min-width: 150px;
+/*----------------------------------------------------------------------------------------------------------------------*/
+
+/* contenedor del meme */
+.contenido-meme #container-meme {
 	max-width: 500px;
-	height: auto;
+	max-height: 700px; 
 
 	border-radius: 2px;
 	box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+/* meme */
+.contenido-meme #img-meme {
+	width: 100%;
+	height: auto;
 }
 
 /*----------------------------------------------------------------------------------------------------------------------*/

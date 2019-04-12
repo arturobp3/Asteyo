@@ -174,7 +174,8 @@ class Meme {
                     $memes[] = array(
                         'username' => $fila['username'],
                         'id' => $fila['id_meme'],
-                        'nameMeme' => $fila['title']
+                        'nameMeme' => $fila['title'],
+                        'numLikes' => $fila['num_megustas']
                     );
                 }
                     $rs->free();
@@ -220,7 +221,8 @@ class Meme {
                     $memes[] = array(
                         'username' => $fila['username'],
                         'id' => $fila['id_meme'],
-                        'nameMeme' => $fila['title']
+                        'nameMeme' => $fila['title'],
+                        'numLikes' => $fila['num_megustas']
                     );
                 }
                 $rs->free();
