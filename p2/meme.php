@@ -9,9 +9,8 @@ require_once("includes/meme.php");
 <!DOCTYPE html>
 <html>
 <head>
-	<link rel="stylesheet" type="text/css" href="assets/css/estilo-general.css" />
-    <link rel="stylesheet" type="text/css" href="assets/css/estilo-meme.css" />
-    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="assets/css/general.css" />
+    <link rel="stylesheet" type="text/css" href="assets/css/meme.css" />
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<title>Meme | Asteyo</title>
 </head>

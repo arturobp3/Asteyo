@@ -3,11 +3,16 @@
 	- para centrar cosas dentro de los div: usad los atributos "justify-content: center;" y "align-items: center;"
 */
 /*--------------------------------------------------------------------------------------------------------------------------------------*/
+@font-face {
+  font-family: asteyoFont;
+  src: url(https://fonts.googleapis.com/css?family=Ubuntu);
+}
+
 * {
 	box-sizing: border-box;
 	margin: 0;
 	padding: 0;
-	font-family: 'Ubuntu', sans-serif;
+	font-family: asteyoFont, sans-serif;
 }
 
 body {
