@@ -49,14 +49,14 @@
 								foreach ($rtMemes as $key => $value) {
 									$meme = "uploads/".$usuario->id()."/".$value[2].".jpg";
 									echo <<< END
-									<div class="responsive">
-										<div id="meme">
-											<img id="imagen-meme"src=$meme>
-											<p>Título: $value[0]</p>
-											<p>$value[1] Me Gusta</p>
+									<div id="meme">
+										<img id="imagen-meme"src=$meme>
+										<div id ="meme-taInfo">
+											<p> <b>$value[0]</b></p>
+											<p>$value[1] <span style='color:red;'>\u{2764}</span> 0 <span>\u{1F4AC}</span> </p>
 										</div>
 									</div>
-END;
+									END;
 								}
 							}
 						?>

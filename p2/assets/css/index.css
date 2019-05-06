@@ -33,8 +33,13 @@
 	margin-top: 20px;
 	margin-bottom: 20px;
 
-	border-radius: 2px;
+	border-radius: 4px;
 	box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+/* estilo de div que contiene los memes cuando se situa el raton encima */
+.contenido-index #meme:hover{
+	box-shadow: 0 2px 4px 0 coral, 0 6px 20px 0 coral;
 }
 
 /*----------------------------------------------------------------------------------------------------------------------*/
@@ -46,6 +51,7 @@
 	justify-content: center;
 
 	height: 50px; 
+	padding-top: 3px;
 	padding-left: 15px;
 
 	font-weight: bold;

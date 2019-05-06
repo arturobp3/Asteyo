@@ -100,6 +100,9 @@ class formularioSubirMeme extends Form{
                 echo $formato;
             } 
         }
+        else{
+            $erroresFormulario[]='Tienes que introducir al menos un hastag.';
+        }
         
         
         if(!$formato){
@@ -112,7 +115,7 @@ class formularioSubirMeme extends Form{
                 //Se guardan los datos en la BBDD
                 $meme = Meme::crea($tituloMeme, $num_megustas, $id_autor, $datetime);
 
-                $ruta = "uploads/".$username-id()."/".$meme->id().".jpg"; 
+                $ruta = "uploads/".$id_autor."/".$meme->id().".jpg"; 
 
                 if($meme && move_uploaded_file($imagetemp , $ruta)) {
                     //comprobar la extensión

@@ -69,41 +69,48 @@
 
 /*panel de memes del perfil*/
 .memes-perfil {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+
 	margin-top:5px;
 	padding-top: 5px;
 	border-top: 2px solid coral;
 }
 
-/*memes responsive div */
-.responsive {
-	padding: 0 6px;
-	float: left;
-	width: 24.99999%;
-}
-
-@media only screen and (max-width: 700px) {
-  .responsive {
-    width: 49.99999%;
-    margin: 6px 0;
-  }
-}
-
-@media only screen and (max-width: 500px) {
-  .responsive {
-    width: 100%;
-  }
-}
-
-/*panel del perfil donde estan contenidos los memes de usuario */
+/*panel del perfil donde estan contenidos cada uno de los memes de usuario */
 .principal #contenido #meme {
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
 	align-items: center;
+	flex: 0 24%;
+
+	margin-top: 5px;
+	margin-left: 5px;
+	margin-right: 5px;
+
+	background-color: #eaeaea;
+	border-radius: 4px;
+	box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 /*imagen del meme*/
 .principal #contenido #imagen-meme {
 	width: auto;
 	height: 150px;
+}
+
+/* div con la meta información del meme */
+.principal #contenido #meme-taInfo {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+
+	width: 100%;
+	padding-top: 4px;
+	padding-bottom: 4px;
+
+	background-color: white;
 }

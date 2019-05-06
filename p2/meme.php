@@ -30,8 +30,10 @@ require_once("includes/usuario.php");
 
             if(isset($_GET['userName']) && isset($_GET['id'])){
 
-                $usuario = $_GET['userName'];
-                $usuario = Usuario::buscaUsuario($usuario);
+                $userName = $_GET['userName'];
+                $usuario = Usuario::buscaUsuario($userName);
+                $uID = $usuario->id();
+                $uName = $usuario->username();
                 $id_meme = $_GET['id'];
                 $url = 'uploads/'.$usuario->id().'/'.$id_meme.'.jpg';
 
@@ -42,23 +44,26 @@ require_once("includes/usuario.php");
                     $num_likes = $info_meme->num_megustas();
                     $date = $info_meme->fechaSubida();
                     
-                    echo '<div id="container-meme">
-                    <img id="img-meme" src="'.$url.'"/>
+                    echo <<< END
+                    <div id="container-meme">
+                    <img id="img-meme" src="$url"/>
                     </div>
                     <div id="info">
-                        <img id="user-profile-picture" src="./uploads/'.$usuario->id().'/fotoPerfil.jpg"/>
+                        <img id="user-profile-picture" src="./uploads/$uID/fotoPerfil.jpg"/>
                         <div id="meme-info">
-                            <p id="title">'.$title.'</p>
-                            <p> by <a href="perfil.php?userName='.$usuario->username().'">'.$usuario->username().'</a></p>
+                            <p id="title">$title</p>
+                            <p> by <a href="perfil.php?userName=$uName">$uName</a></p>
                         </div>
                     </div>
                     <div id="meme-data">
-                        <p>'.$num_likes.' me gustas</p>
-                        <p>Fecha de subida: '.$date.'</p>
+                        <p>$num_likes <span style="color:red;">\u{2764}</span>
+                             0 <span>\u{1F4AC}</span> </p>
+                        <p>Fecha de subida: $date</p>
                     </div>
                     <h3>COMENTARIOS</h3>
                     <div id="comment-section">
-                    </div>';
+                    </div>
+                    END;
                 } 
                 else {
                     echo "<h1 class='mensaje'> ¡No se ha encontrado el meme! </h1>";

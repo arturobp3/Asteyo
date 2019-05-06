@@ -59,6 +59,23 @@
 	padding-left: 10px;
 }
 
+/* estilo para el enlace que redirige al perfil del autor del meme */
+a {
+	text-decoration: none;
+	color: coral;
+}
+
+/* estilo del enlace al pasar por encima */
+a:hover {
+	text-decoration: underline;
+}
+
+/* estilo del enlace al clickar sobre el */
+a:active {
+	text-decoration: none;
+	color: #22264b;
+}
+
 /* estilo del titulo del meme */
 .contenido-meme #info #meme-info #title {
 	font-weight: bold;
