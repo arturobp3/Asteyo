@@ -137,6 +137,27 @@ class Usuario {
         return $usuario;
     }
 
+    public static function cambiarRol($rol, $username){
+        $app = Aplicacion::getInstance();
+        $conn = $app->conexionBD();
+        $query=sprintf("UPDATE users U SET U.rol='%s' WHERE U.username=%d"
+            , $conn->real_escape_string($rol)
+            , $conn->real_escape_string($username));
+
+        
+
+        if ( $conn->query($query) ) {
+            if ( $conn->affected_rows != 1) {
+                echo "Error al actualizar en la BD: (" . $conn->errno . ") " . utf8_encode($conn->error);
+                exit();
+            }
+        } else {
+            echo "Error al actualizar en la BD: (" . $conn->errno . ") " . utf8_encode($conn->error);
+            exit();
+        }
+        
+    }
+
     public static function memes($username){
         $usuario = self::buscaUsuario($username);
         $app = Aplicacion::getInstance();

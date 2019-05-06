@@ -2,6 +2,7 @@
 
 //Inicio del procesamiento
 require_once("includes/config.php");
+require_once("includes/formularioAdmin.php");
 
 ?>
 
@@ -9,8 +10,9 @@ require_once("includes/config.php");
 <html>
 <head>
 	<link rel="stylesheet" type="text/css" href="assets/css/general.css" />
+	<link rel="stylesheet" type="text/css" href="assets/css/formularios.css" />
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<title>Administrar | Asteyo</title>
+	<title>Registro | Asteyo</title>
 </head>
 
 <body>
@@ -19,31 +21,27 @@ require_once("includes/config.php");
 
 		<?php
 			require("includes/comun/cabecera.php");
-			require("includes/comun/sidebarIzq.php");
 		?>
 
-			<div id="contenido">
+			<div class="principal">
 
-				<?php
-					if (!isset($_SESSION['esAdmin'])) {
-						echo "<h1>Acceso denegado!</h1>";
-						echo "<p>No tienes permisos suficientes para administrar la web.</p>";
-					} else {
-				?>
-					<h1>Consola de administración</h1>
-					<p>Aquí estarían todos los controles de administración</p>
-				<?php
-					}
-				?>
+				<?php require("includes/comun/sidebarIzq.php"); ?>
+
+				<div class="contenido-formularios">
+					<h2>GESTIONAR MODERADORES</h2>
+
+					<?php
+						$formulario = new formularioAdmin("registro", array('action' => 'admin.php'));
+						$formulario->gestiona();
+					?>
+				</div>
+
+
 			</div>
 
 		<?php
-
-			require("includes/comun/sidebarDer.php");
 			require("includes/comun/pie.php");
-
 		?>
-
 
 	</div>
 
