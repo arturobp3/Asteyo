@@ -28,15 +28,13 @@
 					<div id="panel-perfil">
 						<div id="foto">
 						<?php
-							$imgPerfil = "uploads/".$_SESSION["nombre"]."/fotoPerfil.jpg";
+							$usuario = Usuario::buscaUsuario($_GET["userName"]);
+							$imgPerfil = "uploads/".$usuario->id()."/fotoPerfil.jpg";
 							echo '<img id="img-perfil" src='.$imgPerfil.'>';
 						?>
 	                	</div>
 	                	<div id="perfil">
 							<?php
-								$usuario = Usuario::buscaUsuario($_SESSION["nombre"]);
-								//echo "Nombre: ".$_SESSION["nombre"];
-
 								echo "<div id='user-info'><p>Nombre: </p>".$usuario->username()."</div>";
 								echo "<div id='user-info'><p>Rango: </p>".$usuario->rol()."</div>";
 
@@ -49,7 +47,7 @@
 							$rtMemes= Usuario::memes($usuario->username());
 							if($rtMemes){
 								foreach ($rtMemes as $key => $value) {
-									$meme = "uploads/".$usuario->username()."/".$value[2].".jpg";
+									$meme = "uploads/".$usuario->id()."/".$value[2].".jpg";
 									echo <<< END
 									<div class="responsive">
 										<div id="meme">

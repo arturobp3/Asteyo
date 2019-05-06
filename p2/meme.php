@@ -3,6 +3,7 @@
 //Inicio del procesamiento
 require_once("includes/config.php");
 require_once("includes/meme.php");
+require_once("includes/usuario.php");
 
 ?>
 
@@ -27,11 +28,12 @@ require_once("includes/meme.php");
 		<div class="contenido-meme">
 		<?php
 
-            if(isset($_GET['name']) && isset($_GET['id'])){
+            if(isset($_GET['userName']) && isset($_GET['id'])){
 
-                $usuario = $_GET['name'];
+                $usuario = $_GET['userName'];
+                $usuario = Usuario::buscaUsuario($usuario);
                 $id_meme = $_GET['id'];
-                $url = 'uploads/'.$usuario.'/'.$id_meme.'.jpg';
+                $url = 'uploads/'.$usuario->id().'/'.$id_meme.'.jpg';
 
                 if (file_exists($url)) {
                     //Obtiene la información relevante del meme para mostrarla.
@@ -44,10 +46,10 @@ require_once("includes/meme.php");
                     <img id="img-meme" src="'.$url.'"/>
                     </div>
                     <div id="info">
-                        <img id="user-profile-picture" src="./uploads/'.$usuario.'/fotoPerfil.jpg"/>
+                        <img id="user-profile-picture" src="./uploads/'.$usuario->id().'/fotoPerfil.jpg"/>
                         <div id="meme-info">
                             <p id="title">'.$title.'</p>
-                            <p> by '.$usuario.'</p>
+                            <p> by <a href="perfil.php?userName='.$usuario->username().'">'.$usuario->username().'</a></p>
                         </div>
                     </div>
                     <div id="meme-data">
@@ -66,8 +68,6 @@ require_once("includes/meme.php");
                 echo "<h1 class='mensaje'> ¡No se ha encontrado el meme! </h1>";
             }
 
-
-	
 		
         ?>	
 		</div>

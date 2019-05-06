@@ -3,7 +3,7 @@
 //Inicio del procesamiento
 require_once("includes/config.php");
 require_once("includes/meme.php");
-
+require_once("includes/usuario.php");
 ?>
 
 <!DOCTYPE html>
@@ -45,18 +45,19 @@ require_once("includes/meme.php");
 			else{
 
 				foreach ($result as $meme) {
+					$usuario = Usuario::buscaUsuario($meme['username']);
 					echo
-					'<a class="memes" href="./meme.php?name='.$meme['username'].'&id='.$meme['id'].'"">
+					'<a class="memes" href="./meme.php?userName='.$meme['username'].'&id='.$meme['id'].'"">
 						<div id="meme">
 							<div id="meme-title">
 								<p>'.$meme['nameMeme'].'</p>
 							</div>
 							<div id="meme-container">
-								<img id="img-meme" src="uploads/'.$meme['username'].'/'.$meme['id'].'.jpg"/>
+								<img id="img-meme" src="uploads/'.$usuario->id().'/'.$meme['id'].'.jpg"/>
 							</div>
 							<div id="meme-info">
 								<div id="user-info">
-									<img id="user-profile-picture" src="./uploads/'.$meme['username'].'/fotoPerfil.jpg"/>
+									<img id="user-profile-picture" src="./uploads/'.$usuario->id().'/fotoPerfil.jpg"/>
 									<p> by '.$meme['username'].'</p>
 								</div>
 								<p>'.$meme['numLikes'].' me gusta</p>

@@ -4,6 +4,7 @@ require_once('form.php');
 require_once('usuario.php');
 require_once('meme.php');
 require_once('hashtag.php');
+require_once('usuario.php');
 
 
 class formularioSubirMeme extends Form{
@@ -110,7 +111,12 @@ class formularioSubirMeme extends Form{
             if(is_uploaded_file($imagetemp)) {
                 //Se guardan los datos en la BBDD
                 $meme = Meme::crea($tituloMeme, $num_megustas, $id_autor, $datetime);
-                if($meme && move_uploaded_file($imagetemp,"uploads/".$username."/".$meme->id().".jpg")) {
+
+                $ruta = "uploads/".$username-id()."/".$meme->id().".jpg"; 
+
+                if($meme && move_uploaded_file($imagetemp , $ruta)) {
+                    //comprobar la extensión
+
                     echo "Meme subido correctamente";
                     //comprobar si existe el hashtag si no se sube y si ya existe
                     foreach ($hashtags as $key => $value) {
