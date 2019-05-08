@@ -13,6 +13,7 @@ require_once("includes/usuario.php");
 	<link rel="stylesheet" type="text/css" href="assets/css/general.css" />
     <link rel="stylesheet" type="text/css" href="assets/css/meme.css" />
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <script src="./assets/js/jquery-3.4.1.min.js"></script>
 	<title>Meme | Asteyo</title>
 </head>
 
@@ -44,26 +45,28 @@ require_once("includes/usuario.php");
                     $num_likes = $info_meme->num_megustas();
                     $date = $info_meme->fechaSubida();
                     
-                    echo <<< END
-                    <div id="container-meme">
-                    <img id="img-meme" src="$url"/>
+                    $html ="
+                    <div id='container-meme'>
+                    <img id='img-meme' src='$url'/>
                     </div>
-                    <div id="info">
-                        <img id="user-profile-picture" src="./uploads/$uID/fotoPerfil.jpg"/>
-                        <div id="meme-info">
-                            <p id="title">$title</p>
-                            <p> by <a href="perfil.php?userName=$uName">$uName</a></p>
+                    <div id='info'>
+                        <img id='user-profile-picture' src='./uploads/$uID/fotoPerfil.jpg'/>
+                        <div id='meme-info'>
+                            <p id='title'>$title</p>
+                            <p> by <a href='perfil.php?userName=$uName'>$uName</a></p>
                         </div>
                     </div>
-                    <div id="meme-data">
-                        <p>$num_likes <span style="color:red;">\u{2764}</span>
+                    <div id='meme-data'>
+                        <p>$num_likes <span style='color:red;'>\u{2764}</span>
                              0 <span>\u{1F4AC}</span> </p>
                         <p>Fecha de subida: $date</p>
                     </div>
                     <h3>COMENTARIOS</h3>
-                    <div id="comment-section">
-                    </div>
-                    END;
+                    <div id='comment-section'>";
+                    
+                    $html .= "</div>";
+
+                    echo $html;
                 } 
                 else {
                     echo "<h1 class='mensaje'> ¡No se ha encontrado el meme! </h1>";
