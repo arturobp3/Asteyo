@@ -93,6 +93,36 @@ body {
 	border-radius: 5px;
 }
 
+.nav li{
+	list-style: none;
+	float:left;
+}
+
+.nav li ul{
+
+	display: none;
+	position:absolute;
+	width: 140px;
+}
+
+.nav li:hover ul{
+	display: block;
+	/*margin-top: 5px;*/
+	background-color: black;
+}
+
+.nav li ul li a{
+  display: block;
+  padding:5%;
+  text-decoration: none
+}
+
+.nav li ul li a:hover{
+	background-color: black;
+	color:white;
+}
+ 
+
 /*----------------------------------------------------------------------------------------------------------------------*/
 /*----------------------------------------------------------------------------------------------------------------------*/
 /*----------------------------------------------------------------------------------------------------------------------*/
