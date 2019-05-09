@@ -26,26 +26,29 @@ require_once("includes/usuario.php");
 
 		<div class="contenido-index">
 		<?php
-
-			$result;
-			if(isset($_GET['buscar'])){
-				//Se ha recibido una petición de busqueda de memes por el buscador
-
-				$result = Meme::searchMemeHashtag($_GET['buscar']);
-			}
-			else{
-				//No se ha recibido nada y por tanto obtenemos los memes ordenados por fecha
-				$result = Meme::lastMemes();
-			}
+            $esUser= false;
+            $result=false;
+            if(isset($_GET['tipo'])){
+                if($_GET['tipo']==='masMg'){
+                    //Ranking más me gustas
+                    $result = Meme::top10();
+                    
+                }
+                else if ($_GET['tipo']==='masSeg'){
+                    $result = Usuario::top10();
+                    
+                    $esUser= true;
+				}
+            }
 
 
 			if($result === false){
-				echo "<h1> ¡No se han encontrado memes! </h1>";
+				echo "<h1> ¡No se han encontrado resultados! </h1>";
 			}
 			else{
-
-				foreach ($result as $meme) {
-					echo Meme::formatoRanking($meme);
+				foreach ($result as $part) {
+					if($esUser) echo Usuario::formatoRanking($part);
+					else echo Meme::formatoRanking($part);
 				}
 			}
         ?>	

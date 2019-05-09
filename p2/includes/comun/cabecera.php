@@ -19,7 +19,18 @@
 					//Boton para moderar los reports, memes y tomar acciones
 				}
 				else{
+					
 					$botones.= "<a href='subirMeme.php' class='subirMeme'>"."\u{1F4E4}"."</a>";
+					$botones.= "<ul class='nav'>";
+					$botones.= "	<li><a href=''>Ranking</a>
+										<ul>
+											<li><a href='ranking.php?tipo=masMg'>Top10 publicaciones</a></li>
+											<li><a href='ranking.php?tipo=masSeg'>Mas seguidores</a></li>
+										</ul>
+									</li>
+								</ul>";
+
+					
 				}
 
 				$botones .= "<a href='perfil.php?userName=".$_SESSION['nombre']."' class='perfil'>Perfil</a>

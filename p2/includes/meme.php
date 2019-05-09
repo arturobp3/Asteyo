@@ -270,5 +270,68 @@ class Meme {
        }
        return $result;
    }
+
+   public static function top10(){
+       $app = Aplicacion::getInstance();
+       $conn = $app->conexionBD();
+
+       $query = sprintf("SELECT *
+                        FROM users U JOIN memes M
+                       WHERE U.id = M.id_autor
+                        ORDER BY num_megustas DESC");
+
+
+        $rs = $conn->query($query);
+        
+        if ($rs) {
+
+            if ( $rs->num_rows > 0) {
+                $publications = $rs->num_rows > 10 ? 10 : $rs->num_rows;
+ 
+                 for($i = 0; $i < $publications; $i++){
+                     $fila = $rs->fetch_assoc();
+
+                     
+
+                     $memes[] = array(
+                         'username' => $fila['username'],
+                         'id' => $fila['id_meme'],
+                         'nameMeme' => $fila['title'],
+                         'numLikes' => $fila['num_megustas']
+                     );
+                 }
+                 $rs->free();
+                 return $memes;
+             }
+        } else {
+            echo "Error al consultar en la BD: (" . $conn->errno . ") " . utf8_encode($conn->error);
+            exit();
+        }
+        return $result;
+
+       
+   }
+
+   public static function formatoRanking($meme){
+        $usuario = Usuario::buscaUsuario($meme['username']);
+        return
+        '<a class="memes" href="./meme.php?userName='.$meme['username'].'&id='.$meme['id'].'"">
+            <div id="meme">
+                <div id="meme-title">
+                    <p>'.$meme['nameMeme'].'</p>
+                </div>
+                <div id="meme-container">
+                    <img id="img-meme" src="uploads/'.$usuario->id().'/'.$meme['id'].'.jpg"/>
+                </div>
+                <div id="meme-info">
+                    <div id="user-info">
+                        <img id="user-profile-picture" src="./uploads/'.$usuario->id().'/fotoPerfil.jpg"/>
+                        <p> by '.$meme['username'].'</p>
+                    </div>
+                    <p>'.$meme['numLikes'].' me gusta</p>
+                </div>
+            </div>
+        </a>';
+   }
 }
 

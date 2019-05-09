@@ -187,5 +187,86 @@ class Usuario {
         }
         return $rt;
     }
+
+    public static function top10(){
+        $users = self::numUsers();
+        for($i=0; $i< $users; $i++){
+            $mg=self::numMegustas($i+1);
+            $user=self::buscaId($i+1);
+            $rt[]=array(
+                'mg' => $mg,
+                'user' => $user
+            );
+        }
+
+        arsort($rt);
+        $rt=array_slice($rt,0,5);
+        var_dump($rt);
+        return $rt;
+        
+    }
+
+    public static function buscaId($id){
+        $app = Aplicacion::getInstance();
+        $conn = $app->conexionBD();
+
+        $query = sprintf("SELECT username FROM users U WHERE U.id = '%s'", $conn->real_escape_string($id));
+        $rs = $conn->query($query);
+        $result = false;
+        if ($rs) {
+            if ( $rs->num_rows == 1) {
+                $fila = $rs->fetch_assoc();
+                $result= $fila['username'];
+            }
+            $rs->free();
+        } else {
+            echo "Error al consultar en la BD: (" . $conn->errno . ") " . utf8_encode($conn->error);
+            exit();
+        }
+        return $result;
+    }
+
+    public static function numMegustas($id){
+        $app =Aplicacion::getInstance();
+        $conn= $app->conexionBD();
+        $query = sprintf("SELECT num_megustas FROM memes WHERE id_autor=".$id);
+        $rs = $conn->query($query);
+
+        if($rs){
+            $mg=0;
+            for ($i = 0; $i< $rs->num_rows; $i++){
+                $fila = $rs->fetch_assoc();
+                $mg+=$fila['num_megustas'];
+            }
+        }
+        else{
+            echo "Error al consultar en la BD: (" . $conn->errno . ") " . utf8_encode($conn->error);
+            exit();
+        }
+        return $mg;
+    }
+    
+
+    public static function numUsers(){
+        $app =Aplicacion::getInstance();
+        $conn= $app->conexionBD();
+        $query = sprintf("SELECT id FROM users");
+        $rs = $conn->query($query);
+        if (!$rs){
+            echo "Error al consultar en la BD: (". $conn->errno . ")".utf8_encode($conn->error);
+        }
+        return $rs->num_rows;
+    }
+
+    public static function formatoRanking($infoUser){
+        $usuario = self::buscaUsuario($infoUser['user']);
+        return 
+        "<div id='info'>
+               <img id='user-profile-picture' src='./uploads/".$usuario->id()."/fotoPerfil.jpg'/>
+               <div id='meme-info'>
+                   <p><a href='perfil.php?userName=".$usuario->username()."'>".$usuario->username()."</a></p>
+               </div>
+        </div>";
+    }
     
 }
