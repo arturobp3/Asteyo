@@ -14,6 +14,7 @@ require_once("includes/usuario.php");
     <link rel="stylesheet" type="text/css" href="assets/css/meme.css" />
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <script src="./assets/js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="./assets/js/comentarios.js"></script>
 	<title>Meme | Asteyo</title>
 </head>
 
@@ -45,6 +46,7 @@ require_once("includes/usuario.php");
                     $num_likes = $info_meme->num_megustas();
                     $date = $info_meme->fechaSubida();
                     $comments = $info_meme->comentarios();
+                    $num_comments = sizeof($comments);
                     
                     $html ="
                     <div id='container-meme'>
@@ -58,29 +60,60 @@ require_once("includes/usuario.php");
                         </div>
                     </div>
                     <div id='meme-data'>
-                        <p>$num_likes <span style='color:red;'>\u{2764}</span>
-                             0 <span>\u{1F4AC}</span> </p>
+                        <p>
+                            $num_likes <span style='color:red;'>\u{2764}</span>
+                            <label id='num_comments'>$num_comments</label> <span>\u{1F4AC}</span> 
+                        </p>
                         <p>Fecha de subida: $date</p>
                     </div>
-                    <h3>COMENTARIOS</h3>
-                    <div id='comment-section'>
+                    <h3>COMENTARIOS</h3>"; //He puesto label en num_comments para poder incrementarlo con ajax
+                                            //Cuando se introduzca un nuevo comentario
 
-                    <form method='post' id='commentForm'>
-                        <textarea name='comment' id='comment' rows='2'></textarea>
-                        <button type='button' onclick='procesarComentario($id)'
-                        name='submit id='submit'> Comentar </button>
-                    </form>
-                    <p id='mensaje'></p>";
+                    //Solo si está logueado y es usuario podrá dejar un comentario
+                    if(isset($_SESSION['login']) && $_SESSION['esUser']){
+                       $html .=" 
+                        <form method='post' id='commentForm'>
+                            <textarea name='comment' id='comment' rows='2'></textarea>
+                            <button type='button' onclick='procesarComentario($id_meme, $num_comments)'
+                                name='submit id='submit'> Comentar </button>
+                        </form>
+                        <p id='mensaje'></p>";
+                    }
 
+                    //Zona de los comentarios
+                    $html .= "<div id='comment-section'>";
            
                     for($i = 0; $i < sizeof($comments); $i++){
+                        $id_comment = $comments[$i]['id_comment'];
 
                         $html .= "<div id='cajaComentario'>
                                     <p id='user'>".$comments[$i]['autor']."</p>
-                                    <p class='fecha'>".$comments[$i]['fecha']."</p>
-                                    <p id='comentario'>".$comments[$i]['texto']."</p>
-                                </div>";
+                                    <p id='fecha'>".$comments[$i]['fecha']."</p>
+                                    <p id='comentario'>".$comments[$i]['texto']."</p>";
+
+                                    //Si es moderador puede eliminar un comentario
+                                    if(isset($_SESSION['login']) && $_SESSION['esModerador']){
+                                        $html .= " 
+                                        <div id='botones'>
+                                            <a onclick='borrarComentario($id_comment)'>
+                                                Eliminar
+                                            </a>
+                                        </div>";
+                                    }
+                                    //Si es usuario puede reportarlo
+                                    else if(isset($_SESSION['login']) && $_SESSION['esUser']){
+                                        $html .= "
+                                        <div id='botones'>
+                                            <a onclick='reportarComentario($id_comment)'>
+                                                Reportar
+                                            </a>
+                                        </div>";
+                                    }
+                            
+                        $html .="</div>";
                     }
+
+            
 
 
                     $html .= "</div>";

@@ -156,7 +156,8 @@ class Meme {
                             $m[] = array(
                                 'texto' => $fila['texto'],
                                 'fecha' => $fila['c_date'],
-                                'autor' => $fila['username']
+                                'autor' => $fila['username'],
+                                'id_comment' => $fila['id_comment']
                             );
                         }
 

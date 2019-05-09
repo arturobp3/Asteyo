@@ -6,6 +6,8 @@ require_once("includes/config.php");
 //Doble seguridad: unset + destroy
 unset($_SESSION["login"]);
 unset($_SESSION["esAdmin"]);
+unset($_SESSION["esUser"]);
+unset($_SESSION["esModerador"]);
 unset($_SESSION["nombre"]);
 
 

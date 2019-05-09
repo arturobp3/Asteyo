@@ -66,6 +66,10 @@ class formularioLogin extends Form{
                     $_SESSION['login'] = true;
                     $_SESSION['nombre'] = $username;
                     $_SESSION['esAdmin'] = strcmp($usuario->rol(), 'administrador') == 0 ? true : false;
+                    $_SESSION['esUser'] = strcmp($usuario->rol(), 'normal') == 0 ? true : false;
+                    $_SESSION['esModerador'] = strcmp($usuario->rol(), 'moderador') == 0 ? true : false;
+                
+
                     //header('Location: index.php');
                     return "index.php";
                 } else {
