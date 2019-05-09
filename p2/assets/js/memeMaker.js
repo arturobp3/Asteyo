@@ -4,33 +4,33 @@ var textAbajo;
 function GenerarMeme(){
 			textArriba=document.getElementById("txtTextoArriba").value;
 			textAbajo=document.getElementById("txtTextoAbajo").value;
-			var ContextoCanvas = canvas.getContext("2d");
-			var ObjetoImagen = new Image();
-				ObjetoImagen.onload = function(){
-				canvas.width = ObjetoImagen.width * 1;
-				canvas.height = ObjetoImagen.height * 1;
-                ContextoCanvas.drawImage(ObjetoImagen, 0, 0,canvas.width ,canvas.height);
+			var ctx = canvas.getContext("2d");
+			var img = new Image();
+				img.onload = function(){
+				canvas.width = img.width * 1;
+				canvas.height = img.height * 1;
+                ctx.drawImage(img, 0, 0,canvas.width ,canvas.height);
 				
                 // Datos texto Meme (font)
-				ContextoCanvas.lineWidth  = 5;
-				ContextoCanvas.font = '15pt sans-serif';
-				ContextoCanvas.strokeStyle = 'black';
-				ContextoCanvas.fillStyle = 'white';
-				ContextoCanvas.textAlign = 'center';
-				ContextoCanvas.lineJoin = 'round';
+				ctx.lineWidth  = 5;
+				ctx.font = '20pt impact';
+				ctx.strokeStyle = 'black';
+				ctx.fillStyle = 'white';
+				ctx.textAlign = 'center';
+				ctx.lineJoin = 'round';
 			
 				textAbajo = textAbajo.toUpperCase(); 
 				x = canvas.width/2;
 				y = canvas.height - canvas.height/7.4;
 				
-				ContextoCanvas.strokeText(textAbajo, x, y);
-				ContextoCanvas.fillText(textAbajo, x, y);
+				ctx.strokeText(textAbajo, x, y);
+				ctx.fillText(textAbajo, x, y);
 			
 				textArriba = textArriba.toUpperCase();
-				ContextoCanvas.strokeText(textArriba, x, 30);
-				ContextoCanvas.fillText(textArriba, x, 30);
+				ctx.strokeText(textArriba, x, 30);
+				ctx.fillText(textArriba, x, 30);
 	};
-	 ObjetoImagen.src = document.getElementById("image").src; 
+	 img.src = document.getElementById("image").src; 
 };
 
 
@@ -50,9 +50,9 @@ function RedimensionarImagen(base64, maxWidth, maxHeight) {
   if(typeof(maxWidth) === 'undefined') var maxWidth = 500;
   if(typeof(maxHeight) === 'undefined') var maxHeight = 500;
   var canvas = document.createElement("canvas");
-  var ContextoCanvas = canvas.getContext("2d");
-  var CopiaCambas = document.createElement("canvas");
-  var copyContext = CopiaCambas.getContext("2d");
+  var ctx = canvas.getContext("2d");
+  var copiaCanvas = document.createElement("canvas");
+  var copyContext = copiaCanvas.getContext("2d");
   var ImgenTemporal = new Image();
   ImgenTemporal.src = base64;
   var ratio = 1;
@@ -60,12 +60,12 @@ function RedimensionarImagen(base64, maxWidth, maxHeight) {
     ratio = maxWidth / ImgenTemporal.width;
   else if(ImgenTemporal.height > maxHeight)
     ratio = maxHeight / ImgenTemporal.height;
-  CopiaCambas.width = ImgenTemporal.width;
-  CopiaCambas.height = ImgenTemporal.height;
+  copiaCanvas.width = ImgenTemporal.width;
+  copiaCanvas.height = ImgenTemporal.height;
   copyContext.drawImage(ImgenTemporal, 0, 0);
   canvas.width = ImgenTemporal.width * ratio;
   canvas.height = ImgenTemporal.height * ratio;
-  ContextoCanvas.drawImage(CopiaCambas, 0, 0, CopiaCambas.width, CopiaCambas.height, 0, 0, canvas.width, canvas.height);
+  ctx.drawImage(copiaCanvas, 0, 0, copiaCanvas.width, copiaCanvas.height, 0, 0, canvas.width, canvas.height);
   return canvas.toDataURL();
 }
  GenerarMeme();
