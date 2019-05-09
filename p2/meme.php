@@ -44,6 +44,7 @@ require_once("includes/usuario.php");
                     $title = $info_meme->titulo();
                     $num_likes = $info_meme->num_megustas();
                     $date = $info_meme->fechaSubida();
+                    $comments = $info_meme->comentarios();
                     
                     $html ="
                     <div id='container-meme'>
@@ -62,8 +63,26 @@ require_once("includes/usuario.php");
                         <p>Fecha de subida: $date</p>
                     </div>
                     <h3>COMENTARIOS</h3>
-                    <div id='comment-section'>";
-                    
+                    <div id='comment-section'>
+
+                    <form method='post' id='commentForm'>
+                        <textarea name='comment' id='comment' rows='2'></textarea>
+                        <button type='button' onclick='procesarComentario($id)'
+                        name='submit id='submit'> Comentar </button>
+                    </form>
+                    <p id='mensaje'></p>";
+
+           
+                    for($i = 0; $i < sizeof($comments); $i++){
+
+                        $html .= "<div id='cajaComentario'>
+                                    <p id='user'>".$comments[$i]['autor']."</p>
+                                    <p class='fecha'>".$comments[$i]['fecha']."</p>
+                                    <p id='comentario'>".$comments[$i]['texto']."</p>
+                                </div>";
+                    }
+
+
                     $html .= "</div>";
 
                     echo $html;

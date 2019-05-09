@@ -10,6 +10,7 @@ class Meme {
     private $id_autor;
     //fecha y hora de subida
     private $datetime;
+    private $comentarios;
 
     
 
@@ -34,6 +35,10 @@ class Meme {
 
     public function fechaSubida(){
         return $this->datetime;
+    }
+
+    public function comentarios(){
+        return $this->comentarios;
     }
 
     /* Crea un nuevo meme con los datos introducidos por parámetro. */
@@ -115,8 +120,8 @@ class Meme {
         $conn = $app->conexionBD();
 
         $query = sprintf("SELECT * 
-                        FROM memes M 
-                        WHERE M.id_meme=".$id);
+                        FROM memes M
+                        WHERE M.id_meme=$id");
 
        $rs = $conn->query($query);
        $result = false;
@@ -125,15 +130,42 @@ class Meme {
            //Si la consulta devuelve muchos memes
 
            if ( $rs->num_rows > 0) {
-
                 $fila = $rs->fetch_assoc();
-
                 //Cogemos la información del meme
                 $meme = new Meme($fila['title'],  $fila['num_megustas'], $fila['id_autor'],
                     $fila['upload_date']);
-
                 $meme->id = $fila['id_meme'];
+                $meme->comentarios = array();
+
                 
+                $query = sprintf("SELECT * 
+                                FROM memes M JOIN users U JOIN comments C
+                                WHERE M.id_meme=$id
+                                AND C.id_autor = U.id
+                                AND M.id_meme = C.id_meme");
+
+                $rs2 = $conn->query($query);
+
+                if($rs2){
+                    if ( $rs2->num_rows > 0) {
+
+                        $m;
+                        for($i = 0; $i < $rs2->num_rows; $i++){
+                            $fila = $rs2->fetch_assoc();
+        
+                            $m[] = array(
+                                'texto' => $fila['texto'],
+                                'fecha' => $fila['c_date'],
+                                'autor' => $fila['username']
+                            );
+                        }
+
+                        $meme->comentarios = $m;
+
+                        $rs2->free();
+                    }
+                }
+
                 $result = $meme;
             }
             $rs->free();

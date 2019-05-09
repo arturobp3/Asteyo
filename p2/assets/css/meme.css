@@ -113,3 +113,15 @@ a:active {
 
 	border-top: 2px solid coral;
 }
+
+.contenido-meme #comment-section #cajaComentario{
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	background-color: #CAE4DB;
+	color: #00303F;
+	font-weight: bolder;
+	border: 3px solid #00303F;
+	margin-bottom: 2%;
+}
+
