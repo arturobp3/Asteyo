@@ -15,11 +15,11 @@
 					$botones .= "<a href='admin.php' class='subirMeme'><span style='font-size:24px;color:green;'>"."\u{1F511}"."</span></a>";
 				}
 				else if(isset($_SESSION["esModerador"]) && $_SESSION["esModerador"] ===true){
-					$botones .= "<a href='subirMeme.php' class='subirMeme'>"."\u{1F4E4}"."</a>";
+					$botones .= "<a href='addMeme.php' class='subirMeme'>"."\u{1F4E4}"."</a>";
 					//Boton para moderar los reports, memes y tomar acciones
 				}
 				else{
-					$botones.= "<a href='subirMeme.php' class='subirMeme'>"."\u{1F4E4}"."</a>";
+					$botones.= "<a href='addMeme.php' class='subirMeme'>"."\u{1F4E4}"."</a>";
 				}
 
 				$botones .= "<a href='perfil.php?userName=".$_SESSION['nombre']."' class='perfil'>Perfil</a>
