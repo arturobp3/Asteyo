@@ -29,14 +29,17 @@
 						<div id="foto">
 						<?php
 							$usuario = Usuario::buscaUsuario($_GET["userName"]);
-							$imgPerfil = "uploads/".$usuario->id()."/fotoPerfil.jpg";
+							$uId = $usuario->id();
+							$uUsername = $usuario->username();
+							$uRol = $usuario->rol();
+							$imgPerfil = "uploads/".$uId."/fotoPerfil.jpg";
 							echo '<img id="img-perfil" src='.$imgPerfil.'>';
 						?>
 	                	</div>
 	                	<div id="perfil">
 							<?php
-								echo "<div id='user-info'><p>Nombre: </p>".$usuario->username()."</div>";
-								echo "<div id='user-info'><p>Rango: </p>".$usuario->rol()."</div>";
+								echo "<div id='user-info'><p>Nombre: </p>".$uUsername."</div>";
+								echo "<div id='user-info'><p>Rango: </p>".$uRol."</div>";
 
 							?>
 						</div>
@@ -44,10 +47,10 @@
 					<h3>Memes</h3>
 					<div class="memes-perfil">
 						<?php
-							$rtMemes= Usuario::memes($usuario->username());
+							$rtMemes= Usuario::memes($uUsername);
 							if($rtMemes){
 								foreach ($rtMemes as $key => $value) {
-									$meme = "uploads/".$usuario->id()."/".$value[2].".jpg";
+									$meme = "uploads/".$uId."/".$value[2].".jpg";
 									echo <<< END
 									<div id="meme">
 										<img id="imagen-meme"src=$meme>

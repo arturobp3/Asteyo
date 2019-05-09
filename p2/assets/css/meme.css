@@ -206,4 +206,12 @@ a:active {
 	cursor: pointer;
 }
 
+/*----------------------------------------------------------------------------------------------------------------------*/
 
+/* estilo para el botón de like */
+.like{
+	border: none;
+	background-color: white;
+	cursor: pointer;
+	font-size: 16px;
+}

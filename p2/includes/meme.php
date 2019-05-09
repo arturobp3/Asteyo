@@ -348,7 +348,7 @@ class Meme {
    public static function formatoRanking($meme){
         $usuario = Usuario::buscaUsuario($meme['username']);
         return
-        '<a class="memes" href="./meme.php?userName='.$meme['username'].'&id='.$meme['id'].'"">
+        '<a class="memes" href="./meme.php?userName='.$meme['username'].'&id='.$meme['id'].'">
             <div id="meme">
                 <div id="meme-title">
                     <p>'.$meme['nameMeme'].'</p>

@@ -15,6 +15,7 @@ require_once("includes/usuario.php");
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <script src="./assets/js/jquery-3.4.1.min.js"></script>
     <script type="text/javascript" src="./assets/js/comentarios.js"></script>
+    <script type="text/javascript" src="./assets/js/like.js"></script>
 	<title>Meme | Asteyo</title>
 </head>
 
@@ -61,7 +62,7 @@ require_once("includes/usuario.php");
                     </div>
                     <div id='meme-data'>
                         <p>
-                            $num_likes <span style='color:red;'>\u{2764}</span>
+                            $num_likes <button type='button' class='like' name='like' style='color:grey;'>\u{2764}</button>
                             <label id='num_comments'>$num_comments</label> <span>\u{1F4AC}</span> 
                         </p>
                         <p>Fecha de subida: $date</p>
