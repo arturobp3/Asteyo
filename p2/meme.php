@@ -75,7 +75,7 @@ require_once("includes/usuario.php");
                        $html .=" 
                         <form method='post' id='commentForm'>
                             <textarea name='comment' id='comment' rows='2'></textarea>
-                            <button type='button' onclick='añadirComentario($id_meme, $num_comments)'
+                            <button type='button' onclick='añadirComentario($id_meme)'
                                 name='submit id='submit'> Comentar </button>
                         </form>
                         <p id='mensaje'></p>";

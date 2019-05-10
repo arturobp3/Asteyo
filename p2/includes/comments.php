@@ -14,16 +14,17 @@ $html = '';
 $hoy = date("Y-m-d H:i:s");
 
 
-if(empty($_POST['comentario'])){
+if($_POST['accion'] === "añadir" && empty($_POST['comentario'])){
     $error = 'Debes escribir un comentario primero';
 }
 else{
 
     /*------------OBTENEMOS INFORMACION DE LA PETICIÓN AJAX---------------*/
-    $accion = $_POST['accion'];
-    $id_meme = $_POST['id_meme'];
-    $comentario = $_POST['comentario'];
-    $nombreAutor = $_SESSION['nombre'];
+    $accion = isset($_POST['accion']) ? $_POST['accion'] : null;
+    $id_meme = isset($_POST['id_meme']) ? $_POST['id_meme'] : null;
+    $comentario = isset($_POST['comentario']) ? $_POST['comentario'] : null;
+    $nombreAutor = isset($_SESSION['nombre']) ? $_SESSION['nombre'] : "";
+    $id_comment = isset($_POST['id_comment']) ? $_POST['id_comment'] : null;
 
     $app = Aplicacion::getInstance();
     $conn = $app->conexionBD();
@@ -42,10 +43,11 @@ else{
 
     switch($accion){
         case "añadir": $rs = $comentario->addComment(); break;
-        case "borrar": $rs = $comentario->deleteComment(); break;
+        case "borrar": $rs = $comentario->deleteComment($id_comment); break;
         case "reportar": $rs = $comentario->reportComment(); break;
         default: $rs = false; break;
     }
+
     
     if($rs !== false){
         $html = $rs;

@@ -1,6 +1,6 @@
 //AJAX para los comentarios:
 
-function añadirComentario(id, num_comments){
+function añadirComentario(id){
 
     $(document).ready(function(){
 
@@ -16,9 +16,12 @@ function añadirComentario(id, num_comments){
     
                 //Se puede hacer un if de esta manera porque el servidor devuelve un JSON
                 if(response.error == ''){
+
+                    var numC =  $('#meme-data #num_comments').html();
+
      
                     $('#mensaje').html("Comentario añadido correctamente");
-                    $('#meme-data #num_comments').html(num_comments += 1);
+                    $('#meme-data #num_comments').html(parseInt(numC) + 1);
                     $('#comment').val("");
                     $('#comment-section').append(response.html);
                 }
@@ -46,9 +49,11 @@ function borrarComentario(id_comment){
     
                 //Se puede hacer un if de esta manera porque el servidor devuelve un JSON
                 if(response.error == ''){
+
+                    var numC =  $('#meme-data #num_comments').html();
      
-                    $('#meme-data #num_comments').html(num_comments -= 1);
-                    $('#'+id_comment).append(response.html);
+                    $('#meme-data #num_comments').html(parseInt(numC) - 1);
+                    $('#'+id_comment).remove();
                 }
                 else{
                     $('#mensaje').html(response.error);

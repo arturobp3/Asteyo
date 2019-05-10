@@ -32,7 +32,7 @@ class Comentarios{
         );
 
         if ( $conn->query($query) ){
-            $html = "<div id='cajaComentario'>
+            $html = "<div class='cajaComentario' id='$conn->insert_id'>
                 <p id='user'>".$_SESSION['nombre']."</p>
                 <p id='fecha'>".$this->c_date."</p>
                 <p id='comentario'>".$this->texto."</p>";
@@ -58,6 +58,24 @@ class Comentarios{
             $html .= "</div>";
 
             return $html;
+        } 
+        else {
+            return false;
+        }
+    }
+
+
+    public function deleteComment($id_comment){
+        $app = Aplicacion::getInstance();
+        $conn = $app->conexionBD();
+        
+        $query=sprintf("DELETE FROM comments
+                        WHERE id_comment = $id_comment"
+        );
+
+
+        if ( $conn->query($query) ){
+            return true;
         } 
         else {
             return false;
