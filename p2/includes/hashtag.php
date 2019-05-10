@@ -1,7 +1,7 @@
 <?php
 
-    require_once('aplicacion.php');
-    require_once('meme.php');
+    require_once('Aplicacion.php');
+    require_once('Meme.php');
 
 
 class Hashtag {

@@ -1,9 +1,9 @@
 <?php
 
-require_once('form.php');
+require_once('Form.php');
 require_once('usuario.php');
-require_once('meme.php');
-require_once('hashtag.php');
+require_once('Meme.php');
+require_once('Hashtag.php');
 require_once('usuario.php');
 
 
@@ -39,7 +39,7 @@ class formularioSubirMeme extends Form{
         return $html;
     }
 
-    //La información que maneja esta función ha sido enviada por el método POST (clase form.php)
+    //La información que maneja esta función ha sido enviada por el método POST (clase Form.php)
     protected function procesaFormulario($datos){
 
         $erroresFormulario = array();

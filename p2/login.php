@@ -3,7 +3,7 @@
 //Inicio del procesamiento
 
 require_once("includes/config.php");
-require_once("includes/formularioLogin.php");
+require_once("includes/FormularioLogin.php");
 
 ?>
 

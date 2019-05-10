@@ -1,6 +1,6 @@
 <?php
 
-require_once('form.php');
+require_once('Form.php');
 require_once('usuario.php');
 
 class formularioRegistro extends Form{

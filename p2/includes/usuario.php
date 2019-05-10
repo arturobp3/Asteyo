@@ -1,6 +1,6 @@
-<?php
+  <?php
 
-require_once('aplicacion.php');
+require_once('Aplicacion.php');
 
 class Usuario {
 
@@ -268,5 +268,8 @@ class Usuario {
                </div>
         </div>";
     }
+
+
+    
     
 }

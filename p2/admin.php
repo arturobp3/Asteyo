@@ -2,7 +2,7 @@
 
 //Inicio del procesamiento
 require_once("includes/config.php");
-require_once("includes/formularioAdmin.php");
+require_once("includes/FormularioAdmin.php");
 
 ?>
 

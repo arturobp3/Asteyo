@@ -2,7 +2,7 @@
 
 //Inicio del procesamiento
 require_once("includes/config.php");
-require_once("includes/meme.php");
+require_once("includes/Meme.php");
 require_once("includes/usuario.php");
 
 ?>
@@ -75,7 +75,7 @@ require_once("includes/usuario.php");
                        $html .=" 
                         <form method='post' id='commentForm'>
                             <textarea name='comment' id='comment' rows='2'></textarea>
-                            <button type='button' onclick='procesarComentario($id_meme, $num_comments)'
+                            <button type='button' onclick='añadirComentario($id_meme, $num_comments)'
                                 name='submit id='submit'> Comentar </button>
                         </form>
                         <p id='mensaje'></p>";
@@ -87,31 +87,27 @@ require_once("includes/usuario.php");
                     for($i = 0; $i < sizeof($comments); $i++){
                         $id_comment = $comments[$i]['id_comment'];
 
-                        $html .= "<div id='cajaComentario'>
+                        $html .= "<div class='cajaComentario' id='$id_comment'>
                                     <p id='user'>".$comments[$i]['autor']."</p>
                                     <p id='fecha'>".$comments[$i]['fecha']."</p>
-                                    <p id='comentario'>".$comments[$i]['texto']."</p>";
+                                    <p id='comentario'>".$comments[$i]['texto']."</p>
+                                    
+                                    <div class='botones'>
+                                    ";
 
                                     //Si es moderador puede eliminar un comentario
                                     if(isset($_SESSION['login']) && $_SESSION['esModerador']){
-                                        $html .= " 
-                                        <div id='botones'>
-                                            <a onclick='borrarComentario($id_comment)'>
-                                                Eliminar
-                                            </a>
-                                        </div>";
+                                        $html .= "
+                                        <a onclick='borrarComentario($id_comment)'>Eliminar</a>";
                                     }
                                     //Si es usuario puede reportarlo
-                                    else if(isset($_SESSION['login']) && $_SESSION['esUser']){
+                                    if(isset($_SESSION['login']) && ($_SESSION['esUser'] || $_SESSION['esModerador'])){
                                         $html .= "
-                                        <div id='botones'>
-                                            <a onclick='reportarComentario($id_comment)'>
-                                                Reportar
-                                            </a>
-                                        </div>";
+                                            <a onclick='reportarComentario($id_comment)'>Reportar</a>";
                                     }
                             
-                        $html .="</div>";
+                        $html .="</div>
+                            </div>";
                     }
 
             

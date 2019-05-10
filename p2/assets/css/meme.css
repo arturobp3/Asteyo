@@ -137,7 +137,7 @@ a:active {
 }
 
 /*Caja que engloba todo el comentario*/
-.contenido-meme #comment-section #cajaComentario{
+.contenido-meme #comment-section .cajaComentario{
 	display: flex;
 	flex-direction: column;
 
@@ -152,7 +152,7 @@ a:active {
 }
 
 /*Nombre de usuario*/
-.contenido-meme #comment-section #cajaComentario #user{
+.contenido-meme #comment-section .cajaComentario #user{
 	border-bottom: 2px solid rgb(214, 73, 22);
 	background-color: coral;
 	font-style: italic;
@@ -162,7 +162,7 @@ a:active {
 }
 
 /*Fecha comentario*/
-.contenido-meme #comment-section #cajaComentario #fecha{
+.contenido-meme #comment-section .cajaComentario #fecha{
 	color: grey;
 	font-size: 0.9em;
 	padding: 1%;
@@ -170,7 +170,7 @@ a:active {
 
 
 /*Comentario*/
-.contenido-meme #comment-section #cajaComentario #comentario{
+.contenido-meme #comment-section .cajaComentario #comentario{
 	padding: 2.5%;
 }
 
@@ -193,7 +193,7 @@ a:active {
     border: 0px;
 }
 
-.contenido-meme #comment-section #cajaComentario #botones{
+.contenido-meme #comment-section .cajaComentario .botones{
 	display: flex;
 	flex-direction: row;
 	justify-content: flex-end;
@@ -201,8 +201,9 @@ a:active {
 	padding: 1.5%;
 }
 
-#cajaComentario #botones a{
+.cajaComentario .botones a{
 	text-decoration: none;
+	margin: 5px;
 	cursor: pointer;
 }
 

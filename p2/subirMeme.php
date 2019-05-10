@@ -2,7 +2,7 @@
 
 //Inicio del procesamiento
 require_once("includes/config.php");
-require_once("includes/formularioSubirMeme.php");
+require_once("includes/FormularioSubirMeme.php");
 
 ?>
 
