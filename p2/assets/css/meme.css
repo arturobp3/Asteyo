@@ -209,12 +209,12 @@ a:active {
 
 
 /*Submenú del botón reportar*/
-ul{
+.botones ul{
 	margin-left: 6.5%;
 	list-style: none;
 	position:absolute;
 }
-ul li{
+.botones ul li{
 	padding: 6px;
 	background-color: #e8edf3;
 	border: 1px solid coral;

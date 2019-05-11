@@ -40,18 +40,25 @@ class Comentarios{
             if(isset($_SESSION['login']) && $_SESSION['esModerador']){
                 $html .= " 
                 <div class='botones'>
-                    <a onclick='borrarComentario($conn->insert_id)'>
-                        Eliminar
-                    </a>
+                    <a onclick='borrarComentario($conn->insert_id)'>Eliminar</a>
                 </div>";
             }
             //Si es usuario puede reportarlo
             else if(isset($_SESSION['login']) && $_SESSION['esUser']){
+
+                $autorComentario = $_SESSION['nombre'];
+
                 $html .= "
                 <div class='botones'>
-                    <a onclick='reportarComentario($conn->insert_id)'>
-                        Reportar
-                    </a>
+                <a onclick='openMenu($conn->insert_id)' id='reportar'>Reportar</a>
+                <ul class='subMenu' id='subMenu$conn->insert_id'>
+                    <li><a onclick='reportarComentario(\"{$autorComentario}\",
+                            $conn->insert_id, 1)'>Spam</a>
+                    </li>
+                    <li><a onclick='reportarComentario(\"{$autorComentario}\",
+                            $conn->insert_id, 2)'>Ofensivo</a>
+                    </li>
+                </ul>
                 </div>";
             }
 
