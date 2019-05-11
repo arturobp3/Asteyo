@@ -102,8 +102,18 @@ require_once("includes/usuario.php");
                                     }
                                     //Si es usuario puede reportarlo
                                     if(isset($_SESSION['login']) && ($_SESSION['esUser'] || $_SESSION['esModerador'])){
+
+                                        $autorComentario = $comments[$i]['autor'];
                                         $html .= "
-                                            <a onclick='reportarComentario($id_comment)'>Reportar</a>";
+                                            <a id='reportar'>Reportar</a>
+                                            <ul id='subMenu'>
+                                                <li><a onclick='reportarComentario(\"{$autorComentario}\",
+                                                        $id_comment, 1)'>Spam</a>
+                                                </li>
+                                                <li><a onclick='reportarComentario(\"{$autorComentario}\",
+                                                        $id_comment, 2)'>Ofensivo</a>
+                                                </li>
+										    </ul>";
                                     }
                             
                         $html .="</div>

@@ -114,7 +114,7 @@ body {
 .nav li ul li a{
   display: block;
   padding:5%;
-  text-decoration: none
+  text-decoration: none;
 }
 
 .nav li ul li a:hover{

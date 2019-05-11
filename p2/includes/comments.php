@@ -25,6 +25,7 @@ else{
     $comentario = isset($_POST['comentario']) ? $_POST['comentario'] : null;
     $nombreAutor = isset($_SESSION['nombre']) ? $_SESSION['nombre'] : "";
     $id_comment = isset($_POST['id_comment']) ? $_POST['id_comment'] : null;
+    $autorComentario = isset($_POST['autorComentario']) ? $_POST['autorComentario'] : null;
 
     $app = Aplicacion::getInstance();
     $conn = $app->conexionBD();
@@ -36,15 +37,26 @@ else{
     );
 
     $id_autor = $conn->query($consultaID);
-    $id_autor = $id_autor->fetch_assoc()['id'];
+    $id_autor = $id_autor->fetch_assoc()['id'];//ID del usuario de la sesion
+
+    $consultaID = sprintf("SELECT U.id
+                    FROM users U
+                    WHERE U.username = '%s'",
+                $conn->real_escape_string($autorComentario)
+    );
+
+    $id_autor_comment = $conn->query($consultaID);
+    $id_autor_comment = $id_autor_comment->fetch_assoc()['id'];//ID del usuario del comentario
     /*--------------------------------------------------------------------*/
 
     $comentario = new Comentarios($id_autor, $id_meme, $comentario, $hoy);
 
+
     switch($accion){
         case "añadir": $rs = $comentario->addComment(); break;
         case "borrar": $rs = $comentario->deleteComment($id_comment); break;
-        case "reportar": $rs = $comentario->reportComment(); break;
+        case "reportar": $rs = $comentario->reportComment($id_autor_comment, $id_autor,
+                        $id_comment, $_POST['cause']); break;
         default: $rs = false; break;
     }
 

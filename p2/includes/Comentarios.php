@@ -82,5 +82,41 @@ class Comentarios{
         }
     }
 
+    public function reportComment($id_autor_comment, $id_session, $id_comment, $cause){
+        $app = Aplicacion::getInstance();
+        $conn = $app->conexionBD();
+        
+        $query=sprintf("INSERT INTO reports(usr_that_reports, usr_reported)
+                        VALUES('%s', '%s')",
+                            $conn->real_escape_string($id_session),
+                            $conn->real_escape_string($id_autor_comment)
+        );
+
+
+        if ( $conn->query($query) ){
+
+            $id_report = $conn->insert_id;
+
+            $query2=sprintf("INSERT INTO co_reports(id_report, cause, id_comment)
+                            VALUES('%s', '%s', '%s')",
+                $conn->real_escape_string($id_report),
+                $conn->real_escape_string($cause),
+                $conn->real_escape_string($id_comment)
+            );
+
+
+
+            if($conn->query($query2)){
+                return true;
+            }
+            else{
+                return false;
+            }
+        } 
+        else {
+            return false;
+        }
+    }
+
 
 }

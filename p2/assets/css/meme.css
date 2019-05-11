@@ -207,6 +207,19 @@ a:active {
 	cursor: pointer;
 }
 
+
+/*Submenú del botón reportar*/
+ul{
+	margin-left: 6.5%;
+	list-style: none;
+	position:absolute;
+}
+ul li{
+	padding: 6px;
+	background-color: #e8edf3;
+	border: 1px solid coral;
+}
+
 /*----------------------------------------------------------------------------------------------------------------------*/
 
 /* estilo para el botón de like */
