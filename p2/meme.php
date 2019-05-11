@@ -114,8 +114,8 @@ require_once("includes/usuario.php");
 
                                         $autorComentario = $comments[$i]['autor'];
                                         $html .= "
-                                            <a id='reportar'>Reportar</a>
-                                            <ul id='subMenu'>
+                                            <a onclick='openMenu($id_comment)' id='reportar'>Reportar</a>
+                                            <ul class='subMenu'id='subMenu$id_comment'>
                                                 <li><a onclick='reportarComentario(\"{$autorComentario}\",
                                                         $id_comment, 1)'>Spam</a>
                                                 </li>

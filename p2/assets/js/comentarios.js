@@ -96,26 +96,30 @@ function reportarComentario(autorComentario, id_comment, cause){
     });
 }
 
-//Comportamiento del boton de reportar
+//Esconde todos los subMenu cuando se ha añadido un comentario con ajax
+$(document).on('DOMNodeInserted', function() {
+    $('.subMenu').hide();
+});
+
 $(document).ready(function(){
 
-    //Esconder y mostrar submenu
-    $('#subMenu').hide();
-    $('#reportar').on('click', function(){
+    $('.subMenu').hide();
+});
 
-        if($('#subMenu').is(':hidden')){
+//Comportamiento del boton de reportar
+function openMenu(id_comment){
+    $(document).ready(function(){
 
-            $('#subMenu').show();
+        if($('#subMenu'+id_comment).is(':hidden')){
+
+            $('#subMenu'+id_comment).show();
         }
         else{
-            $('#subMenu').hide();
+            $('#subMenu'+id_comment).hide();
         }
-    });
     
-    $('#subMenu').click(function(){
-        $('#subMenu').hide();
+        $('#subMenu'+id_comment).click(function(){
+            $('#subMenu'+id_comment).hide();
+        });
     });
-
-
-
-});
+}
