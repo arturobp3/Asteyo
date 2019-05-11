@@ -62,7 +62,16 @@ require_once("includes/usuario.php");
                     </div>
                     <div id='meme-data'>
                         <p>
-                            $num_likes <button type='button' class='like' name='like' style='color:grey;'>\u{2764}</button>
+                            <label id='num_likes'>$num_likes</label> ";
+                            
+                    if (isset($_SESSION['login']) && $_SESSION['esUser']) {
+                    	$html .= "<button type='button' class='like' name='like' style='color:grey;'>\u{2764}</button>";
+                    }
+                    else{
+                    	$html .= "<span style='color:red;'>\u{2764}</span>";
+                    }
+
+                    $html .= "
                             <label id='num_comments'>$num_comments</label> <span>\u{1F4AC}</span> 
                         </p>
                         <p>Fecha de subida: $date</p>
