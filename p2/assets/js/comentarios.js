@@ -97,12 +97,12 @@ function reportarComentario(autorComentario, id_comment, cause){
 }
 
 //Esconde todos los subMenu cuando se ha añadido un comentario con ajax
-$(document).on('DOMNodeInserted', function() {
-    $('.subMenu').hide();
-});
-
 $(document).ready(function(){
 
+    $('#comment-section').on('DOMSubtreeModified', function() {
+        $('.subMenu').hide();
+    });
+    
     $('.subMenu').hide();
 });
 
