@@ -6,7 +6,7 @@ class Like{
 	private $idUser;
 	private $idMeme;
 
-	private function __construct($idUser, $idMeme){
+	public function __construct($idUser, $idMeme){
 		$this->idUser = $idUser;
 		$this->idMeme = $idMeme;
 	}
@@ -23,12 +23,17 @@ class Like{
 	public static function searchLike($like){
 		$app = Aplicacion::getInstance();
 		$conn = $app->conexionBD();
-
 		$query = sprintf("SELECT * FROM megustas WHERE id_user='%d' AND id_meme = '%d'"
 				, $conn->real_escape_string($like->idUser)
 				, $conn->real_escape_string($like->idMeme));
-		if ($conn->query($query)) {
-			return true;
+		$result = $conn->query($query); 
+		if ($result) {
+			if ($conn->affected_rows == 1) {
+				return true;
+			}
+			else{
+				return false;
+			}
 		}
 		else {
 			return false;
@@ -40,11 +45,17 @@ class Like{
 		$app = Aplicacion::getInstance();
 		$conn = $app->conexionBD();
 
-		$query = sprintf("INSERT INTO megustas(id_user, id_meme) VALUES ('%d', '%d')"
+		$query = sprintf("INSERT INTO megustas(id_user, id_meme) VALUES ('%s', '%s')"
 				, $conn->real_escape_string($like->idUser)
 				, $conn->real_escape_string($like->idMeme));
-		if ($conn->query($query)) {
-			return true;
+		$result = $conn->query($query); 
+		if ($result) {
+			if ($conn->affected_rows == 1) {
+				return true;
+			}
+			else{
+				return false;
+			}
 		}
 		else {
 			return false;
@@ -56,11 +67,17 @@ class Like{
 		$app = Aplicacion::getInstance();
 		$conn = $app->conexionBD();
 
-		$query = sprintf("DELETE FROM megustas WHERE id_user='%d' AND id_meme = '%d')"
+		$query = sprintf("DELETE FROM megustas WHERE id_user='%s' AND id_meme = '%s'"
 				, $conn->real_escape_string($like->idUser)
 				, $conn->real_escape_string($like->idMeme));
-		if ($conn->query($query)) {
-			return true;
+		$result = $conn->query($query); 
+		if ($result) {
+			if ($conn->affected_rows == 1) {
+				return true;
+			}
+			else{
+				return false;
+			}
 		}
 		else {
 			return false;

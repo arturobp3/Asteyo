@@ -5,6 +5,7 @@ require_once('usuario.php');
 require_once('meme.php');
 require_once('Like.php');
 
+
 if($_POST['accion'] === "add"){
 	$uName = isset($_SESSION['nombre']) ? $_SESSION['nombre'] : "";
 	$mId = isset($_POST['idMeme']) ? $_POST['idMeme'] : null;
@@ -15,13 +16,19 @@ if($_POST['accion'] === "add"){
 	$uId = $usuario->id();
 
 	/* insert the like */
-	$like = new Like($uId, $mId);
-	$success = Like::addLike($like);
-	if ($success) {
-		exit(json_encode(true));
+	if ($usuario && $meme) {
+		$like = new Like($uId, $mId);
+		$success = Like::addLike($like);
+		$meme = Meme::actualiza($meme);
+		if ($success) {
+			echo json_encode(array('success' => true));
+		}
+		else {
+			echo json_encode(array('success' => false));
+		}
 	}
 	else {
-		exit(json_encode(false));
+		echo json_encode(array('success' => false));
 	}
 }
 else if ($_POST['accion'] === "remove") {
@@ -29,6 +36,24 @@ else if ($_POST['accion'] === "remove") {
 	$mId = isset($_POST['idMeme']) ? $_POST['idMeme'] : null;
 
 	/* validation of the data recieved */
+	$usuario = Usuario::buscaUsuario($uName);
+	$meme = Meme::getMeme($mId);
+	$uId = $usuario->id();
+
+	/* insert the like */
+	if ($usuario && $meme) {
+		$like = new Like($uId, $mId);
+		$success = Like::removeLike($like);
+		if ($success) {
+			echo json_encode(array('success' => true));
+		}
+		else {
+			echo json_encode(array('success' => false));
+		}
+	}
+	else {
+		echo json_encode(array('success' => false));
+	}
 	
 }
 else if ($_POST['accion'] === "search") {
@@ -36,5 +61,22 @@ else if ($_POST['accion'] === "search") {
 	$mId = isset($_POST['idMeme']) ? $_POST['idMeme'] : null;
 
 	/* validation of the data recieved */
-	
+	$usuario = Usuario::buscaUsuario($uName);
+	$meme = Meme::getMeme($mId);
+	$uId = $usuario->id();
+
+	/* insert the like */
+	if ($usuario && $meme) {
+		$like = new Like($uId, $mId);
+		$success = Like::searchLike($like);
+		if ($success) {
+			echo json_encode(array('success' => true));
+		}
+		else {
+			echo json_encode(array('success' => false));
+		}
+	}
+	else {
+		echo json_encode(array('success' => false));
+	}
 }

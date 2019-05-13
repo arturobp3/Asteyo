@@ -97,8 +97,8 @@ class Meme {
         $app = Aplicacion::getInstance();
         $conn = $app->conexionBD();
 
-        $query=sprintf("UPDATE memes M SET num_megustas = num_megustas + 1 WHERE M.id_meme=%i"
-            , $meme->id);
+        $query=sprintf("UPDATE memes M SET M.num_megustas = M.num_megustas + 1 WHERE M.id_meme='%d'"
+            , $conn->real_escape_string($meme->id));
 
         if ( $conn->query($query) ) {
             if ( $conn->affected_rows != 1) {
