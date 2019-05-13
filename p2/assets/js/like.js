@@ -4,6 +4,11 @@ $(document).ready(function(){
 
 	resetColor();
 
+	/* check if the user has liked the meme */
+	var urlParams = new URLSearchParams(window.location.search);
+	var memeId = urlParams.get('id');
+	likedMeme(memeId);
+
 	/* when hovering over the button */
 	$('.like').mouseover(function(){
 
@@ -21,8 +26,31 @@ $(document).ready(function(){
 
 })
 
+/* function that check if the user has already liked a meme */
+function likedMeme(idMeme){
+	$.ajax({
+		url:'./includes/likes.php',
+		type:'post',
+		dataType: 'JSON',
+		data: {
+			"idMeme": idMeme,
+			"accion": "search"
+		},
+		success: function(response){
+			if (response.success == true) {
+				liked = 1;
+				changeColor();
+			}
+			else{
+				liked = 0;
+				resetColor();
+			}
+		}
+	});
+}
+
 /* function that save the like of a meme from a registered user */
-function likeAMeme(nameUser, idMeme){
+function likeAMeme(idMeme){
 	if (liked == 0) {
 		$.ajax({
 			url:'./includes/likes.php',
@@ -33,14 +61,11 @@ function likeAMeme(nameUser, idMeme){
 				"accion": "add"
 			},
 			success: function(response){
-				if (response) {
+				if (response.success == true) {
 					liked = 1;
 					changeColor();
-					var numL = $('#meme-data #num-likes').html;
-					$('#meme-data #num-likes').html(parseInt(numL) + 1);
-				}
-				else{
-					$('.like').css('color', 'green');
+					var numL = $('#meme-data #num_likes').html();
+					$('#meme-data #num_likes').html(parseInt(numL) + 1);
 				}
 			}
 		});
@@ -55,8 +80,12 @@ function likeAMeme(nameUser, idMeme){
 				"accion": "remove"
 			},
 			success: function(response){
-				liked = 0;
-				resetColor();
+				if (response.true == true) {
+					liked = 0;
+					resetColor();
+					var numL = $('#meme-data #num_likes').html();
+					$('#meme-data #num_likes').html(parseInt(numL) - 1);
+				}
 			}
 		});
 	}
