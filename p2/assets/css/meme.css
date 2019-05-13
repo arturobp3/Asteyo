@@ -33,6 +33,19 @@
 	height: auto;
 }
 
+/*div con la medalla y el meme en el ranking*/
+.ranking{
+	display: flex;
+	flex-direction: row;
+
+}
+
+.span-ranking{
+	font-size: 20px;
+
+}
+
+
 /*----------------------------------------------------------------------------------------------------------------------*/
 
 /* div que contiene el avatar del usuario y otro div con el título y le autor del meme*/

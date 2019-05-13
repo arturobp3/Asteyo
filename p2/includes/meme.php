@@ -97,8 +97,8 @@ class Meme {
         $app = Aplicacion::getInstance();
         $conn = $app->conexionBD();
 
-        $query=sprintf("UPDATE memes M SET num_megustas = num_megustas + 1 WHERE M.id_meme=%i"
-            , $meme->id);
+        $query=sprintf("UPDATE memes M SET M.num_megustas = M.num_megustas + 1 WHERE M.id_meme='%d'"
+            , $conn->real_escape_string($meme->id));
 
         if ( $conn->query($query) ) {
             if ( $conn->affected_rows != 1) {
@@ -345,13 +345,25 @@ class Meme {
        
    }
 
-   public static function formatoRanking($meme){
+   public static function formatoMeme($meme, $i=NULL){
         $usuario = Usuario::buscaUsuario($meme['username']);
+
+
+        if($i){
+            $span = "<span class='span-ranking'>\u{1F3C5}</span>";
+            if($i==1) 		$span = "<span class='span-ranking'>\u{1F947}</span>";
+		    else if($i==2)	$span = "<span class='span-ranking'>\u{1F948}</span>";
+		    else if($i==3)	$span = "<span class='span-ranking'>\u{1F949}</span>";
+        }
+        else $span = "";
+
+        
+
         return
         '<a class="memes" href="./Meme.php?userName='.$meme['username'].'&id='.$meme['id'].'">
             <div id="meme">
                 <div id="meme-title">
-                    <p>'.$meme['nameMeme'].'</p>
+                    <p>'.$span." ".$meme['nameMeme'].'</p>
                 </div>
                 <div id="meme-container">
                     <img id="img-meme" src="uploads/'.$usuario->id().'/'.$meme['id'].'.jpg"/>

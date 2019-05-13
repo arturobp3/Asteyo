@@ -11,7 +11,9 @@ require_once("includes/FormularioSubirMeme.php");
 <head>
     <link rel="stylesheet" type="text/css" href="assets/css/general.css" />
     <link rel="stylesheet" type="text/css" href="assets/css/formularios.css" />
+    <link rel="stylesheet" type="text/css" href="assets/css/index.css" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
     <title>Sube tu meme | Asteyo</title>
 </head>
 
@@ -25,11 +27,11 @@ require_once("includes/FormularioSubirMeme.php");
 
         <?php require("includes/comun/sidebarIzq.php");?>
 
-        <div class="contenido-formularios">
-            <h2>AÑADE TU MEME</h2>
-			
-			<a href="subirMeme.php"> Subir desde tu ordenador </a>
-			<a href="crearMeme.php"> Crea tu meme </a>
+        <div class="contenido-index" id="subida">
+            <h2 style="font-family: impact;">AÑADE TU MEME</h2>
+
+			<a href="subirMeme.php" class="subir"> SUBIR DESDE</br>TU ORDENADOR </a>
+			<a href="crearMeme.php" class="subir"> CREA TU MEME</a>
         
         </div>
 

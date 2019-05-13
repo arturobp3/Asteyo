@@ -1,25 +1,21 @@
+var liked = 0;
+
 $(document).ready(function(){
 
-	var liked = 0;
 	resetColor();
 
-	$('.like').on('click', function(){
+	/* check if the user has liked the meme */
+	var urlParams = new URLSearchParams(window.location.search);
+	var memeId = urlParams.get('id');
+	likedMeme(memeId);
 
-		if (liked == 0) {
-			changeColor();
-			liked = 1;
-		}
-		else {
-			resetColor();
-			liked = 0;
-		}
-	});
-
+	/* when hovering over the button */
 	$('.like').mouseover(function(){
 
 		changeColor();
 	});
 
+	/* when leaving the button */
 	$('.like').mouseleave(function(){
 
 		if (liked == 1) {
@@ -28,17 +24,79 @@ $(document).ready(function(){
 		else resetColor();
 	});
 
-	/*----------------------------------------------------------------------------------------------------------------------*/
+})
 
-	/* change the color of the like button when clicked */
-	function changeColor(){
+/* function that check if the user has already liked a meme */
+function likedMeme(idMeme){
+	$.ajax({
+		url:'./includes/likes.php',
+		type:'post',
+		dataType: 'JSON',
+		data: {
+			"idMeme": idMeme,
+			"accion": "search"
+		},
+		success: function(response){
+			if (response.success == true) {
+				liked = 1;
+				changeColor();
+			}
+			else{
+				liked = 0;
+				resetColor();
+			}
+		}
+	});
+}
 
-		$('.like').css('color', 'red');
+/* function that save the like of a meme from a registered user */
+function likeAMeme(idMeme){
+	if (liked == 0) {
+		$.ajax({
+			url:'./includes/likes.php',
+			type:'post',
+			dataType: 'JSON',
+			data: {
+				"idMeme": idMeme,
+				"accion": "add"
+			},
+			success: function(response){
+				if (response.success == true) {
+					liked = 1;
+					changeColor();
+					var numL = $('#meme-data #num_likes').html();
+					$('#meme-data #num_likes').html(parseInt(numL) + 1);
+				}
+			}
+		});
 	}
-
-	/* reset the color of the like button to grey */
-	function resetColor(){
-
-		$('.like').css('color', 'grey');
+	else if (liked == 1) {
+		$.ajax({
+			url:'./includes/likes.php',
+			type:'post',
+			dataType: 'JSON',
+			data: {
+				"idMeme": idMeme,
+				"accion": "remove"
+			},
+			success: function(response){
+				if (response.true == true) {
+					liked = 0;
+					resetColor();
+					var numL = $('#meme-data #num_likes').html();
+					$('#meme-data #num_likes').html(parseInt(numL) - 1);
+				}
+			}
+		});
 	}
-});
+}
+
+/* change the color of the like button when clicked */
+function changeColor(){
+	$('.like').css('color', 'red');
+}
+
+/* reset the color of the like button to grey */
+function resetColor(){
+	$('.like').css('color', 'grey');
+}

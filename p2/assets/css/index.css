@@ -13,6 +13,7 @@
 	width: 100%;
 
 	padding: 15px 25px;
+	
 }
 
 /*----------------------------------------------------------------------------------------------------------------------*/
@@ -98,4 +99,70 @@
 .contenido-index #meme #meme-info #user-profile-picture {
 	width: 35px;
 	height: 35px;
+}
+
+.contenido-index .subir {
+	
+	margin-top: 30px;
+	text-decoration: none;
+	color: #2c272a;
+	border: 2px solid #444243;
+	border-radius: 10px;
+	background-color: coral;
+	padding: 1% 2%;
+	font-family: impact;
+	text-align: center;
+	box-shadow: 0 8px 8px 0 rgba(0, 0, 0, 0.3), 0 6px 20px 0 rgba(0, 0, 0, 0.3);
+}
+
+.contenido-index .subir:hover{
+	
+	text-decoration: none;
+	background-color: #2c272a;
+	color: coral;
+	border: 2px solid #444243;
+	border-radius: 10px;
+	box-shadow: 0 8px 8px 0 rgb(255, 255, 255), 0 6px 20px 0 rgba(255, 255, 255, 0.3);
+}
+
+.contenido-index #subida{
+	border: 2px solid #444243;
+}
+
+/*----------------------------------------------------------------------------------------------------------------------*/
+/*CSS de los rankings*/
+
+.contenido-index #info {
+	display: flex;
+	flex-direction: row;
+
+	margin-top: 20px;
+	margin-bottom: 10px;
+}
+
+.contenido-index #info span{
+	font-size: 30px;
+
+	padding-right: 10px;
+}
+
+.contenido-index #info #img{
+	padding-right: 30px;
+}
+
+/*imagen de perfil del usuario */
+.contenido-index #info #img #user-profile-picture {
+	width: 150px;
+	height: 150px;
+	
+	
+}
+
+/* div con el titulo y el autor del meme */
+.contenido-index #info #meme-info {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+
+	padding-left: 30px;
 }

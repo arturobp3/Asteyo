@@ -1,4 +1,4 @@
-  <?php
+<?php
 
 require_once('Aplicacion.php');
 
@@ -201,7 +201,7 @@ class Usuario {
 
         arsort($rt);
         $rt=array_slice($rt,0,5);
-        var_dump($rt);
+        
         return $rt;
         
     }
@@ -258,13 +258,24 @@ class Usuario {
         return $rs->num_rows;
     }
 
-    public static function formatoRanking($infoUser){
+    public static function formatoRanking($infoUser, $i = NULL){
         $usuario = self::buscaUsuario($infoUser['user']);
+        $span = "<span>\u{1F3C5}</span>";
+  
+        if($i==1) 		$span = "<span>\u{1F947}</span>";
+		else if($i==2)	$span = "<span>\u{1F948}</span>";
+		else if($i==3)	$span = "<span>\u{1F949}</span>";
+						
+        
         return 
         "<div id='info'>
-               <img id='user-profile-picture' src='./uploads/".$usuario->id()."/fotoPerfil.jpg'/>
-               <div id='meme-info'>
+            ".$span."
+                <div id='img'>
+                    <img id='user-profile-picture' src='./uploads/".$usuario->id()."/fotoPerfil.jpg'/>
+                </div>
+                <div id='meme-info'>
                    <p><a href='perfil.php?userName=".$usuario->username()."'>".$usuario->username()."</a></p>
+                   <p>".$infoUser['mg']."<p>
                </div>
         </div>";
     }
