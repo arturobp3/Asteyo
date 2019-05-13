@@ -162,7 +162,7 @@ body {
 	display: flex;
 	flex-direction: column;
 
-	padding: 2% 2%;
+	padding: 2% 1.5%;
 
 	width: 250px;
 	min-height: 600px;
@@ -188,10 +188,44 @@ body {
 }
 
 /* estilo de las celdas de las filas */
-.sidebarIzq td {
-	padding: 10px;
+.sidebarIzq td #info-hashtag{
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
 
-	/*border-right: 0.5px solid grey;*/
+	padding-top: 10px;
+	padding-bottom: 10px;
+
+	font-size: 14px;
+}
+
+/* estilo para las etiquetas que muestran la cantidad de likes de un hashtag */
+.sidebarIzq td #info-hashtag #num_likes{
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	align-items: center;
+
+	width: 50px;
+	padding-top: 2px;
+	padding-left: 2px;
+	padding-right: 2px;
+
+	color: #e8edf3;
+	background-color: #22264b;
+	border-radius: 6px;
+}
+
+/* estilo para el span del corazón*/
+.sidebarIzq td #info-hashtag #num_likes span{
+	position: relative;
+	bottom: 1px;
+}
+
+/* estilo para el número de likes*/
+.sidebarIzq td #info-hashtag #num_likes p{
+	font-style: italic;
 }
 
 /*----------------------------------------------------------------------------------------------------------------------*/

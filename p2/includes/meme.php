@@ -322,7 +322,8 @@ class Meme {
                     $fila = $rs->fetch_assoc();
 
                     $hashtags[] = array(
-                        'name' => $fila['name']
+                        'name' => $fila['name'],
+                        'n_mg' => $fila['n_mg']
                     );
                 }
                 $rs->free();
