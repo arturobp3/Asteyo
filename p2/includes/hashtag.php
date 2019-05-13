@@ -1,8 +1,5 @@
 <?php
-
-    require_once('Aplicacion.php');
-    require_once('Meme.php');
-
+require_once('Aplicacion.php');
 
 class Hashtag {
 
@@ -134,20 +131,23 @@ class Hashtag {
     }
     
     //Esta funcion debe actualizar el numero de memes asociados al hashtag
-    public static function update($hashtag){
+    public static function update($hashtag, $accion){
         
         $app = Aplicacion::getInstance();
         $conn = $app->conexionBD();
 
-
-        $hashtag->n_memes+=1;
-
-        $query=sprintf("UPDATE hashtags M SET M.n_memes = M.n_memes+1 WHERE M.name='%s'"
-            , $hashtag->name);
+        if ($accion === "add") {
+            $query=sprintf("UPDATE hashtags H SET H.n_mg = H.n_mg + 1 WHERE H.name='%s'"
+                , $hashtag);
+        }
+        else if ($accion === "remove") {
+            $query=sprintf("UPDATE hashtags H SET H.n_mg = H.n_mg - 1 WHERE H.name='%s'"
+                , $hashtag);
+        }
 
         if ( $conn->query($query) ) {
             if ( $conn->affected_rows != 1) {
-                echo "No se ha podido actualizar el meme: " . $hashtag->id_meme();
+                echo "No se ha podido actualizar el meme de los hashtags: " . $hashtag;
                 exit();
             }
         } else {

@@ -1,6 +1,7 @@
 <?php
 
 require_once('Aplicacion.php');
+require_once('hashtag.php');
 
 class Meme {
 
@@ -108,38 +109,32 @@ class Meme {
 
         if ( $conn->query($query) ) {
             if ( $conn->affected_rows != 1) {
-                echo "No se ha podido actualizar el meme: " . $meme->id;
+                echo "No se ha podido actualizar el meme pinche: " . $meme->id;
                 exit();
             }
             else{
 
             	/* seleccionamos los hashtag que el meme tiene */
-            	$query=sprintf("SELECT name_hash FROM hashtag_meme H JOIN memes M WHERE H.id_meme = M.id_meme AND M.id_meme='%d'"
+            	$query2=sprintf("SELECT name_hash FROM hashtag_meme H JOIN memes M WHERE H.id_meme = M.id_meme AND M.id_meme='%d'"
 		            , $conn->real_escape_string($meme->id));
 
-            	$rs = $conn->query($query);
-            	for ($i=0; $i < $rs->num_rows; $i++) { 
-            		$hashtagName = $rs->fetch_assoc();
-            		/* realizamos la accion correspondiente a cada numero de likes de un hastag por vuelta del bucle*/
-            		if ($accion === "add") {
-			        	$query=sprintf("UPDATE hashtags H SET H.n_mg = H.n_mg + 1 WHERE H.name='%s'"
-			            , $conn->real_escape_string($hashtagName['name_hash']));
-			        }
-			        else if ($accion === "remove") {
-			        	$query=sprintf("UPDATE hashtags H SET H.n_mg = H.n_mg - 1 WHERE H.name='%s'"
-			            , $conn->real_escape_string($hashtagName['name_hash']));
-			        }
-			        
-			        if ( $conn->query($query) ) {
-			            if ( $conn->affected_rows != 1) {
-			                echo "No se ha podido actualizar el meme: " . $meme->id;
-			                exit();
-			            }
-			        } else {
-			            echo "Error al actualizar en la BD: (" . $conn->errno . ") " . utf8_encode($conn->error);
+            	$rs = $conn->query($query2);
+			    if ($rs) {
+			        if ( $conn->affected_rows == 0) {
+			            echo "No se ha podido actualizar el meme de la reconcha: " . $meme->id;
 			            exit();
 			        }
-            	}
+                    else{
+                        for ($i=0; $i < $rs->num_rows; $i++) { 
+                            $hashtagName = $rs->fetch_assoc();
+                            /* realizamos la accion correspondiente a cada numero de likes de un hastag por vuelta del bucle*/
+                            $hashtag = Hashtag::update($hashtagName['name_hash'], $accion);
+                        }
+                    }
+			    } else {
+    			    echo "Error al actualizar en la BD: (" . $conn->errno . ") " . utf8_encode($conn->error);
+    			    exit();
+			    }
             }
         } else {
             echo "Error al actualizar en la BD: (" . $conn->errno . ") " . utf8_encode($conn->error);
