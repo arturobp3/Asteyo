@@ -80,7 +80,7 @@ function likeAMeme(idMeme){
 				"accion": "remove"
 			},
 			success: function(response){
-				if (response.true == true) {
+				if (response.success == true) {
 					liked = 0;
 					resetColor();
 					var numL = $('#meme-data #num_likes').html();

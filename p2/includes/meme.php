@@ -91,19 +91,55 @@ class Meme {
         return true;
     }
     
-    //Esta funcion debe actualizar el numero de likes del meme (entre otras cosas??)
-    public static function actualiza($meme){
+    /* Esta funcion debe actualizar el numero de likes del meme en las tablas de meme y hashtag */
+    public static function actualizaLikes($meme, $accion){
         
         $app = Aplicacion::getInstance();
         $conn = $app->conexionBD();
 
-        $query=sprintf("UPDATE memes M SET M.num_megustas = M.num_megustas + 1 WHERE M.id_meme='%d'"
+        if ($accion === "add") {
+        	$query=sprintf("UPDATE memes M SET M.num_megustas = M.num_megustas + 1 WHERE M.id_meme='%d'"
             , $conn->real_escape_string($meme->id));
+        }
+        else if ($accion === "remove") {
+        	$query=sprintf("UPDATE memes M SET M.num_megustas = M.num_megustas - 1 WHERE M.id_meme='%d'"
+            , $conn->real_escape_string($meme->id));
+        }
 
         if ( $conn->query($query) ) {
             if ( $conn->affected_rows != 1) {
                 echo "No se ha podido actualizar el meme: " . $meme->id;
                 exit();
+            }
+            else{
+
+            	/* seleccionamos los hashtag que el meme tiene */
+            	$query=sprintf("SELECT name_hash FROM hashtag_meme H JOIN memes M WHERE H.id_meme = M.id_meme AND M.id_meme='%d'"
+		            , $conn->real_escape_string($meme->id));
+
+            	$rs = $conn->query($query);
+            	for ($i=0; $i < $rs->num_rows; $i++) { 
+            		$hashtagName = $rs->fetch_assoc();
+            		/* realizamos la accion correspondiente a cada numero de likes de un hastag por vuelta del bucle*/
+            		if ($accion === "add") {
+			        	$query=sprintf("UPDATE hashtags H SET H.n_mg = H.n_mg + 1 WHERE H.name='%s'"
+			            , $conn->real_escape_string($hashtagName['name_hash']));
+			        }
+			        else if ($accion === "remove") {
+			        	$query=sprintf("UPDATE hashtags H SET H.n_mg = H.n_mg - 1 WHERE H.name='%s'"
+			            , $conn->real_escape_string($hashtagName['name_hash']));
+			        }
+			        
+			        if ( $conn->query($query) ) {
+			            if ( $conn->affected_rows != 1) {
+			                echo "No se ha podido actualizar el meme: " . $meme->id;
+			                exit();
+			            }
+			        } else {
+			            echo "Error al actualizar en la BD: (" . $conn->errno . ") " . utf8_encode($conn->error);
+			            exit();
+			        }
+            	}
             }
         } else {
             echo "Error al actualizar en la BD: (" . $conn->errno . ") " . utf8_encode($conn->error);

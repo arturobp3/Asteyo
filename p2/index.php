@@ -45,7 +45,7 @@ require_once("includes/usuario.php");
 			else{
 
 				foreach ($result as $meme) {
-					echo Meme::formatoMeme($meme);
+					echo Meme::formatoMeme($meme,$i);
 				}
 			}
         ?>	

@@ -19,7 +19,7 @@ if($_POST['accion'] === "add"){
 	if ($usuario && $meme) {
 		$like = new Like($uId, $mId);
 		$success = Like::addLike($like);
-		$meme = Meme::actualiza($meme);
+		$meme = Meme::actualizaLikes($meme, $_POST['accion']);
 		if ($success) {
 			echo json_encode(array('success' => true));
 		}
@@ -44,6 +44,7 @@ else if ($_POST['accion'] === "remove") {
 	if ($usuario && $meme) {
 		$like = new Like($uId, $mId);
 		$success = Like::removeLike($like);
+		$meme = Meme::actualizaLikes($meme, $_POST['accion']);
 		if ($success) {
 			echo json_encode(array('success' => true));
 		}
