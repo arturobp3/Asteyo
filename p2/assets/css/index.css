@@ -128,3 +128,40 @@
 .contenido-index #subida{
 	border: 2px solid #444243;
 }
+
+/*----------------------------------------------------------------------------------------------------------------------*/
+/*CSS de los rankings*/
+
+.contenido-index #info {
+	display: flex;
+	flex-direction: row;
+
+	margin-top: 20px;
+	margin-bottom: 10px;
+}
+
+.contenido-index #info span{
+	width: 50px;
+	height:50px;
+}
+
+.contenido-index #info #img{
+	padding-right: 30px;
+}
+
+/*imagen de perfil del usuario */
+.contenido-index #info #img #user-profile-picture {
+	width: 150px;
+	height: 150px;
+	
+	
+}
+
+/* div con el titulo y el autor del meme */
+.contenido-index #info #meme-info {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+
+	padding-left: 30px;
+}

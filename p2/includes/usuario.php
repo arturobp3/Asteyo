@@ -201,7 +201,7 @@ class Usuario {
 
         arsort($rt);
         $rt=array_slice($rt,0,5);
-        var_dump($rt);
+        
         return $rt;
         
     }
@@ -260,13 +260,17 @@ class Usuario {
 
     public static function formatoRanking($infoUser){
         $usuario = self::buscaUsuario($infoUser['user']);
+        
         return 
-        "<div id='info'>
-               <img id='user-profile-picture' src='./uploads/".$usuario->id()."/fotoPerfil.jpg'/>
-               <div id='meme-info'>
+        "
+                <div id='img'>
+                    <img id='user-profile-picture' src='./uploads/".$usuario->id()."/fotoPerfil.jpg'/>
+                </div>
+                <div id='meme-info'>
                    <p><a href='perfil.php?userName=".$usuario->username()."'>".$usuario->username()."</a></p>
+                   <p>".$infoUser['mg']."<p>
                </div>
-        </div>";
+        ";
     }
 
 

@@ -8,7 +8,7 @@
 			if (isset($_SESSION["login"]) && ($_SESSION["login"]===true)) {
 
 
-				$botones = "Bienvenido " . $_SESSION['nombre'] . ".";
+				$botones = "Bienvenido, " . $_SESSION['nombre'] . ".";
 				
 
 				if(isset($_SESSION["esAdmin"]) && $_SESSION["esAdmin"] ===true){
@@ -34,7 +34,7 @@
 					$botones.= "	<li><a href=''>Ranking</a>
 										<ul>
 											<li><a href='ranking.php?tipo=masMg'>Top10 publicaciones</a></li>
-											<li><a href='ranking.php?tipo=masSeg'>Mas seguidores</a></li>
+											<li><a href='ranking.php?tipo=masSeg'>Top5 usuarios</a></li>
 										</ul>
 									</li>
 								</ul>";

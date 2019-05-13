@@ -11,6 +11,7 @@ require_once("includes/usuario.php");
 <head>
 	<link rel="stylesheet" type="text/css" href="assets/css/general.css" />
 	<link rel="stylesheet" type="text/css" href="assets/css/index.css" />
+	<link rel="stylesheet" type="text/css" href="assets/css/meme.css" />
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<title>Inicio | Asteyo</title>
 </head>
@@ -46,9 +47,23 @@ require_once("includes/usuario.php");
 				echo "<h1> ¡No se han encontrado resultados! </h1>";
 			}
 			else{
+				$i = 0;
 				foreach ($result as $part) {
-					if($esUser) echo Usuario::formatoRanking($part);
-					else echo Meme::formatoRanking($part);
+					echo "<div id='info'>";
+						if($i==0) echo "<span>\u{1F947}</span>";
+						else if($i==1)echo "<span>\u{1F948}</span>";
+						else if($i==2)echo "<span>\u{1F949}</span>";
+						else echo "<span>\u{1F3C5}</span>";
+						
+						if($esUser){
+							echo Usuario::formatoRanking($part, $i)."</div>";
+							
+						} 
+					
+						else echo "</div>".Meme::formatoMeme($part);
+
+						$i++;
+					;
 				}
 			}
         ?>	

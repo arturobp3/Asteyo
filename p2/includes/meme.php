@@ -345,7 +345,7 @@ class Meme {
        
    }
 
-   public static function formatoRanking($meme){
+   public static function formatoMeme($meme){
         $usuario = Usuario::buscaUsuario($meme['username']);
         return
         '<a class="memes" href="./Meme.php?userName='.$meme['username'].'&id='.$meme['id'].'">
