@@ -81,6 +81,10 @@ require_once("includes/FormularioSubirMeme.php");
 							<input type="text" id="txtTextoAbajo" onkeyup="GenerarMeme()" value="Abajo" class="form-control" />
 							Imagen: 
 							<input type="file" name="fileMeme" id="fileMeme" class="form-control">
+							Titulo:
+							<input type="text" id="titulo" value="Titulo" class="form-control" />
+							Hashtags:
+							<input type="text" id="hashtags" value="hashtags" class="form-control" />
 						</div>
                 </div>
                 
@@ -90,6 +94,9 @@ require_once("includes/FormularioSubirMeme.php");
                     <div class="panel-heading">Nuestras plantillas</div>
                     
 					<div class="panel-body">
+						<?php
+						
+						?>
                         <div class="col-xs-2 col-md-6">
                             <a href="#" class="thumbnail">
                                 <img src="meme1.jpg"  class="imgthumbnail">
@@ -107,7 +114,7 @@ require_once("includes/FormularioSubirMeme.php");
 						</div>
 						<div class="col-xs-2 col-md-6">
 							<a href="#" class="thumbnail">
-								<img src="meme4.jpg" class="imgthumbnail">
+								<img src="meme4.png" class="imgthumbnail">
 							</a>
 						</div>
 						<div class="col-xs-2 col-md-6">
@@ -142,7 +149,10 @@ require_once("includes/FormularioSubirMeme.php");
                 </div>
                     </div>
                     <a id="btnDescargar" value="Descargar" class="btn btn-danger">Descargar meme </a>
+					<a id="btnSubir" value="Subir" class="btn btn-danger">Subir meme</a>
                 </div>
+
+				
                 
             </div>
         </div>
@@ -154,7 +164,7 @@ require_once("includes/FormularioSubirMeme.php");
 			link.download = filename;
 		}
 		document.getElementById('btnDescargar').addEventListener('click', function() {
-			downloadCanvas(this, 'canvas', 'Meme.png');
+			downloadCanvas(this, 'canvas', 'miMeme.png');
 		}, 
 		false);
     </script>

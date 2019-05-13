@@ -8,7 +8,7 @@
 			if (isset($_SESSION["login"]) && ($_SESSION["login"]===true)) {
 
 
-				$botones = "Bienvenido, " . $_SESSION['nombre'] . ".";
+				$botones = "Bienvenido " . $_SESSION['nombre'] . ".";
 				
 
 				if(isset($_SESSION["esAdmin"]) && $_SESSION["esAdmin"] ===true){
@@ -17,10 +17,19 @@
 				else if(isset($_SESSION["esModerador"]) && $_SESSION["esModerador"] ===true){
 					$botones .= "<a href='addMeme.php' class='subirMeme'>"."\u{1F4E4}"."</a>";
 					//Boton para moderar los reports, memes y tomar acciones
+					$botones .= "<a href=# class='subirMeme'> \u{1F4A5} </a>";
+					$botones.= "<ul class='nav'>";
+					$botones.= "	<li><a href=''>Ranking</a>
+										<ul>
+											<li><a href='ranking.php?tipo=masMg'>Top10 publicaciones</a></li>
+											<li><a href='ranking.php?tipo=masSeg'>Mas seguidores</a></li>
+										</ul>
+									</li>
+								</ul>";
 				}
 				else{
 					
-					$botones.= "<a href='subirMeme.php' class='subirMeme'>"."\u{1F4E4}"."</a>";
+					$botones.= "<a href='addMeme.php' class='subirMeme'>"."\u{1F4E4}"."</a>";
 					$botones.= "<ul class='nav'>";
 					$botones.= "	<li><a href=''>Ranking</a>
 										<ul>

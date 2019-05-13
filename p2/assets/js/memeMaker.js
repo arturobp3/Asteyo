@@ -36,13 +36,21 @@ function GenerarMeme(){
 
 document.getElementById("fileMeme").onchange = function () {
     var reader = new FileReader();
-    reader.onload = function (e) {
-    document.getElementById("image").src = RedimensionarImagen(e.target.result, 568,335);
-	            
+    var input = event.target;
+   
+    reader.onload = function () {
+
+      var dataURL = reader.result;
+      var output = document.getElementById('image');
+      output.src = dataURL;
+
+      //output.src = RedimensionarImagen(dataURL, 568,335);
+	      
 	
          GenerarMeme();
 	
-    };reader.readAsDataURL(this.files[0]);
+    };reader.readAsDataURL(input.files[0]);
+    
 };
 
 
