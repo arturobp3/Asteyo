@@ -258,13 +258,13 @@ class Usuario {
         return $rs->num_rows;
     }
 
-    public static function formatoRanking($infoUser, $i){
+    public static function formatoRanking($infoUser, $i = NULL){
         $usuario = self::buscaUsuario($infoUser['user']);
         $span = "<span>\u{1F3C5}</span>";
-
-        if($i==0) 		$span = "<span>\u{1F947}</span>";
-		else if($i==1)	$span = "<span>\u{1F948}</span>";
-		else if($i==2)	$span = "<span>\u{1F949}</span>";
+  
+        if($i==1) 		$span = "<span>\u{1F947}</span>";
+		else if($i==2)	$span = "<span>\u{1F948}</span>";
+		else if($i==3)	$span = "<span>\u{1F949}</span>";
 						
         
         return 
