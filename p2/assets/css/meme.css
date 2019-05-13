@@ -112,6 +112,7 @@ a:active {
 
 /* estilo del titulo de la sección de comentarios*/
 .contenido-meme h3 {
+	margin-top: 2%;
 	font-style: italic;
 	padding-left: 10px;
 }
@@ -222,6 +223,12 @@ a:active {
 
 
 /*Submenú del botón reportar*/
+#reportMeme{
+	cursor: pointer;
+	text-decoration: none;
+	width: 15%;
+}
+
 .botones ul{
 	margin-left: 6.5%;
 	list-style: none;
@@ -231,6 +238,12 @@ a:active {
 	padding: 6px;
 	background-color: #e8edf3;
 	border: 1px solid coral;
+}
+
+.botones #menuReportMeme{
+	display: flex;
+	flex-direction: row;
+	cursor: pointer;
 }
 
 /*----------------------------------------------------------------------------------------------------------------------*/

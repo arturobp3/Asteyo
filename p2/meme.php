@@ -16,6 +16,7 @@ require_once("includes/usuario.php");
     <script src="./assets/js/jquery-3.4.1.min.js"></script>
     <script type="text/javascript" src="./assets/js/comentarios.js"></script>
     <script type="text/javascript" src="./assets/js/like.js"></script>
+    <script type="text/javascript" src="./assets/js/reports.js"></script>
 	<title>Meme | Asteyo</title>
 </head>
 
@@ -74,7 +75,23 @@ require_once("includes/usuario.php");
                     $html .= "
                             <label id='num_comments'>$num_comments</label> <span>\u{1F4AC}</span> 
                         </p>
-                        <p>Fecha de subida: $date</p>
+                        <p>Fecha de subida: $date</p>";
+
+                    if(isset($_SESSION['login']) && ($_SESSION['esUser'] || $_SESSION['esModerador'])){
+                        $html .= "<a onclick='openMenuReport(\"#menuReportMeme\")' id='reportMeme'>Reportar meme</a>
+                        <div class='botones'>
+                            <ul class='subMenu' id='menuReportMeme'>
+                                <li><a onclick='reportarMeme(\"{$uName}\",
+                                    $id_meme, 1)'>Spam</a>
+                                </li>
+                                <li><a onclick='reportarMeme(\"{$uName}\",
+                                    $id_meme, 2)'>Ofensivo</a>
+                                </li>
+                            </ul>
+                        </div>";
+                    }
+
+                    $html .= "<p id='mensajeReport'></p>
                     </div>
                     <h3>COMENTARIOS</h3>"; //He puesto label en num_comments para poder incrementarlo con ajax
                                             //Cuando se introduzca un nuevo comentario
@@ -125,7 +142,8 @@ require_once("includes/usuario.php");
 										    </ul>";
                                     }
                             
-                        $html .="</div>
+                        $html .="
+                                </div>
                             </div>";
                     }
 
