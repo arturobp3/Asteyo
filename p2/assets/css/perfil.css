@@ -5,7 +5,8 @@
 /*----------------------------------------------------------------------------------------------------------------------*/
 
 /*editar perfil*/
-.principal #contenido a {
+
+.principal #contenido a{
 	display: flex;
 	justify-content: center;
 	align-items: center;

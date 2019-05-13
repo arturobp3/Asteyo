@@ -64,38 +64,6 @@ function borrarComentario(id_comment){
     });
 }
 
-
-
-function reportarComentario(autorComentario, id_comment, cause){
-    $(document).ready(function(){
-
-        if(cause === 1) causa = "Spam";
-        else causa = "Ofensivo";
-
-        $.ajax({
-            data: { "id_comment" : id_comment,
-                    "cause" : causa,
-                    "autorComentario" : autorComentario,
-                    "accion": "reportar"
-            },
-            url:'./includes/comments.php',
-            type:'post',
-            dataType:'JSON', //Esto esta relacionado con el tipo de dato que devuelve el servidor
-            success: function(response){
-    
-                //Se puede hacer un if de esta manera porque el servidor devuelve un JSON
-                if(response.error == ''){
-                    $('#mensaje').html("Comentario reportado con éxito.");
-                }
-                else{
-                    $('#mensaje').html(response.error);
-                }
-            }
-        });
-
-    });
-}
-
 //Esconde todos los subMenu cuando se ha añadido un comentario con ajax
 $(document).ready(function(){
 

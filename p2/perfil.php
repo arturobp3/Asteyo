@@ -10,6 +10,7 @@
 			<link rel="stylesheet" type="text/css" href="assets/css/general.css" />
 			<link rel="stylesheet" type="text/css" href="assets/css/perfil.css" />
 			<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+			<script type="text/javascript" src="./assets/js/reports.js"></script>
 			<title>Perfil | Asteyo</title>
 		</head>
 		<body>
@@ -23,8 +24,22 @@
 
 				<?php require("includes/comun/sidebarIzq.php"); ?>
 
-				<div id="contenido">						
+				<div id="contenido">
+					<div class='botonesPrincipales'>
 					<a href='editarPerfil.php' id='edit'>Editar</a>
+					<a onclick='openMenuReport()'>Reportar usuario </a>
+						<div class='botones'>
+							<ul class='subMenu' id='menuReportMeme'>
+								<li><a onclick='reportarMeme(\"{$uName}\",
+									$id_meme, 1)'>Spam</a>
+								</li>
+								<li><a onclick='reportarMeme(\"{$uName}\",
+									$id_meme, 2)'>Ofensivo</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+					<p id='mensajeReport'></p>
 					<div id="panel-perfil">
 						<div id="foto">
 						<?php
