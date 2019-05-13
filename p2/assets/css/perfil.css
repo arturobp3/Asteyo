@@ -6,6 +6,21 @@
 
 /*editar perfil*/
 
+.principal #contenido #perfil .botones{
+	margin-left: 10px;
+	
+}
+
+
+.principal #contenido #perfil .botones ul{
+	list-style: none;
+	margin-top: 10px;
+}
+
+.principal #contenido #perfil .botones ul li a{
+	width: 100%;
+}
+
 .principal #contenido a{
 	display: flex;
 	justify-content: center;
@@ -17,6 +32,8 @@
 	border-radius: 5px;
 	text-decoration: none;
 	font-weight: bold; 
+	margin-right: 10px;
+	cursor: pointer;
 }
 
 /* estilo del hover de editar perfil */

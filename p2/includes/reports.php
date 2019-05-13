@@ -16,7 +16,7 @@ $hoy = date("Y-m-d H:i:s");
 
 /*------------OBTENEMOS INFORMACION DE LA PETICIÓN AJAX---------------*/
 $usr_that_report = isset($_SESSION['nombre']) ? $_SESSION['nombre'] : "";
-$usr_reported = isset($_POST['username_meme']) ? $_POST['username_meme'] : null;
+$usr_reported = isset($_POST['usr_reported']) ? $_POST['usr_reported'] : null;
 $accion = isset($_POST['accion']) ? $_POST['accion'] : null;
 $id_meme = isset($_POST['id_meme']) ? $_POST['id_meme'] : null;
 
@@ -53,6 +53,7 @@ $query=sprintf("INSERT INTO reports(usr_that_reports, usr_reported)
 if ( $conn->query($query) ){
 
     $id_report = $conn->insert_id;
+    $causa = $_POST['cause'];
 
     if($accion === "meme"){
 
@@ -67,8 +68,8 @@ if ( $conn->query($query) ){
         $query2=sprintf("INSERT INTO usr_reports(id_report, cause)
                         VALUES ('%s', '%s')",
             $conn->real_escape_string($id_report),
-            $conn->real_escape_string($_POST['cause']),
-            $conn->real_escape_string($id_meme));
+            $conn->real_escape_string($causa)
+        );
     }
 
     if(! $conn->query($query2)){
