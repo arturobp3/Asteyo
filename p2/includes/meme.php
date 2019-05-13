@@ -345,13 +345,19 @@ class Meme {
        
    }
 
-   public static function formatoMeme($meme){
+   public static function formatoMeme($meme, $i){
         $usuario = Usuario::buscaUsuario($meme['username']);
+
+        $span = "<span class='span-ranking'>\u{1F3C5}</span>";
+        if($i==0) 		$span = "<span class='span-ranking'>\u{1F947}</span>";
+		else if($i==1)	$span = "<span class='span-ranking'>\u{1F948}</span>";
+		else if($i==2)	$span = "<span class='span-ranking'>\u{1F949}</span>";
+
         return
         '<a class="memes" href="./Meme.php?userName='.$meme['username'].'&id='.$meme['id'].'">
             <div id="meme">
                 <div id="meme-title">
-                    <p>'.$meme['nameMeme'].'</p>
+                    <p>'.$span." ".$meme['nameMeme'].'</p>
                 </div>
                 <div id="meme-container">
                     <img id="img-meme" src="uploads/'.$usuario->id().'/'.$meme['id'].'.jpg"/>

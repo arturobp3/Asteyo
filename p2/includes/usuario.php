@@ -258,11 +258,18 @@ class Usuario {
         return $rs->num_rows;
     }
 
-    public static function formatoRanking($infoUser){
+    public static function formatoRanking($infoUser, $i){
         $usuario = self::buscaUsuario($infoUser['user']);
+        $span = "<span>\u{1F3C5}</span>";
+
+        if($i==0) 		$span = "<span>\u{1F947}</span>";
+		else if($i==1)	$span = "<span>\u{1F948}</span>";
+		else if($i==2)	$span = "<span>\u{1F949}</span>";
+						
         
         return 
-        "
+        "<div id='info'>
+            ".$span."
                 <div id='img'>
                     <img id='user-profile-picture' src='./uploads/".$usuario->id()."/fotoPerfil.jpg'/>
                 </div>
@@ -270,7 +277,7 @@ class Usuario {
                    <p><a href='perfil.php?userName=".$usuario->username()."'>".$usuario->username()."</a></p>
                    <p>".$infoUser['mg']."<p>
                </div>
-        ";
+        </div>";
     }
 
 

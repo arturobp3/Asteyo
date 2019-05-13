@@ -49,18 +49,10 @@ require_once("includes/usuario.php");
 			else{
 				$i = 0;
 				foreach ($result as $part) {
-					echo "<div id='info'>";
-						if($i==0) echo "<span>\u{1F947}</span>";
-						else if($i==1)echo "<span>\u{1F948}</span>";
-						else if($i==2)echo "<span>\u{1F949}</span>";
-						else echo "<span>\u{1F3C5}</span>";
-						
-						if($esUser){
-							echo Usuario::formatoRanking($part, $i)."</div>";
-							
-						} 
+		
+						if($esUser) echo Usuario::formatoRanking($part, $i); 
 					
-						else echo "</div>".Meme::formatoMeme($part);
+						else echo "<div class='ranking'>".Meme::formatoMeme($part, $i)."</div>";
 
 						$i++;
 					;
