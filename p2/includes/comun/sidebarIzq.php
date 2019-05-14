@@ -34,8 +34,8 @@ require_once("includes/Meme.php");
 				$name = $hashtag['name'];
 				$name = substr($name,1);
 				$num_likes = $hashtag['n_mg'];
-				echo <<< END
-				<tr>
+				echo 
+				"<tr>
 					<td>
 						<div id='info-hashtag'>
 							<a href='./index.php?buscar=%23$name'>#$name</a>
@@ -45,8 +45,8 @@ require_once("includes/Meme.php");
 							</div>
 						</div>
 					</td>
-				</tr>
-				END;
+				</tr>"
+				;
 	
 			} //Final foreach
 		?>

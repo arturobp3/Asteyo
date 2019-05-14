@@ -11,6 +11,7 @@ require_once("includes/FormularioSubirMeme.php");
 <head>
     <link rel="stylesheet" type="text/css" href="assets/css/general.css" />
     <link rel="stylesheet" type="text/css" href="assets/css/formularios.css" />
+	<link rel="stylesheet" type="text/css" href="assets/css/index.css"/>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<script type="text/javascript" src="./assets/js/memeMaker.js"></script>
     <title>Crea tu meme | Asteyo</title>

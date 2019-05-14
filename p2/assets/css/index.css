@@ -166,3 +166,29 @@
 
 	padding-left: 30px;
 }
+
+.contenido-reports{
+		
+		text-align:center;
+		/*display: flex;
+		flex-direction: row;*/
+		width: 100%;
+		align-items: center;
+		margin-top: 100;
+}
+
+/*div con la info de los reports*/
+.contenido-reports #caja {
+	
+	width: 300px;
+	text-align: center;
+	top: 200px;
+	margin-left: 60px;
+	
+	border: 2px solid coral;
+	padding: 1% 1%;
+	background-color: #e8edf3;
+	float: left;
+	
+	color: #22264b;
+}

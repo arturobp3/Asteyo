@@ -17,7 +17,7 @@
 				else if(isset($_SESSION["esModerador"]) && $_SESSION["esModerador"] ===true){
 					$botones .= "<a href='addMeme.php' class='subirMeme'>"."\u{1F4E4}"."</a>";
 					//Boton para moderar los reports, memes y tomar acciones
-					$botones .= "<a href=# class='subirMeme'> \u{1F4A5} </a>";
+					$botones .= "<a href='moderador.php' class='subirMeme'> \u{26A0} </a>";
 					$botones.= "<ul class='nav'>";
 					$botones.= "	<li><a href=''>Ranking</a>
 										<ul>
