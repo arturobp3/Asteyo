@@ -388,7 +388,7 @@ class Meme {
 		    else if($i==3)	$span = "<span class='span-ranking'>\u{1F949}</span>";
         }
         else $span = "";
-
+        $like = "<span style='color:red;'>\u{2764}</span>";
         
 
         return
@@ -405,7 +405,9 @@ class Meme {
                         <img id="user-profile-picture" src="./uploads/'.$usuario->id().'/fotoPerfil.jpg"/>
                         <p> by '.$meme['username'].'</p>
                     </div>
-                    <p>'.$meme['numLikes'].' me gusta</p>
+                    <div id="meme-likes">
+                    <p>'.$meme['numLikes'].' '.$like.'</p>
+                    </div>
                 </div>
             </div>
         </a>';

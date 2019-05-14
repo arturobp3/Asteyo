@@ -33,8 +33,7 @@
 
 	margin-top: 20px;
 	margin-bottom: 20px;
-
-	border-radius: 4px;
+	border-radius: 8px;
 	box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
@@ -57,14 +56,21 @@
 
 	font-weight: bold;
 	background-color: #e8edf3;
+	border-top-left-radius: 8px;
+	border-top-right-radius: 8px;
 }
 
 /*----------------------------------------------------------------------------------------------------------------------*/
 
+/* div que contiene la imagen del meme */
+.contenido-index #meme #meme-container {
+	max-width: 500px;
+}
+
 /* meme */
 .contenido-index #meme #meme-container #img-meme {
 	height: auto;
-	width: 500px;
+	width: 100%;
 }
 
 /*----------------------------------------------------------------------------------------------------------------------*/
@@ -76,10 +82,11 @@
 	align-items: center;
 
 	height: 50px;
-
 	padding-left: 15px;
 
 	background-color: #e8edf3;
+	border-bottom-left-radius: 8px;
+	border-bottom-right-radius: 8px;
 }
 
 /* div con la info del autor */
@@ -101,6 +108,13 @@
 	height: 35px;
 }
 
+.contenido-index #meme #meme-info #meme-likes{
+	width: 50%;
+
+	text-align: center;
+}
+
+/*--------------------------------------------------------------------------------------------------------------------------*/
 .contenido-index .subir {
 	
 	margin-top: 30px;
@@ -154,8 +168,6 @@
 .contenido-index #info #img #user-profile-picture {
 	width: 150px;
 	height: 150px;
-	
-	
 }
 
 /* div con el titulo y el autor del meme */
@@ -167,6 +179,7 @@
 	padding-left: 30px;
 }
 
+/*--------------------------------------------------------------------------------------------------------------------------*/
 .contenido-reports{
 		
 		text-align:center;
