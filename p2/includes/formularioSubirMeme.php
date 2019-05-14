@@ -97,8 +97,8 @@ class formularioSubirMeme extends Form{
         if(!empty($hashtags)){
             foreach ($hashtags as $key => $values) {
                 $formato = (substr($values, 0, 1)=== '#' && $formato)? true : false;
-                var_dump($values);
-                echo $formato;
+                /*var_dump($values);
+                echo $formato;*/
             } 
         }
         else{

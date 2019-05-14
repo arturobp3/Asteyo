@@ -61,7 +61,7 @@ class Like{
 		$sentencia = sprintf("SELECT SUM(num_megustas) as TOTAL 
 								FROM memes 
 								GROUP BY '%d'"
-						, $conn->real_escape_string($autor));
+						, $conn->real_escape_string($autor['id_autor']));
 		$sumatotal = $conn->query($sentencia);
 		$suma = $sumatotal->fetch_assoc();
 

@@ -128,7 +128,7 @@ class Meme {
                         for ($i=0; $i < $rs->num_rows; $i++) { 
                             $hashtagName = $rs->fetch_assoc();
                             /* realizamos la accion correspondiente a cada numero de likes de un hastag por vuelta del bucle*/
-                            $hashtag = Hashtag::update($hashtagName['name_hash'], $accion);
+                            $hashtag = Hashtag::updateLikes($hashtagName['name_hash'], $accion);
                         }
                     }
 			    } else {

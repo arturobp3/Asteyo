@@ -97,15 +97,13 @@ class Hashtag {
     private static function save($hashtag){
         
         $existe = self::searchHashtag($hashtag);
-        
-        $nombre = $hashtag->name;
 
         if (!$existe){
             
            self::insert($hashtag);
         }
         self::createRelation($hashtag);
-        $hashtag = self::update($nombre, "add");
+        $hashtag = self::update($hashtag);
         return $hashtag;
     }
 
@@ -130,9 +128,33 @@ class Hashtag {
 
         return true;
     }
+
+    /* Esta funcion debe actualizar el numero de memes asociados a un hashtag */
+    public static function update($hashtag){
+
+        $app = Aplicacion::getInstance();
+        $conn = $app->conexionBD();
+
+        $hashtag->n_memes+=1;
+
+        $query=sprintf("UPDATE hashtags H SET H.n_memes = H.n_memes + 1 WHERE H.name='%s'"
+                , $conn->real_escape_string($hashtag->name));
+
+        if ( $conn->query($query) ) {
+            if ( $conn->affected_rows != 1) {
+                echo "No se ha podido actualizar el meme: " . $hashtag->id_meme;
+                exit();
+            }
+        } else {
+            echo "Error al actualizar en la BD: (" . $conn->errno . ") " . utf8_encode($conn->error);
+            exit();
+        }
+        
+        return $hashtag;
+    }
     
-    //Esta funcion debe actualizar el numero de memes asociados al hashtag
-    public static function update($hashtag, $accion){
+    //Esta funcion debe actualizar el numero de likes asociados a un hashtag
+    public static function updateLikes($hashtag, $accion){
         
         $app = Aplicacion::getInstance();
         $conn = $app->conexionBD();
