@@ -98,13 +98,14 @@ class Hashtag {
         
         $existe = self::searchHashtag($hashtag);
         
-        
+        $nombre = $hashtag->name;
+
         if (!$existe){
             
            self::insert($hashtag);
         }
         self::createRelation($hashtag);
-        $hashtag = self::update($hashtag);
+        $hashtag = self::update($nombre, "add");
         return $hashtag;
     }
 
