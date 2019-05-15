@@ -3,6 +3,7 @@
 require_once('Form.php');
 require_once('usuario.php');
 require_once('Meme.php');
+require_once('Logros.php');
 require_once('Hashtag.php');
 require_once('usuario.php');
 
@@ -96,6 +97,11 @@ class formularioSubirMeme extends Form{
         if(!empty($hashtags)){
             foreach ($hashtags as $key => $values) {
                 $formato = (substr($values, 0, 1)=== '#' && $formato)? true : false;
+<<<<<<< HEAD
+=======
+                /*var_dump($values);
+                echo $formato;*/
+>>>>>>> a31040059b2f678dcee28e6dc930965eca50e82d
             } 
         }
         else{
@@ -114,6 +120,8 @@ class formularioSubirMeme extends Form{
                 $meme = Meme::crea($tituloMeme, $num_megustas, $id_autor, $datetime);
 
                 $ruta = "uploads/".$id_autor."/".$meme->id().".jpg"; 
+
+                $logro = Logros::logroSubir($id_autor);
 
                 if($meme && move_uploaded_file($imagetemp , $ruta)) {
                     //comprobar la extensión

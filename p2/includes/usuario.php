@@ -46,7 +46,7 @@ class Usuario {
         $app = Aplicacion::getInstance();
         $conn = $app->conexionBD();
 
-        $query = sprintf("SELECT * FROM users U WHERE U.username = '%s'", $conn->real_escape_string($username));
+        $query = sprintf("SELECT * FROM users U WHERE U.username = BINARY '%s'", $conn->real_escape_string($username));
         $rs = $conn->query($query);
         $result = false;
         if ($rs) {
