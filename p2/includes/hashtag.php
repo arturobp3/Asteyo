@@ -34,8 +34,8 @@ class Hashtag {
     /* Crea un nuevo meme con los datos introducidos por parámetro. */
     public static function create($name, $id_meme){
 
-        $hastag = new Hashtag($name, $id_meme);
-        return self::save($hastag);
+        $hashtag = new Hashtag($name, $id_meme);
+        return self::save($hashtag);
     }
 
     public static function searchHashtag($hashtag){
@@ -104,7 +104,7 @@ class Hashtag {
            self::insert($hashtag);
         }
         self::createRelation($hashtag);
-        $hashtag = self::update($hashtag);
+        $hashtag = self::update($hashtag->name, "add");
         return $hashtag;
     }
 
@@ -138,11 +138,11 @@ class Hashtag {
 
         if ($accion === "add") {
             $query=sprintf("UPDATE hashtags H SET H.n_mg = H.n_mg + 1 WHERE H.name='%s'"
-                , $hashtag);
+                , $conn->real_escape_string($hashtag));
         }
         else if ($accion === "remove") {
             $query=sprintf("UPDATE hashtags H SET H.n_mg = H.n_mg - 1 WHERE H.name='%s'"
-                , $hashtag);
+                , $conn->real_escape_string($hashtag));
         }
 
         if ( $conn->query($query) ) {

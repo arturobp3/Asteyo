@@ -93,15 +93,13 @@ class formularioSubirMeme extends Form{
         $hashtags= isset($_POST['hashtags'])? explode(" ", $_POST['hashtags'] ) : null;
         $formato = true;
 
-        if(!empty($hastags)){
-            foreach ($hashtags as $key => $value) {
+        if(!empty($hashtags)){
+            foreach ($hashtags as $key => $values) {
                 $formato = (substr($values, 0, 1)=== '#' && $formato)? true : false;
-                var_dump($value);
-                echo $formato;
             } 
         }
         else{
-            $erroresFormulario[]='Tienes que introducir al menos un hastag.';
+            $erroresFormulario[]='Tienes que introducir al menos un hashtag.';
         }
         
         
