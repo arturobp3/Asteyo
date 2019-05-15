@@ -34,8 +34,8 @@ class Hashtag {
     /* Crea un nuevo meme con los datos introducidos por parámetro. */
     public static function create($name, $id_meme){
 
-        $hastag = new Hashtag($name, $id_meme);
-        return self::save($hastag);
+        $hashtag = new Hashtag($name, $id_meme);
+        return self::save($hashtag);
     }
 
     public static function searchHashtag($hashtag){
@@ -103,7 +103,7 @@ class Hashtag {
            self::insert($hashtag);
         }
         self::createRelation($hashtag);
-        $hashtag = self::update($hashtag);
+        $hashtag = self::update($hashtag->name, "add");
         return $hashtag;
     }
 
