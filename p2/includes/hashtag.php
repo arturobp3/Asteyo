@@ -103,7 +103,7 @@ class Hashtag {
            self::insert($hashtag);
         }
         self::createRelation($hashtag);
-        $hashtag = self::update($hashtag->name, "add");
+        $hashtag = self::update($hashtag, "add");
         return $hashtag;
     }
 
