@@ -140,7 +140,7 @@ class Usuario {
     public static function cambiarRol($rol, $username){
         $app = Aplicacion::getInstance();
         $conn = $app->conexionBD();
-        $query=sprintf("UPDATE users U SET U.rol='%s' WHERE U.username=%d"
+        $query=sprintf("UPDATE users U SET U.rol='%s' WHERE U.username='%s'"
             , $conn->real_escape_string($rol)
             , $conn->real_escape_string($username));
 

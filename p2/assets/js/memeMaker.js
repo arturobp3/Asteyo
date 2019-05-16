@@ -28,8 +28,8 @@ function GenerarMeme(){
 				x = canvas.width/2;
 				y = canvas.height - canvas.height/7.4;
 				
-				ctx.strokeText(textAbajo, x, y);
-				ctx.fillText(textAbajo, x, y);
+				ctx.strokeText(textAbajo, x, y+25);
+				ctx.fillText(textAbajo, x, y+25);
 			
 				textArriba = textArriba.toUpperCase();
 				ctx.strokeText(textArriba, x, 40);

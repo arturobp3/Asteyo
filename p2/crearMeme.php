@@ -20,6 +20,7 @@ require_once("includes/FormularioSubirMeme.php");
 	<!-- Latest compiled and minified JavaScript -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
     <script src="https://www.gstatic.com/firebasejs/3.6.1/firebase.js"></script>
+	<script src="assets/js/guardaMeme.js"></script>
 	<script>
 		
 		// Initialize Firebase
@@ -81,10 +82,12 @@ require_once("includes/FormularioSubirMeme.php");
 							<input type="text" id="txtTextoAbajo" onkeyup="GenerarMeme()" value="Abajo" class="form-control" />
 							Imagen: 
 							<input type="file" name="fileMeme" id="fileMeme" class="form-control">
-							Titulo:
-							<input type="text" id="titulo" value="Titulo" class="form-control" />
-							Hashtags:
-							<input type="text" id="hashtags" value="hashtags" class="form-control" />
+							<!--
+							Titulo (solo si se sube):
+							<input type="text" id="titulo" value="Titulo" class="form-control" method="post" />
+							Hashtags (solo si se sube):
+							<input type="text" id="hashtags" value="hashtags" class="form-control" method="post"/>-->
+							
 						</div>
                 </div>
                 
@@ -123,13 +126,13 @@ require_once("includes/FormularioSubirMeme.php");
 			<div class="panel panel-default">
 			<div class="panel-heading">Salida del Meme</div>
                 <div class="panel-body">
-                <img src="meme5.jpg" id="image" style="display:none; width: 100%; height: auto" />
+                <img src="./assets/templates/meme5.jpg" id="image" style="display:none; width: 100%; height: auto" />
                     <canvas id="canvas" style="width: 100%; height: auto"></canvas>
                 
                 </div>
                     </div>
                     <a id="btnDescargar" value="Descargar" class="btn btn-danger">Descargar meme </a>
-					<a id="btnSubir" value="Subir" class="btn btn-danger">Subir meme</a>
+					<!--<a id="btnSubir" value="Subir" class="btn btn-danger">Subir meme</a>-->
                 </div>
 
 				
