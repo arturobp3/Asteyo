@@ -7,9 +7,14 @@ function GenerarMeme(){
 			var ctx = canvas.getContext("2d");
 			var img = new Image();
 				img.onload = function(){
-				canvas.width = img.width * 1;
-				canvas.height = img.height * 1;
-                ctx.drawImage(img, 0, 0,canvas.width ,canvas.height);
+        
+        
+				canvas.width = 568;
+        canvas.height = 335;
+        var scale = Math.min(canvas.width / img.width, canvas.height / img.height);
+        var x = (canvas.width / 2) - (img.width / 2) * scale;
+        var y = (canvas.height / 2) - (img.height / 2) * scale;
+                ctx.drawImage(img, x, y,img.width*scale ,img.height*scale);
 				
                 // Datos texto Meme (font)
 				ctx.lineWidth  = 5;
@@ -27,8 +32,8 @@ function GenerarMeme(){
 				ctx.fillText(textAbajo, x, y);
 			
 				textArriba = textArriba.toUpperCase();
-				ctx.strokeText(textArriba, x, 30);
-				ctx.fillText(textArriba, x, 30);
+				ctx.strokeText(textArriba, x, 40);
+				ctx.fillText(textArriba, x, 40);
 	};
 	 img.src = document.getElementById("image").src; 
 };

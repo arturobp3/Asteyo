@@ -11,7 +11,6 @@ require_once("includes/FormularioSubirMeme.php");
 <head>
     <link rel="stylesheet" type="text/css" href="assets/css/general.css" />
     <link rel="stylesheet" type="text/css" href="assets/css/formularios.css" />
-	<link rel="stylesheet" type="text/css" href="assets/css/index.css"/>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<script type="text/javascript" src="./assets/js/memeMaker.js"></script>
     <title>Crea tu meme | Asteyo</title>
@@ -82,10 +81,12 @@ require_once("includes/FormularioSubirMeme.php");
 							<input type="text" id="txtTextoAbajo" onkeyup="GenerarMeme()" value="Abajo" class="form-control" />
 							Imagen: 
 							<input type="file" name="fileMeme" id="fileMeme" class="form-control">
-							Titulo:
+							<!--
+							Titulo (sólo si se sube):
 							<input type="text" id="titulo" value="Titulo" class="form-control" />
-							Hashtags:
+							Hashtags (sólo si se sube):
 							<input type="text" id="hashtags" value="hashtags" class="form-control" />
+							-->
 						</div>
                 </div>
                 
@@ -96,43 +97,23 @@ require_once("includes/FormularioSubirMeme.php");
                     
 					<div class="panel-body">
 						<?php
-						
+							$dir = "./assets/templates";
+							$explorar = scandir($dir);
+							
+							$total_archivos = count($explorar)-2;
+							
+
+							for ($i = 0; $i<$total_archivos; $i++) {
+								$j = $i+1;
+								echo '<div class="col-xs-2 col-md-6">
+                            			<a href="#" class="thumbnail">
+                                			<img src="./assets/templates/meme'. $j .'.jpg"  class="imgthumbnail">
+                            			</a>
+									 </div>';
+								
+								
+							}
 						?>
-                        <div class="col-xs-2 col-md-6">
-                            <a href="#" class="thumbnail">
-                                <img src="meme1.jpg"  class="imgthumbnail">
-                            </a>
-                        </div>
-                        <div class="col-xs-2 col-md-6">
-							<a href="#" class="thumbnail">
-								<img src="meme2.jpg"  class="imgthumbnail">
-							</a>
-						</div>
-						<div class="col-xs-2 col-md-6">
-							<a href="#" class="thumbnail">
-								<img src="meme3.jpg" class="imgthumbnail">
-							</a>
-						</div>
-						<div class="col-xs-2 col-md-6">
-							<a href="#" class="thumbnail">
-								<img src="meme4.png" class="imgthumbnail">
-							</a>
-						</div>
-						<div class="col-xs-2 col-md-6">
-							<a href="#" class="thumbnail">
-								<img src="meme5.jpg" class="imgthumbnail">
-							</a>
-						</div>
-						<div class="col-xs-2 col-md-6">
-							<a href="#" class="thumbnail">
-								<img src="meme6.jpg" class="imgthumbnail">
-							</a>
-						</div>
-						<div class="col-xs-2 col-md-6">
-							<a href="#" class="thumbnail">
-								<img src="meme7.jpg" class="imgthumbnail">	
-							</a>
-						</div>
 													
 					</div>
                 </div>
@@ -144,13 +125,13 @@ require_once("includes/FormularioSubirMeme.php");
 			<div class="panel panel-default">
 			<div class="panel-heading">Salida del Meme</div>
                 <div class="panel-body">
-                <img src="meme5.jpg" id="image" style="display:none;" />
-                    <canvas id="canvas"></canvas>
+                <img src="./assets/templates/meme5.jpg" id="image" style="display:none; width: 100%; height: auto" />
+                    <canvas id="canvas" style="width: 100%; height: auto"></canvas>
                 
                 </div>
                     </div>
                     <a id="btnDescargar" value="Descargar" class="btn btn-danger">Descargar meme </a>
-					<a id="btnSubir" value="Subir" class="btn btn-danger">Subir meme</a>
+					<!--<a id="btnSubir" value="Subir" class="btn btn-danger">Subir meme</a>-->
                 </div>
 
 				

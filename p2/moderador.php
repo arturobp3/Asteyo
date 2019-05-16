@@ -4,6 +4,7 @@
 require_once("includes/config.php");
 require_once("includes/Meme.php");
 require_once("includes/usuario.php");
+require_once("includes/vistaReports.php");
 ?>
 
 <!DOCTYPE html>
@@ -28,9 +29,18 @@ require_once("includes/usuario.php");
 		<div class="contenido-reports">
 		<h2>Gestión del moderador</h2>
 		<?php
-			echo "<div class='contenido-reports' id='caja'><h3>Reports de Usuarios</h3></div>";
-			echo "<div class='contenido-reports' id='caja'><h3>Reports de Comentarios</h3></div>";
-			echo "<div class='contenido-reports' id='caja'><h3>Reports de Memes</h3></div>";
+			echo "<div id='caja'>
+					<h3>Reports de Usuarios</h3>";
+					getUserReports();
+			echo "</div>";
+			echo "<div id='caja'>
+					<h3>Reports de Comentarios</h3>";
+					getCommentReports();
+			echo	"</div>";
+			echo "<div id='caja'>
+					<h3>Reports de Memes</h3>";
+			getMemeReports();
+			echo "</div>";
 			
         ?>	
 		</div>
