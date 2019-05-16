@@ -4,6 +4,9 @@
 require_once("includes/config.php");
 require_once("includes/Meme.php");
 require_once("includes/usuario.php");
+require_once("includes/aplicacion.php");
+require_once("includes/Logros.php");
+
 ?>
 
 <!DOCTYPE html>
@@ -28,7 +31,7 @@ require_once("includes/usuario.php");
 		<div class="contenido-index">
 			<div class="logros">
 				<h1>LOGROS DISPONIBLES</h1>
-				<p>Si la imagen está en blanco y negro es que aún no lo has completado</p>
+				<p>Si la imagen está en blanco y negro es que aún no lo has completado.</p>
 				<!-- Inicio de la tabla -->
 				<table>
 					<thead>
@@ -39,16 +42,56 @@ require_once("includes/usuario.php");
 					</thead>
 					<tbody>
 						<tr>
-							<td><img src="assets/img/nnummg.jpg" height="40px" width="40px" /></td>
-							<td>Consigue 2 o más "me gusta" en tus memes.</td>
+							<?php
+								$resultado = Logros::comprobarLogros("nummg");
+								
+								if($resultado->num_rows > 0){
+							?>
+									<td><img src="assets/img/nummg.jpg" height="40px" width="40px" /></td>
+									<td>Consigue 2 o más "me gusta" en tus memes.</td>
+							<?php
+								} else{
+							?>
+									<td><img src="assets/img/nnummg.jpg" height="40px" width="40px" /></td>
+									<td>Consigue 2 o más "me gusta" en tus memes.</td>
+							<?php
+								}
+							?>
+
 						</tr>
 						<tr>
-							<td><img src="assets/img/nsubmemes.png" height="40px" width="40px" /></td>
-							<td>Sube 2 o más memes.</td>
+							<?php
+								$resultado = Logros::comprobarLogros("submemes");
+
+								if($resultado->num_rows > 0){
+							?>
+									<td><img src="assets/img/submemes.jpg" height="40px" width="40px" /></td>
+									<td>Sube 2 o más memes a la página.</td>
+							<?php
+								} else{
+							?>
+									<td><img src="assets/img/nsubmemes.png" height="40px" width="40px" /></td>
+									<td>Sube 2 o más memes a la página.</td>
+							<?php
+								}
+							?>
 						</tr>
 						<tr>
-							<td><img src="assets/img/ncomentavario.jpg" height="40px" width="40px" /></td>
-							<td>Realiza 2 o más comentarios.</td>
+							<?php
+								$resultado = Logros::comprobarLogros("comentavario");
+
+								if($resultado->num_rows > 0){
+							?>
+									<td><img src="assets/img/comentavario.jpg" height="40px" width="40px" /></td>
+									<td>Realiza dos o más comentarios en memes.</td>
+							<?php
+								} else{
+							?>
+									<td><img src="assets/img/ncomentavario.jpg" height="40px" width="40px" /></td>
+									<td>Realiza dos o más comentarios en memes.</td>
+							<?php
+								}
+							?>
 						</tr>
 					</tbody>
 				</table>

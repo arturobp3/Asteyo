@@ -94,10 +94,9 @@ class formularioSubirMeme extends Form{
         $formato = true;
 
         if(!empty($hashtags)){
-            foreach ($hashtags as $key => $value) {
-                $formato = (substr($value, 0, 1)=== '#' && $formato)? true : false;
-                var_dump($value);
-                echo $formato;
+            foreach ($hashtags as $key => $values) {
+                $formato = (substr($values, 0, 1)=== '#' && $formato)? true : false;
+            
             } 
         }
         else{
@@ -119,6 +118,9 @@ class formularioSubirMeme extends Form{
 
                 if($meme && move_uploaded_file($imagetemp , $ruta)) {
                     //comprobar la extensión
+
+                    //Cuando el meme se haya subido comprobamos si ha conseguido el logro
+                    $logro = Logros::logroSubir($datetime, $id_autor);
 
                     echo "Meme subido correctamente";
                     //comprobar si existe el hashtag si no se sube y si ya existe

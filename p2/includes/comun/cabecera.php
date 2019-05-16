@@ -43,7 +43,7 @@
 
 				}
 
-				$botones .= "<a href='perfil.php?userName=".$_SESSION['nombre']."' class='perfil'>Perfil</a>
+				$botones .= "<a href='perfil.php?userName=".$_SESSION['nombre']."' class='perfil'>"."\u{1F9D9}"."</a>
 				<a href='logout.php' class='salir'>Salir</a>";	
 
 

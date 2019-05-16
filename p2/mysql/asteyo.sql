@@ -230,7 +230,7 @@ CREATE TABLE `usr_reports` (
 -- Indices de la tabla `achievement`
 --
 ALTER TABLE `achievement`
-  ADD PRIMARY KEY (`name`),
+  ADD PRIMARY KEY (`name`, `id_user`),
   ADD KEY `id_user` (`id_user`);
 /*
 --

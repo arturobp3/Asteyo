@@ -42,7 +42,8 @@ class Like{
 
 	/* add a like to a meme */
 	public static function addLike($like){
-		$achievement = "nummg";
+
+		
 		$app = Aplicacion::getInstance();
 		$conn = $app->conexionBD();
 
@@ -51,26 +52,7 @@ class Like{
 				, $conn->real_escape_string($like->idMeme));
 		$result = $conn->query($query); 
 
-		$sql = sprintf("SELECT id_autor
-						FROM memes 
-						WHERE id_meme = '%d'"
-						, $conn->real_escape_string($like->idMeme));
-		$au = $conn->query($sql);
-		$autor = $au->fetch_assoc();
-
-		$sentencia = sprintf("SELECT SUM(num_megustas) as TOTAL 
-								FROM memes 
-								GROUP BY '%d'"
-						, $conn->real_escape_string($autor['id_autor']));
-		$sumatotal = $conn->query($sentencia);
-		$suma = $sumatotal->fetch_assoc();
-
-		if($suma == 2){
-			$logro = sprintf("INSERT INTO achievement(id_user, name, date_got) VALUES ('%s','%s', getdate())"
-					, $conn->real_escape_string($autor)
-					, $conn->real_escape_string($achievement));
-			$inse = $conn->query($logro);
-		}
+		
 
 		if ($result) {
 			if ($conn->affected_rows == 1) {
