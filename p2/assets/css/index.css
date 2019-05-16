@@ -193,7 +193,7 @@
 /*div con la info de los reports*/
 .contenido-reports #caja {
 	
-	width: 300px;
+	width: 500px;
 	text-align: center;
 	top: 200px;
 	margin-left: 60px;
@@ -206,6 +206,7 @@
 	color: #22264b;
 }
 
+<<<<<<< HEAD
 
 /*---------------TABLA LOGROS---------------------------*/
 
@@ -237,4 +238,26 @@
 	border-bottom: 2px solid coral;
 	border-left: 2px solid coral;
 	border-right: 2px solid coral;
+}
+
+.reports{
+	text-decoration: none;
+	background-color: coral;
+	width: 100%
+}
+
+.reports td {
+   width: 25%;
+   text-align: center;
+   background-color: #eeeeee;
+   text-decoration: none;
+   padding: 3% 1%;
+   
+}
+
+.reports th {
+	width: 25%;
+   text-align: center;
+   background-color: #aaaaaa;
+   text-decoration: none;
 }
