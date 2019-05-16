@@ -22,12 +22,14 @@ function getMemeReports(){
 				<th>Causa</th>
 				<th>ID Meme</th>
 				<th>Usuario reportado</th>
+				<th>Eliminar<th>
 				</tr>';
 		while ($fila = $resultado->fetch_assoc()) {
 			echo "<tr>
 						<td>". $fila['cause'] . "</td>
 						<td><a class='memes' href='./Meme.php?userName=".$fila['username']."&id=".$fila['id_meme']."'>".$fila['id_meme']."</a></td>
 						<td>". $fila['username']."</td>
+						<td><a href='./includes/borrarMeme.php?id_meme=". $fila['id_meme'] ."' >\u{274C}</a><td>
 				  </tr>";
 			
 		}
@@ -51,6 +53,7 @@ function getUserReports(){
 				<tr>
 				<th>Causa</th>
 				<th>Usuario reportado</th>
+				
 				</tr>';
 		while ($fila = $resultado->fetch_assoc()) {
 			echo "<tr>
@@ -68,7 +71,7 @@ function getCommentReports(){
 	$app = Aplicacion::getInstance();
 	$conn = $app->conexionBD();
 
-	$query = sprintf("SELECT U.id_report, U.cause, X.texto, W.username
+	$query = sprintf("SELECT U.id_report, U.cause, X.texto, W.username, U.id_comment
                 FROM co_reports U JOIN reports V ON U.id_report=V.id_report JOIN users W ON V.usr_reported=W.id
 				JOIN comments X ON U.id_comment=X.id_comment");
 	
@@ -78,12 +81,14 @@ function getCommentReports(){
 				<th>Causa</th>
 				<th>Comentario</th>
 				<th>Usuario reportado</th>
+				<th>Eliminar<th>
 				</tr>';
 		while ($fila = $resultado->fetch_assoc()) {
 			echo "<tr class= 'reports'>
 						<td>". $fila['cause'] . "</td>
-						<td><a class='memes' href='./perfil.php?username=".$fila['username']."'>".$fila['texto']."</a></td>
+						<td>".$fila['texto']."</td>
 						<td>".$fila['username']."</td>
+						<td><a href='./includes/borrarComentario.php?id_comment=". $fila['id_comment'] ."' >\u{274C}</a><td>
 				  </tr>";
 		}
 		echo '</table>';
@@ -91,3 +96,4 @@ function getCommentReports(){
 		echo "Ha ocurrido un error durante la consulta";
 	}
 }
+
