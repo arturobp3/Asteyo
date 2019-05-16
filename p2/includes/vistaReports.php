@@ -53,12 +53,14 @@ function getUserReports(){
 				<tr>
 				<th>Causa</th>
 				<th>Usuario reportado</th>
+				<th>Eliminar</th>
 				
 				</tr>';
 		while ($fila = $resultado->fetch_assoc()) {
 			echo "<tr>
 						<td>". $fila['cause'] . "</td>
-						<td><a class='memes' href='./perfil.php?username=".$fila['username']."'>".$fila['username']."</a></td>
+						<td><a class='memes' href='./perfil.php?userName=".$fila['username']."'>".$fila['username']."</a></td>
+						<td><a href='./includes/borrarUsuario.php?userName=". $fila['username'] ."' >\u{274C}</a></td>
 				  </tr>";
 		}
 		echo '</table>';

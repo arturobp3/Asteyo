@@ -17,9 +17,9 @@
 				else if(isset($_SESSION["esModerador"]) && $_SESSION["esModerador"] ===true){
 					$botones .= "<a href='addMeme.php' class='subirMeme'>"."\u{1F4E4}"."</a>";
 					//Boton para moderar los reports, memes y tomar acciones
-					$botones .= "<a href='moderador.php' class='subirMeme'> \u{26A0} </a>"; //alternativa {2049} "?!"
+					$botones .= "<a href='moderador.php' class='subirMeme'> \u{2757} </a>"; //alternativa {2049} "?!"
 					$botones.= "<ul class='nav'>";
-					$botones.= "	<li><a href=''>Ranking</a>
+					$botones.= "	<li><a href=''>"."\u{1F51D}"."</a>
 										<ul>
 											<li><a href='ranking.php?tipo=masMg'>Top10 publicaciones</a></li>
 											<li><a href='ranking.php?tipo=masSeg'>Mas seguidores</a></li>
