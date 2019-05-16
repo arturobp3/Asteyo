@@ -93,6 +93,18 @@ class Comentarios{
         }
     }
 
+    public function deleteCommentsMeme($idMeme){
+        $app = Aplicacion::getInstance();
+        $conn = $app->conexionBD();
+
+        $query = sprintf("DELETE FROM comments WHERE id_meme = '%s'", $idMeme);
+
+        if(!$conn->query($query)){
+            echo "Error al borrar en la BD: (" . $conn->errno . ") " . utf8_encode($conn->error);
+            exit();
+        }
+    }
+
     public function reportComment($id_autor_comment, $id_session, $id_comment, $cause){
         $app = Aplicacion::getInstance();
         $conn = $app->conexionBD();

@@ -12,6 +12,7 @@
 			<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 			<script src="./assets/js/jquery-3.4.1.min.js"></script>
 			<script type="text/javascript" src="./assets/js/reports.js"></script>
+			<script type="text/javascript" src="./assets/js/meme.js"></script>
 			<title>Perfil | Asteyo</title>
 		</head>
 		<body>
@@ -84,7 +85,7 @@
 										<img id="imagen-meme"src=$meme>
 										<div id ="meme-taInfo">
 											<p> <b>$value[0]</b></p>
-											<p>$value[1] <span style='color:red;'>\u{2764}</span> $num_comments <span>\u{1F4AC}</span> </p>
+											<p>$value[1] <span style='color:red;'>\u{2764}</span> $num_comments <span>\u{1F4AC}</span> <button type='button'  onclick='deleteMeme($value[2])'>\u{1F6AE}</button></p>
 										</div>
 									</div>
 									END;

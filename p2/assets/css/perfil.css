@@ -133,3 +133,12 @@
 	border-bottom-left-radius: 8px;
 	border-bottom-right-radius: 8px;
 }
+
+.principal #contenido #meme-taInfo button{
+	border: none;
+	background-color: white;
+	cursor: pointer;
+	font-size: 20px;
+
+	padding-left: 10px;
+}

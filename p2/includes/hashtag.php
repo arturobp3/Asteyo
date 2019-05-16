@@ -153,6 +153,24 @@ class Hashtag {
         return $hashtag;
     }
     
+    public static function deleteMeme ($nameHash, $nMg){
+        $app = APlicacion::getInstance();
+        $conn = $app->conexionBD();
+
+        $query =sprintf("UPDATE hashtags H SET H.n_memes= H.n_memes-1 , H.n_mg = H.n_mg-'%d' WHERE h.name = '%s'"
+                        , $conn->real_escape_string($nMg)
+                        , $conn->real_escape_string($nameHash));
+        if(!$conn->query($query)){
+            echo "Error al actualizar en la BD: (" . $conn->errno . ") " . utf8_encode($conn->error);
+            exit();
+        }else{
+            if ( $conn->affected_rows != 1) {
+                echo "No se ha podido actualizar el meme de los hashtags: " . $nameHash;
+                exit();
+            }
+        }
+    }
+
     //Esta funcion debe actualizar el numero de likes asociados a un hashtag
     public static function updateLikes($hashtag, $accion){
         
@@ -179,5 +197,35 @@ class Hashtag {
         }
         
         return $hashtag;
+    }
+
+
+
+    public static function hashtagsMeme($idMeme){
+        $app = Aplicacion::getInstance();
+        $conn = $app->conexionBD();
+
+        $query = sprintf("SELECT * FROM hashtag_meme WHERE id_meme = '%s' ", $conn->real_escape_string($idMeme));
+        $rs = $conn->query($query);
+        $rt=false;
+      
+        if ($rs){
+            if($rs->num_rows>0){
+                /*array de memes*/
+                $rt=array();
+                $i = 0;
+                while($row = mysqli_fetch_assoc($rs)){
+                    var_dump($row['name_hash']);
+                    $rt[$i] = $row['name_hash'];
+                    $i = $i + 1;
+                }
+            }
+            $rs->free();
+        }
+        else{
+            echo "Error al consultar en la BD: (" . $conn->errno . ") " . utf8_encode($conn->error);
+            exit(); 
+        }
+        return $rt;
     }
 }

@@ -3,6 +3,10 @@
 require_once('Aplicacion.php');
 require_once('hashtag.php');
 require_once('Logros.php');
+require_once('hashtag.php');
+require_once('Comentarios.php');
+
+
 
 class Meme {
 
@@ -78,9 +82,20 @@ class Meme {
         $app = Aplicacion::getInstance();
         $conn = $app->conexionBD();
 
+        $hashtags=Hashtag::hashtagsMeme($meme->id);
+        var_dump($hashtags);
+        foreach($hashtags as $key=>$value){
+            var_dump($meme);
+            if($meme->num_megustas>0){
+                Hashtag::deleteMeme($value,$meme->num_megustas);
+            }
+            
+        }
+        var_dump("Hash bien");
+        Comentarios::deleteCommentsMeme($meme->id);
 
         //Borramos el meme asociado a la tablas memes
-        $query=sprintf("DELETE FROM memes WHERE id_meme=$meme->id");
+        $query=sprintf("DELETE FROM memes WHERE id_meme='%d'", $conn->real_escape_string($meme->id));
 
         if (! $conn->query($query) ){
             echo "Error al borrar en la BD: (" . $conn->errno . ") " . utf8_encode($conn->error);
@@ -259,6 +274,28 @@ class Meme {
         }
         
 
+        return $result;
+    }
+
+    public static function buscaMeme($id){
+        $app = Aplicacion::getInstance();
+        $conn = $app->conexionBD();
+
+        $query = sprintf("SELECT * FROM memes U WHERE U.id_meme = BINARY '%s'", $conn->real_escape_string($id));
+        $rs = $conn->query($query);
+        $result = false;
+        if ($rs) {
+            if ( $rs->num_rows == 1) {
+                $fila = $rs->fetch_assoc();
+                $meme = new Meme($fila['title'], $fila['num_megustas'], $fila['id_autor'], $fila['upload_date']);
+                $meme->id = $fila['id_meme'];
+                $result = $meme;
+            }
+            $rs->free();
+        } else {
+            echo "Error al consultar en la BD: (" . $conn->errno . ") " . utf8_encode($conn->error);
+            exit();
+        }
         return $result;
     }
 
