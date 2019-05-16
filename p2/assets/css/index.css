@@ -206,8 +206,6 @@
 	color: #22264b;
 }
 
-<<<<<<< HEAD
-
 /*---------------TABLA LOGROS---------------------------*/
 
 .logros{
@@ -234,11 +232,10 @@
 
 	text-align: center;
 
-	border-top: 2px solid coral;
-	border-bottom: 2px solid coral;
-	border-left: 2px solid coral;
-	border-right: 2px solid coral;
+	border: 2px solid coral;
 }
+
+/*--------------------------------------------------------------------------------------------------------------------------*/
 
 .reports{
 	text-decoration: none;

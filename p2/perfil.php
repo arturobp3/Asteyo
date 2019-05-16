@@ -56,7 +56,7 @@
 									&& $_SESSION['nombre'] !== $uUsername){
 									echo "
 									<div class='botones'>
-										<a onclick='openMenuReport(\"#menuReportUser\")'>Reportar usuario </a>
+										<a class='report-user' onclick='openMenuReport(\"#menuReportUser\")'>Reportar usuario </a>
 										<ul class='subMenu' id='menuReportUser'>
 											<li><a onclick='reportarUsuario(\"{$uUsername}\", 1)'>Foto de perfil ofensiva</a></li>
 											<li><a onclick='reportarUsuario(\"{$uUsername}\", 2)'>Nombre inapropiado</a></li>
