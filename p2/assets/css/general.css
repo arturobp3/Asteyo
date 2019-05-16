@@ -96,13 +96,20 @@ body {
 .nav li{
 	list-style: none;
 	float:left;
+	align-items: center;
+	
+	
 }
 
 .nav li ul{
 
 	display: none;
 	position:absolute;
-	width: 140px;
+	width: 150px;
+	align-items: center;
+	padding: 1%;
+	
+	
 }
 
 .nav li:hover ul{

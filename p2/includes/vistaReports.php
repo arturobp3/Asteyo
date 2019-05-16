@@ -58,7 +58,7 @@ function getUserReports(){
 		while ($fila = $resultado->fetch_assoc()) {
 			echo "<tr>
 						<td>". $fila['cause'] . "</td>
-						<td><a class='memes' href='./perfil.php?username=".$fila['username']."'>".$fila['username']."</a></td>
+						<td><a class='memes' href='./perfil.php?userName=".$fila['username']."'>".$fila['username']."</a></td>
 				  </tr>";
 		}
 		echo '</table>';
