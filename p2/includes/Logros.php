@@ -1,44 +1,153 @@
 <?php
 
 require_once('Aplicacion.php');
+require_once('usuario.php');
 
 class Logros{
 
-	private $name;
-
-
-    private function __construct($name){
-        $this->name= $name;
-    }
-
-    public function name(){ 
-        return $this->name; 
-    }
-
-    public static function logroSubir($autor){
-    	$app = Aplicacion::getInstance();
+    public static function logroSubir($datetime, $id_autor){
+        //Conexión con la base de datos
+        $app = Aplicacion::getInstance();
         $conn = $app->conexionBD();
 
-        $name = "submemes";
+        $achievement = "submemes";
+        /*Hace la suma de todos los likes del autor*/
+        $sentencia = sprintf("SELECT id_autor, COUNT(id_meme) AS total 
+                                FROM memes 
+                                WHERE id_autor = '%d'
+                                GROUP BY id_autor"
+                            , $conn->real_escape_string($id_autor));
+        $sumatotal = $conn->query($sentencia);
+        $suma = $sumatotal->fetch_assoc();
 
-        $query = sprintf("SELECT id_autor, count(id_meme) as total 
-                             FROM memes 
-                             WHERE id_autor='%d'
-                             GROUP BY id_autor 
-                             "
-                , $conn->real_escape_string($autor));
-        $result = $conn->query($query);
+        if($suma['total'] == 2){
+            $logro = sprintf("INSERT INTO achievement(id_user, name, date_got) VALUES ('%s','%s','%s')"
+                    , $conn->real_escape_string($id_autor)
+                    , $conn->real_escape_string($achievement)
+                    , $conn->real_escape_string($datetime));
+            $inse = $conn->query($logro);
+        }
 
-        while($rs = $result->fetch_assoc()){
-
-            if($rs['total'] === 2){ 
-                $query = sprintf("INSERT INTO achievement('id_user', 'name', 'date_got')
-                                     VALUES('%d', '%s', getdate())"
-                                , $conn->real_escape_string($autor)
-                                , $conn->real_escape_string($name)); 
-                      
-                $result = $conn->query($query);
+         if ($suma) {
+            if ($conn->affected_rows == 1) {
+                return true;
+            }
+            else{
+                return false;
             }
         }
+        else {
+            return false;
+        }  
+    } //Fin función logroSubir
+
+
+    public static function logroComentar($datetime, $id_autor){
+        //Cinexión con la base de datos
+        $app = Aplicacion::getInstance();
+        $conn = $app->conexionBD();
+
+        $achievement = "comentavario";
+
+         /*Hace la suma de todos los likes del autor*/
+        $sentencia = sprintf("SELECT id_autor, COUNT(id_comment) AS total 
+                                FROM comments 
+                                WHERE id_autor = '%d'
+                                GROUP BY id_autor"
+                        , $conn->real_escape_string($id_autor));
+        $sumatotal = $conn->query($sentencia);
+        $suma = $sumatotal->fetch_assoc();
+
+        if($suma['total'] == 2){
+            $logro = sprintf("INSERT INTO achievement(id_user, name, date_got) VALUES ('%s','%s','%s')"
+                        , $conn->real_escape_string($id_autor)
+                        , $conn->real_escape_string($achievement)
+                        , $conn->real_escape_string($datetime));
+            $inse = $conn->query($logro);
+        }  
+
+        if ($suma) {
+            if ($conn->affected_rows == 1) {
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+        else {
+            return false;
+        } 
+
+    } //Fin funcion logroComentar
+
+
+
+    public static function logroMeGusta($datetime, $id_meme){
+
+        $app = Aplicacion::getInstance();
+        $conn = $app->conexionBD();
+
+        $achievement = "nummg";
+
+        /*Coge el id del autor del creador del meme*/
+        $sql = sprintf("SELECT id_autor
+                        FROM memes 
+                        WHERE id_meme = '%d'"
+                    , $conn->real_escape_string($id_meme));
+        $au = $conn->query($sql);
+        $autor = $au->fetch_assoc();
+
+        /*Hace la suma de todos los likes del autor*/
+        $sentencia = sprintf("SELECT id_autor, SUM(num_megustas) AS total 
+                                FROM memes 
+                                WHERE id_autor = '%d'
+                                GROUP BY id_autor"
+                        , $conn->real_escape_string($autor['id_autor']));
+        $sumatotal = $conn->query($sentencia);
+        $suma = $sumatotal->fetch_assoc();
+
+        if($suma['total'] == 2){
+            $logro = sprintf("INSERT INTO achievement(id_user, name, date_got) VALUES ('%s','%s','%s')"
+                , $conn->real_escape_string($autor['id_autor'])
+                , $conn->real_escape_string($achievement)
+                , $conn->real_escape_string($datetime));
+            $inse = $conn->query($logro);
+        } 
+
+        if ($suma) {
+            if ($conn->affected_rows == 1) {
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+        else {
+            return false;
+        }   
+
     }
+
+    public static function comprobarLogros($nombre){
+        //Obtenemos el usuario actual
+        $username = $_SESSION['nombre'];
+
+        //Buscamos sus datos en la bbdd
+        $usuario = Usuario::buscaUsuario($username);
+
+        $app = Aplicacion::getInstance();
+        $conn = $app->conexionBD();
+        //Coge si existe el usuario en la tabla de logros con el nombre del meme
+        $query = sprintf("SELECT * 
+                            FROM achievement
+                            WHERE name = '%s'
+                            AND id_user = '%d'"
+                        , $conn->real_escape_string($nombre)
+                        , $conn->real_escape_string($usuario->id()));
+        $resultado = $conn->query($query);
+
+        return $resultado;
+
+    }
+   
 }

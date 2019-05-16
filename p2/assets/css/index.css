@@ -205,3 +205,36 @@
 	
 	color: #22264b;
 }
+
+
+/*---------------TABLA LOGROS---------------------------*/
+
+.logros{
+	padding: 20px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.logros p{
+	text-align: center;
+	font-style: italic;
+	padding: 30px;
+}
+
+.logros th {
+	padding: 10px;
+	background-color: coral;
+	border: 2px solid black;
+}
+
+.logros td {
+	padding: 20px;
+
+	text-align: center;
+
+	border-top: 2px solid coral;
+	border-bottom: 2px solid coral;
+	border-left: 2px solid coral;
+	border-right: 2px solid coral;
+}

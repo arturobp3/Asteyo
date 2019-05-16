@@ -20,6 +20,7 @@ if($_POST['accion'] === "add"){
 		$like = new Like($uId, $mId);
 		$success = Like::addLike($like);
 		$meme = Meme::actualizaLikes($meme, $_POST['accion']);
+		
 		if ($success) {
 			echo json_encode(array('success' => true));
 		}

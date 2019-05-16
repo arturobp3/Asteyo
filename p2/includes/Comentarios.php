@@ -1,5 +1,6 @@
 <?php
 
+require_once('Logros.php');
 
 class Comentarios{
 
@@ -32,6 +33,9 @@ class Comentarios{
         );
 
         if ( $conn->query($query) ){
+            //Si es necesario le otorgamos el logro de comentario
+            $logros = Logros::logroComentar($this->c_date, $this->id_autor);
+
             $html = "<div class='cajaComentario' id='$conn->insert_id'>
                 <p id='user'>".$_SESSION['nombre']."</p>
                 <p id='fecha'>".$this->c_date."</p>

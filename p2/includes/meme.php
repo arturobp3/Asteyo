@@ -2,6 +2,7 @@
 
 require_once('Aplicacion.php');
 require_once('hashtag.php');
+require_once('Logros.php');
 
 class Meme {
 
@@ -94,13 +95,16 @@ class Meme {
     
     /* Esta funcion debe actualizar el numero de likes del meme en las tablas de meme y hashtag */
     public static function actualizaLikes($meme, $accion){
-        
+        $datetime = date('Y-m-d H:i:s');
         $app = Aplicacion::getInstance();
         $conn = $app->conexionBD();
 
         if ($accion === "add") {
         	$query=sprintf("UPDATE memes M SET M.num_megustas = M.num_megustas + 1 WHERE M.id_meme='%d'"
             , $conn->real_escape_string($meme->id));
+
+
+            
         }
         else if ($accion === "remove") {
         	$query=sprintf("UPDATE memes M SET M.num_megustas = M.num_megustas - 1 WHERE M.id_meme='%d'"
@@ -114,6 +118,7 @@ class Meme {
             }
             else{
 
+                $logro = Logros::logroMeGusta($datetime, $meme->id);
             	/* seleccionamos los hashtag que el meme tiene */
             	$query2=sprintf("SELECT name_hash FROM hashtag_meme H JOIN memes M WHERE H.id_meme = M.id_meme AND M.id_meme='%d'"
 		            , $conn->real_escape_string($meme->id));

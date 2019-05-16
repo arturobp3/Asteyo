@@ -116,10 +116,11 @@ class formularioSubirMeme extends Form{
 
                 $ruta = "uploads/".$id_autor."/".$meme->id().".jpg"; 
 
-                $logro = Logros::logroSubir($id_autor);
-
                 if($meme && move_uploaded_file($imagetemp , $ruta)) {
                     //comprobar la extensión
+
+                    //Cuando el meme se haya subido comprobamos si ha conseguido el logro
+                    $logro = Logros::logroSubir($datetime, $id_autor);
 
                     echo "Meme subido correctamente";
                     //comprobar si existe el hashtag si no se sube y si ya existe
