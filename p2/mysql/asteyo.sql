@@ -39,12 +39,12 @@ CREATE TABLE `achievement` (
 --
 -- Estructura de tabla para la tabla `achievement_img`
 --
-
+/*
 CREATE TABLE `achievement_img` (
   `name` varchar(32) NOT NULL,
   `link` varchar(32) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
+*/
 -- --------------------------------------------------------
 
 --
@@ -232,14 +232,14 @@ CREATE TABLE `usr_reports` (
 ALTER TABLE `achievement`
   ADD PRIMARY KEY (`name`),
   ADD KEY `id_user` (`id_user`);
-
+/*
 --
 -- Indices de la tabla `achievement_img`
 --
 ALTER TABLE `achievement_img`
   ADD PRIMARY KEY (`name`),
   ADD KEY `achievement_name` (`name`);
-
+*/
 --
 -- Indices de la tabla `comments`
 --
@@ -351,13 +351,13 @@ ALTER TABLE `users`
 --
 ALTER TABLE `achievement`
   ADD CONSTRAINT `achievement_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`) ON DELETE CASCADE;
-
+/*
 --
 -- Filtros para la tabla `achievement_img`
 --
 ALTER TABLE `achievement_img`
   ADD CONSTRAINT `achievement_img_ibfk_1` FOREIGN KEY (`name`) REFERENCES `achievement` (`name`) ON DELETE CASCADE;
-
+*/
 --
 -- Filtros para la tabla `comments`
 --

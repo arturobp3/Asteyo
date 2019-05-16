@@ -31,14 +31,14 @@
 					
 					$botones.= "<a href='addMeme.php' class='subirMeme'>"."\u{1F4E4}"."</a>";
 					$botones.= "<ul class='nav'>";
-					$botones.= "	<li><a href=''>Ranking</a>
+					$botones.= "	<li><a href=''>"."\u{1F51D}"."</a>
 										<ul>
 											<li><a href='ranking.php?tipo=masMg'>Top10 publicaciones</a></li>
 											<li><a href='ranking.php?tipo=masSeg'>Top5 usuarios</a></li>
 										</ul>
 									</li>
 								</ul>";
-
+					$botones.="<a href='achievements.php' class='logros'>"."\u{1F3C6}"."</a>";
 					
 
 				}

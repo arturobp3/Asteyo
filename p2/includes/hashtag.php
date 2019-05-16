@@ -34,8 +34,8 @@ class Hashtag {
     /* Crea un nuevo meme con los datos introducidos por parámetro. */
     public static function create($name, $id_meme){
 
-        $hastag = new Hashtag($name, $id_meme);
-        return self::save($hastag);
+        $hashtag = new Hashtag($name, $id_meme);
+        return self::save($hashtag);
     }
 
     public static function searchHashtag($hashtag){
@@ -97,14 +97,13 @@ class Hashtag {
     private static function save($hashtag){
         
         $existe = self::searchHashtag($hashtag);
-        
-        
+
         if (!$existe){
             
            self::insert($hashtag);
         }
         self::createRelation($hashtag);
-        $hashtag = self::update($hashtag);
+        $hashtag = self::update($hashtag, "add");
         return $hashtag;
     }
 
@@ -129,20 +128,44 @@ class Hashtag {
 
         return true;
     }
+
+    /* Esta funcion debe actualizar el numero de memes asociados a un hashtag */
+    public static function update($hashtag){
+
+        $app = Aplicacion::getInstance();
+        $conn = $app->conexionBD();
+
+        $hashtag->n_memes+=1;
+
+        $query=sprintf("UPDATE hashtags H SET H.n_memes = H.n_memes + 1 WHERE H.name='%s'"
+                , $conn->real_escape_string($hashtag->name));
+
+        if ( $conn->query($query) ) {
+            if ( $conn->affected_rows != 1) {
+                echo "No se ha podido actualizar el meme: " . $hashtag->id_meme;
+                exit();
+            }
+        } else {
+            echo "Error al actualizar en la BD: (" . $conn->errno . ") " . utf8_encode($conn->error);
+            exit();
+        }
+        
+        return $hashtag;
+    }
     
-    //Esta funcion debe actualizar el numero de memes asociados al hashtag
-    public static function update($hashtag, $accion){
+    //Esta funcion debe actualizar el numero de likes asociados a un hashtag
+    public static function updateLikes($hashtag, $accion){
         
         $app = Aplicacion::getInstance();
         $conn = $app->conexionBD();
 
         if ($accion === "add") {
             $query=sprintf("UPDATE hashtags H SET H.n_mg = H.n_mg + 1 WHERE H.name='%s'"
-                , $hashtag);
+                , $conn->real_escape_string($hashtag));
         }
         else if ($accion === "remove") {
             $query=sprintf("UPDATE hashtags H SET H.n_mg = H.n_mg - 1 WHERE H.name='%s'"
-                , $hashtag);
+                , $conn->real_escape_string($hashtag));
         }
 
         if ( $conn->query($query) ) {

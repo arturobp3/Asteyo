@@ -47,12 +47,12 @@ require_once("includes/usuario.php");
 				echo "<h1> ¡No se han encontrado resultados! </h1>";
 			}
 			else{
-				$i = 0;
+				$i = 1;
 				foreach ($result as $part) {
 		
 						if($esUser) echo Usuario::formatoRanking($part, $i); 
 					
-						else echo "<div class='ranking'>".Meme::formatoMeme($part, $i)."</div>";
+						else echo Meme::formatoMeme($part, $i);
 
 						$i++;
 					;

@@ -1,4 +1,5 @@
 var liked = 0;
+var disable = 0;
 
 $(document).ready(function(){
 
@@ -51,43 +52,54 @@ function likedMeme(idMeme){
 
 /* function that save the like of a meme from a registered user */
 function likeAMeme(idMeme){
-	if (liked == 0) {
-		$.ajax({
-			url:'./includes/likes.php',
-			type:'post',
-			dataType: 'JSON',
-			data: {
-				"idMeme": idMeme,
-				"accion": "add"
-			},
-			success: function(response){
-				if (response.success == true) {
-					liked = 1;
-					changeColor();
-					var numL = $('#meme-data #num_likes').html();
-					$('#meme-data #num_likes').html(parseInt(numL) + 1);
+	if (disable == 0) {
+		disable = 1;
+		if (liked == 0) {
+			$.ajax({
+				url:'./includes/likes.php',
+				type:'post',
+				dataType: 'JSON',
+				data: {
+					"idMeme": idMeme,
+					"accion": "add"
+				},
+				success: function(response){
+					if (response.success == true) {
+						liked = 1;
+						changeColor();
+						var numL = $('#meme-data #num_likes').html();
+						$('#meme-data #num_likes').html(parseInt(numL) + 1);
+						disable = 0;
+					}
+					else{
+						disable = 0;
+					}
 				}
-			}
-		});
-	}
-	else if (liked == 1) {
-		$.ajax({
-			url:'./includes/likes.php',
-			type:'post',
-			dataType: 'JSON',
-			data: {
-				"idMeme": idMeme,
-				"accion": "remove"
-			},
-			success: function(response){
-				if (response.success == true) {
-					liked = 0;
-					resetColor();
-					var numL = $('#meme-data #num_likes').html();
-					$('#meme-data #num_likes').html(parseInt(numL) - 1);
+			});
+		}
+		else if (liked == 1) {
+			$.ajax({
+				url:'./includes/likes.php',
+				type:'post',
+				dataType: 'JSON',
+				data: {
+					"idMeme": idMeme,
+					"accion": "remove"
+				},
+				success: function(response){
+					if (response.success == true) {
+						liked = 0;
+						resetColor();
+						var numL = $('#meme-data #num_likes').html();
+						$('#meme-data #num_likes').html(parseInt(numL) - 1);
+						disable = 0;
+					}
+					else{
+						disable = 0;
+					}
 				}
-			}
-		});
+			});
+		}
 	}
 }
 
