@@ -1,7 +1,7 @@
 <?php
 
-require_once('Form.php');
-require_once('usuario.php');
+namespace es\ucm\fdi\aw;
+
 
 class formularioEdit extends Form{
 
@@ -123,6 +123,8 @@ class formularioEdit extends Form{
 
                 $hacerUpdate=true;
 
+                
+
                 echo "Nombre de usuario cambiado correctamente";
 
                 $_SESSION['nombre']=$username;
@@ -163,6 +165,7 @@ class formularioEdit extends Form{
                 $usuario->guarda($usuario);
 
             }
+            #return "index.php";
             
         }
 

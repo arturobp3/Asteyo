@@ -74,10 +74,10 @@ function likeAMeme(idMeme){
 					else {
 						disable = 0;
 					}
-				}
-			});
-		}
-		else if (liked == 1) {
+			}
+		});
+	}
+	else if (liked == 1) {
 			$.ajax({
 				url:'./includes/likes.php',
 				type:'post',
@@ -96,8 +96,9 @@ function likeAMeme(idMeme){
 					}
 					else {
 						disable = 0;
-					}
 				}
+			}
+			
 			});
 		}
 	}

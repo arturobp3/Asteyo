@@ -1,7 +1,7 @@
 <?php
 
 //Inicio del procesamiento
-require_once("includes/config.php");
+require_once __DIR__.'/includes/config.php';
 
 //Doble seguridad: unset + destroy
 unset($_SESSION["login"]);

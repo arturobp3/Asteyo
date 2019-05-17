@@ -1,9 +1,7 @@
 <?php
 
 //Inicio del procesamiento
-require_once("includes/config.php");
-require_once("includes/Meme.php");
-require_once("includes/usuario.php");
+require_once __DIR__.'/includes/config.php';
 ?>
 
 <!DOCTYPE html>
@@ -32,11 +30,11 @@ require_once("includes/usuario.php");
             if(isset($_GET['tipo'])){
                 if($_GET['tipo']==='masMg'){
                     //Ranking más me gustas
-                    $result = Meme::top10();
+                    $result = es\ucm\fdi\aw\Meme::top10();
                     
                 }
                 else if ($_GET['tipo']==='masSeg'){
-                    $result = Usuario::top10();
+                    $result = es\ucm\fdi\aw\Usuario::top10();
                     
                     $esUser= true;
 				}
@@ -50,9 +48,9 @@ require_once("includes/usuario.php");
 				$i = 1;
 				foreach ($result as $part) {
 		
-						if($esUser) echo Usuario::formatoRanking($part, $i); 
+						if($esUser) echo es\ucm\fdi\aw\Usuario::formatoRanking($part, $i); 
 					
-						else echo Meme::formatoMeme($part, $i);
+						else echo es\ucm\fdi\aw\Meme::formatoMeme($part, $i);
 
 						$i++;
 					;

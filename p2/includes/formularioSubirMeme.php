@@ -1,11 +1,12 @@
 <?php
 
-require_once('Form.php');
+namespace es\ucm\fdi\aw;
+
+/*
 require_once('usuario.php');
 require_once('Meme.php');
 require_once('Hashtag.php');
-require_once('usuario.php');
-
+*/
 
 class formularioSubirMeme extends Form{
 

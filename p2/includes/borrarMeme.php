@@ -1,11 +1,10 @@
 <?php
 	
-	require_once('config.php');
-	require_once('Aplicacion.php');
-	require_once('meme.php');
+	namespace es\ucm\fdi\aw;
+	require_once __DIR__.'/config.php';
 
-	$app = Aplicacion::getInstance();
-	$conn = $app->conexionBD();
+	$app = Aplicacion::getSingleton();
+    $conn = $app->conexionBD();
 	
 	
 	
@@ -24,6 +23,7 @@
 		if($resultado = $conn->query($delete)){
 			$meme = Meme::buscaMeme($_GET['id_meme']);
 			$delete = Meme::eliminar($meme);
+			
 			
 			unlink('../uploads/'.$fila['id_autor'].'/'.$_GET['id_meme']);
 			

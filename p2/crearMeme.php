@@ -1,8 +1,7 @@
 <?php
 
 //Inicio del procesamiento
-require_once("includes/config.php");
-require_once("includes/FormularioSubirMeme.php");
+require_once __DIR__.'/includes/config.php';
 
 ?>
 

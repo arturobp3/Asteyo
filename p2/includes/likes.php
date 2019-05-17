@@ -1,10 +1,9 @@
 <?php
-require_once('config.php');
-require_once('Aplicacion.php');
-require_once('usuario.php');
-require_once('meme.php');
-require_once('Like.php');
 
+
+namespace es\ucm\fdi\aw;
+
+require_once __DIR__.'/config.php';
 
 if($_POST['accion'] === "add"){
 	$uName = isset($_SESSION['nombre']) ? $_SESSION['nombre'] : "";

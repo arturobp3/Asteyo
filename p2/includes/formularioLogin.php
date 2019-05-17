@@ -1,7 +1,6 @@
 <?php
 
-require_once('Form.php');
-require_once('usuario.php');
+namespace  es\ucm\fdi\aw;
 
 
 class formularioLogin extends Form{
@@ -56,7 +55,7 @@ class formularioLogin extends Form{
             //$app esta incluido en config.php
 
 
-            $usuario = Usuario::buscaUsuario($username);
+            $usuario = \es\ucm\fdi\aw\Usuario::login($username, $password);
 			
             if (!$usuario) {
                 $erroresFormulario[] = "El usuario o el password no coinciden";
@@ -70,6 +69,10 @@ class formularioLogin extends Form{
                     $_SESSION['esModerador'] = strcmp($usuario->rol(), 'moderador') == 0 ? true : false;
                 
 
+                    session_regenerate_id(true);
+                    //Aplicacion::getSingleton()->login($usuario);
+                    //header('Location: index.php');
+                    
                     //header('Location: index.php');
                     return "index.php";
                 } else {

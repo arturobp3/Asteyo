@@ -1,12 +1,6 @@
 <?php
 
-require_once('Aplicacion.php');
-require_once('hashtag.php');
-require_once('Logros.php');
-require_once('hashtag.php');
-require_once('Comentarios.php');
-
-
+namespace es\ucm\fdi\aw;
 
 class Meme {
 
@@ -56,8 +50,7 @@ class Meme {
     }
 
     private static function guarda($meme){
-        $app = Aplicacion::getInstance();
-        $conn = $app->conexionBD();
+       $conn = Aplicacion::getSingleton()->conexionBD();
 
         $query=sprintf("INSERT INTO memes(title, num_megustas, id_autor, upload_date)
                         VALUES('%s', '%s', '%s', '%s')",
@@ -79,33 +72,39 @@ class Meme {
     //Elimina un meme de la base de datos (Funcion creada para el administrador)
     public static function eliminar($meme){
         
-        $app = Aplicacion::getInstance();
-        $conn = $app->conexionBD();
+        $conn = Aplicacion::getSingleton()->conexionBD();
 
         $hashtags=Hashtag::hashtagsMeme($meme->id);
+        
         foreach($hashtags as $key=>$value){
+            
             if($meme->num_megustas>0){
                 Hashtag::deleteMeme($value,$meme->num_megustas);
             }
             
         }
+
+
+        
         Comentarios::deleteCommentsMeme($meme->id);
 
         //Borramos el meme asociado a la tablas memes
         $query=sprintf("DELETE FROM memes WHERE id_meme='%d'", $conn->real_escape_string($meme->id));
+
         if (! $conn->query($query) ){
             echo "Error al borrar en la BD: (" . $conn->errno . ") " . utf8_encode($conn->error);
             exit();
             return false;
         } 
+        
+        
         return true;
     }
     
     /* Esta funcion debe actualizar el numero de likes del meme en las tablas de meme y hashtag */
     public static function actualizaLikes($meme, $accion){
         $datetime = date('Y-m-d H:i:s');
-        $app = Aplicacion::getInstance();
-        $conn = $app->conexionBD();
+        $conn = Aplicacion::getSingleton()->conexionBD();
 
         if ($accion === "add") {
         	$query=sprintf("UPDATE memes M SET M.num_megustas = M.num_megustas + 1 WHERE M.id_meme='%d'"
@@ -160,8 +159,7 @@ class Meme {
     //Devuelve un meme en base a su id
     public static function getMeme($id){
         
-        $app = Aplicacion::getInstance();
-        $conn = $app->conexionBD();
+        $conn = Aplicacion::getSingleton()->conexionBD();
 
         $query = sprintf("SELECT * 
                         FROM memes M
@@ -230,8 +228,7 @@ class Meme {
     //Devuelve los ultimos memes subidos (DEVUELVE TODOS). Se utiliza en la pantalla principal
     public static function lastMemes(){
 
-        $app = Aplicacion::getInstance();
-        $conn = $app->conexionBD();
+        $conn = Aplicacion::getSingleton()->conexionBD();
 
         $query = sprintf("SELECT * 
                        FROM users U JOIN memes M
@@ -271,8 +268,7 @@ class Meme {
     }
 
     public static function buscaMeme($id){
-        $app = Aplicacion::getInstance();
-        $conn = $app->conexionBD();
+        $conn = Aplicacion::getSingleton()->conexionBD();
 
         $query = sprintf("SELECT * FROM memes U WHERE U.id_meme = BINARY '%s'", $conn->real_escape_string($id));
         $rs = $conn->query($query);
@@ -296,8 +292,7 @@ class Meme {
     //Devuelve los memes que utilicen dicho hashtag (UTILIZADO EN EL BUSCADOR)
     public static function searchMemeHashtag($nombreHashtag){
 
-        $app = Aplicacion::getInstance();
-       $conn = $app->conexionBD();
+       $conn = Aplicacion::getSingleton()->conexionBD();
 
        $query = sprintf("SELECT * 
                        FROM hashtag_meme H JOIN memes M JOIN users U
@@ -337,9 +332,7 @@ class Meme {
 
    //Ordena los hashtags por numero de memes, se utiliza en el sidebar
    public static function rankHashtag(){
-
-        $app = Aplicacion::getInstance();
-       $conn = $app->conexionBD();
+        $conn = Aplicacion::getSingleton()->conexionBD();
 
        $query = sprintf("SELECT * 
                        FROM hashtags
@@ -372,8 +365,7 @@ class Meme {
    }
 
    public static function top10(){
-       $app = Aplicacion::getInstance();
-       $conn = $app->conexionBD();
+       $conn = Aplicacion::getSingleton()->conexionBD();
 
        $query = sprintf("SELECT *
                         FROM users U JOIN memes M

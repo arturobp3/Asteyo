@@ -1,9 +1,7 @@
 <?php
 
 //Inicio del procesamiento
-
-require_once("includes/config.php");
-require_once("includes/FormularioLogin.php");
+require_once __DIR__.'/includes/config.php';
 
 ?>
 
@@ -33,8 +31,8 @@ require_once("includes/FormularioLogin.php");
 				<div class="contenido-formularios">
 
 					<?php
-						$formulario = new formularioLogin("login", array( 'action' => 'login.php'));
-						$formulario->gestiona();
+						$formulario = new \es\ucm\fdi\aw\formularioLogin("login", array( 'action' => 'login.php'));
+						echo $formulario->gestiona();
 					?>
 
 				</div>

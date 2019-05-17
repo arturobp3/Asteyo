@@ -1,8 +1,7 @@
 <?php
 
 //Inicio del procesamiento
-require_once("includes/config.php");
-require_once("includes/FormularioRegistro.php");
+require_once __DIR__.'/includes/config.php';
 
 ?>
 
@@ -31,8 +30,9 @@ require_once("includes/FormularioRegistro.php");
 					<h2>REGISTRARSE</h2>
 
 					<?php
-						$formulario = new formularioRegistro("registro", array('action' => 'registro.php'));
-						$formulario->gestiona();
+						$formulario = new \es\ucm\fdi\aw\formularioRegistro("registro", array('action' => 'registro.php'));
+						echo $formulario->gestiona();
+
 					?>
 				</div>
 

@@ -1,169 +1,229 @@
 <?php
 
+namespace es\ucm\fdi\aw;
+
 /**
- * Clase base para la gestión de formularios.
+ * Clase de  de gestión de formularios.
  *
- * Además de la gestión básica de los formularios.
+ * Gestión de token CSRF está basada en: https://www.owasp.org/index.php/PHP_CSRF_Guard
  */
-abstract class Form
+class Form
 {
 
-    /**
-     * @var string Cadena utilizada como valor del atributo "id" de la etiqueta &lt;form&gt; asociada al formulario y 
-     * como parámetro a comprobar para verificar que el usuario ha enviado el formulario.
-     */
-    private $formId;
+  /**
+   * Sufijo para el nombre del parámetro de la sesión del usuario donde se almacena el token CSRF.
+   */
+  const CSRF_PARAM = 'csrf';
 
-    /**
-     * @var string URL asociada al atributo "action" de la etiqueta &lt;form&gt; del fomrulario y que procesará el 
-     * envío del formulario.
-     */
-    private $action;
+  /**
+   * Cadena utilizada como valor del atributo "id" de la etiqueta &lt;form&gt; asociada al formulario y como parámetro a comprobar para verificar que el usuario ha enviado el formulario.
+   */
+  private $formId;
 
-    /**
-     * Crea un nuevo formulario.
-     *
-     * Posibles opciones:
-     * <table>
-     *   <thead>
-     *     <tr>
-     *       <th>Opción</th>
-     *       <th>Valor por defecto</th>
-     *       <th>Descripción</th>
-     *     </tr>
-     *   </thead>
-     *   <tbody>
-     *     <tr>
-     *       <td>action</td>
-     *       <td><code>$_SERVER['PHP_SELF']</code></td>       
-     *       <td>URL asociada al atributo "action" de la etiqueta &lt;form&gt; del fomrulario y que procesará
-     *          el envío del formulario.</td>
-     *     </tr>
-     *   </tbody>
-     * </table>
+  private $ajax;
 
-     * @param string $formId    Cadena utilizada como valor del atributo "id" de la etiqueta &lt;form&gt; asociada al
-     *                          formulario y como parámetro a comprobar para verificar que el usuario ha enviado el formulario.
-     *
-     * @param array $opciones (ver más arriba).
-     */
-    public function __construct($formId, $opciones = array() )
-    {
-        $this->formId = $formId;
+  /**
+   * URL asociada al atributo "action" de la etiqueta &lt;form&gt; del fomrulario y que procesará el envío del formulario.
+   */
+  private $action;
 
-        $opcionesPorDefecto = array( 'action' => null, );
+  /**
+   * Valor del atributo "class" de la etiqueta &lt;form&gt; asociada al formulario. Si este parámetro incluye la cadena "nocsrf" no se generá el token CSRF para este formulario.
+   */
+  private $classAtt;
 
-        //Machaca los campos que de opcionesPorDefecto que esten definidos en opciones
-        $opciones = array_merge($opcionesPorDefecto, $opciones);
+  /**
+   * Valor del parámetro enctype del formulario.
+   */
+  private $enctype;
 
-        $this->action   = $opciones['action'];
+  /**
+   * Se encarga de orquestar todo el proceso de creación y procesamiento de un formulario web.
+   *
+   * @param string $formId Cadena utilizada como valor del atributo "id" de la etiqueta &lt;form&gt; asociada al formulario y como parámetro a comprobar para verificar que el usuario ha enviado el formulario.
+   *
+   * @param string $action (opcional) URL asociada al atributo "action" de la etiqueta &lt;form&gt; del fomrulario y que procesará el envío del formulario. Por defecto la URL es $_SERVER['PHP_SELF']
+   *
+   * @param string $class (opcional) Valor del atributo "class" de la etiqueta &lt;form&gt; asociada al formulario. Si este parámetro incluye la cadena "nocsrf" no se generá el token CSRF para este formulario.
+   *
+   * @param string enctype (opcional) Valor del parámetro enctype del formulario.
+   */
+  public function __construct($formId, $opciones = array() )
+  {
+    $this->formId = $formId;
 
-        
-        if ( !$this->action ) {
-            //Pagina en la que estamos ahora si no hay una accion. 'PHP_SELF' indica la pagina actual
-            $this->action = htmlentities($_SERVER['PHP_SELF']);
-        }
+    $opcionesPorDefecto = array( 'ajax' => false, 'action' => null, 'class' => null, 'enctype' => null );
+    $opciones = array_merge($opcionesPorDefecto, $opciones);
+
+    $this->ajax     = $opciones['ajax'];
+    $this->action   = $opciones['action'];
+    $this->classAtt = $opciones['class'];
+    $this->enctype  = $opciones['enctype'];
+    
+    if ( !$this->action ) {
+      $app = Aplicacion::getSingleton();
+      $this->action = htmlspecialchars($_SERVER['REQUEST_URI']);
+      $this->action = $app->resuelve($this->action);
     }
+  }
   
-    /**
-     * Se encarga de orquestar todo el proceso de gestión de un formulario.
-     */
-    public function gestiona()
-    {   
- 
-        if ( ! $this->formularioEnviado($_POST) ) { //Estamos con GET: Generamos el formulario
-            echo $this->generaFormulario();
+  public function gestiona()
+  {
+    
+    if ( ! $this->formularioEnviado($_POST) ) {
+      return $this->generaFormulario();
+    } else {
+      // Valida el token CSRF si es necesario (hay un token en la sesión asociada al formulario)
+      $tokenRecibido = $_POST['CSRFToken'] ?? FALSE;
+      
+      if ( ($errores = $this->csrfguard_ValidateToken($this->formId, $tokenRecibido)) !== TRUE ) { 
+          if ( ! $this->ajax ) {
+            return $this->generaFormulario($errores, $_POST);
+          } else {
+            return $this->generaHtmlErrores($errores);
+          }
+      } else  {
+        $result = $this->procesaFormulario($_POST);
+        if ( is_array($result) ) {
+          // Error al procesar el formulario, volvemos a mostrarlo
+          if ( ! $this->ajax ) {
+            return $this->generaFormulario($result, $_POST);
+          } else {
+            return $this->generaHtmlErrores($result);
+          }
+        } else {
+          if ( ! $this->ajax ) {
+            header('Location: '.$result);
+          } else {
+            return $result;
+          }
+        }
+      }
+    }  
+  }
+
+  /**
+   * Devuelve un <code>string</code> con el HTML necesario para presentar los campos del formulario. Es necesario asegurarse que como parte del envío se envía un parámetro con nombre <code$formId</code> (i.e. utilizado como valor del atributo name del botón de envío del formulario).
+   */
+  protected function generaCamposFormulario ($datos)
+  {
+    return '';
+  }
+
+  /**
+   * Procesa los datos del formulario.
+   */
+  protected function procesaFormulario($datos)
+  {
+
+  }
+
+  /**
+   * Función que verifica si el usuario ha enviado el formulario. Comprueba si existe el parámetro <code>$formId</code> en <code>$params</code>.
+   *
+   * @param array $params Array que contiene los datos recibidos en el envío formulario.
+   *
+   * @return boolean Devuelve <code>TRUE</code> si <code>$formId</code> existe como clave en <code>$params</code>
+   */
+  private function formularioEnviado(&$params)
+  {
+    return ($params['action'] ?? '') == $this->formId;
+  } 
+
+  /**
+   * Función que genera el HTML necesario para el formulario.
+   *
+   *
+   * @param array $errores (opcional) Array con los mensajes de error de validación y/o procesamiento del formulario.
+   *
+   * @param array $datos (opcional) Array con los valores por defecto de los campos del formulario.
+   */
+  private function generaFormulario($errores = array(), &$datos = array())
+  {
+
+    $html= $this->generaListaErrores($errores);
+
+    $html .= '<form enctype="multipart/form-data" method="POST" action="'.$this->action.'" id="'.$this->formId.'"';
+    if ( $this->classAtt ) {
+      $html .= ' class="'.$this->classAtt.'"';
+    }
+    if ( $this->enctype ) {
+      $html .= ' enctype="'.$this->enctype.'"';
+    }
+    $html .=' >';
+    
+    // Se genera el token CSRF si el usuario no solicita explícitamente lo contrario.
+    if ( ! $this->classAtt || strpos($this->classAtt, 'nocsrf') === false ) {
+      $tokenValue = $this->csrfguard_GenerateToken($this->formId);
+      $html .= '<input type="hidden" name="CSRFToken" value="'.$tokenValue.'" />';
+    }
+
+    $html .= '<input type="hidden" name="action" value="'.$this->formId.'" />';
+    
+    $html .= $this->generaCamposFormulario($datos);
+    $html .= '</form>';
+    return $html;
+  }
+
+  private function generaListaErrores($errores)
+  {
+    $html='';
+    $numErrores = count($errores);
+    if (  $numErrores == 1 ) {
+      $html .= "<ul><li>".$errores[0]."</li></ul>";
+    } else if ( $numErrores > 1 ) {
+      $html .= "<ul><li>";
+      $html .= implode("</li><li>", $errores);
+      $html .= "</li></ul>";
+    }
+    return $html;
+  }
+
+  private function csrfguard_GenerateToken($formId)
+  {
+    if ( ! isset($_SESSION) ) {
+      throw new Exception('La sesión del usuario no está definida.');
+    }
+    
+    if ( function_exists('hash_algos') && in_array('sha512', hash_algos()) ) {
+      $token = hash('sha512', mt_rand(0, mt_getrandmax()));
+    } else {
+      $token=' ';
+      for ($i=0;$i<128;++$i) {
+        $r=mt_rand(0,35);
+        if ($r<26){
+          $c=chr(ord('a')+$r);
+        } else{ 
+          $c=chr(ord('0')+$r-26);
         } 
-        else {   //Si tenemos un formulario generado
-            $result = $this->procesaFormulario($_POST);
-            if ( is_array($result) ) {
-                echo $this->generaFormulario($result, $_POST);
-            } else {
-                header('Location: '.$result); //Siguiente pagina
-                exit();
-            }
-        }  
+        $token.=$c;
+      }
     }
 
-    /**
-     * Genera el HTML necesario para presentar los campos del formulario.
-     *
-     * @param string[] $datosIniciales Datos iniciales para los campos del formulario (normalmente <code>$_POST</code>).
-     * 
-     * @return string HTML asociado a los campos del formulario.
-     */
-    protected function generaCamposFormulario($datosIniciales)
-    {
-        return '';
+    $_SESSION[$formId.'_'.self::CSRF_PARAM]=$token;
+
+    return $token;
+  }
+
+  private function csrfguard_ValidateToken($formId, $tokenRecibido)
+  {
+    if ( ! isset($_SESSION) ) {
+      throw new Exception('La sesión del usuario no está definida.');
     }
-
-    /**
-     * Procesa los datos del formulario.
-     *
-     * @param string[] $datos Datos enviado por el usuario (normalmente <code>$_POST</code>).
-     *
-     * @return string|string[] Devuelve el resultado del procesamiento del formulario, normalmente una URL a la que
-     * se desea que se redirija al usuario, o un array con los errores que ha habido durante el procesamiento del formulario.
-     */
-    protected function procesaFormulario($datos)
-    {
-        //Tiene que devolver una lista de errores si no. Función de abajo
-        return array();
+    
+    $result = TRUE;
+    
+    if ( isset($_SESSION[$formId.'_'.self::CSRF_PARAM]) ) {
+      if ( $_SESSION[$formId.'_'.self::CSRF_PARAM] !== $tokenRecibido ) {
+        $result = array();
+        $result[] = 'Has enviado el formulario dos veces';
+      }
+      $_SESSION[$formId.'_'.self::CSRF_PARAM] = ' ';
+      unset($_SESSION[$formId.'_'.self::CSRF_PARAM]);
+    } else {
+      $result = array();
+      $result[] = 'Formulario no válido';
     }
-  
-    /**
-     * Función que verifica si el usuario ha enviado el formulario.
-     * Comprueba si existe el parámetro <code>$formId</code> en <code>$params</code>.
-     *
-     * @param string[] $params Array que contiene los datos recibidos en el envío formulario.
-     *
-     * @return boolean Devuelve <code>true</code> si <code>$formId</code> existe como clave en <code>$params</code>
-     */
-    private function formularioEnviado(&$params)
-    {
-        return isset($params['action']) && $params['action'] == $this->formId;
-    } 
-
-    /**
-     * Función que genera el HTML necesario para el formulario.
-     *
-     * @param string[] $errores (opcional) Array con los mensajes de error de validación y/o procesamiento del formulario.
-     *
-     * @param string[] $datos (opcional) Array con los valores por defecto de los campos del formulario.
-     *
-     * @return string HTML asociado al formulario.
-     */
-    private function generaFormulario($errores = array(), &$datos = array())
-    {
-
-        $html= $this->generaListaErrores($errores);
-
-        $html .= '<form enctype="multipart/form-data" method="POST" action="'.$this->action.'" id="'.$this->formId.'" >';
-        $html .= '<input type="hidden" name="action" value="'.$this->formId.'" />';
-
-        $html .= $this->generaCamposFormulario($datos);
-        $html .= '</form>';
-        return $html;
-    }
-
-    /**
-     * Genera la lista de mensajes de error a incluir en el formulario.
-     *
-     * @param string[] $errores (opcional) Array con los mensajes de error de validación y/o procesamiento del formulario.
-     *
-     * @return string El HTML asociado a los mensajes de error.
-     */
-    private function generaListaErrores($errores)
-    {
-        $html='';
-        $numErrores = count($errores);
-        if (  $numErrores == 1 ) {
-            $html .= "<ul><li>".$errores[0]."</li></ul>";
-        } else if ( $numErrores > 1 ) {
-            $html .= "<ul><li>";
-            $html .= implode("</li><li>", $errores);
-            $html .= "</li></ul>";
-        }
-        return $html;
-    }
+      return $result;
+  }
 }

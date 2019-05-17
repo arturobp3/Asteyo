@@ -1,8 +1,7 @@
 <?php
 
 //Inicio del procesamiento
-require_once("includes/config.php");
-require_once("includes/FormularioAdmin.php");
+require_once __DIR__.'/includes/config.php';
 
 ?>
 
@@ -31,8 +30,8 @@ require_once("includes/FormularioAdmin.php");
 					<h2>GESTIONAR MODERADORES</h2>
 
 					<?php
-						$formulario = new formularioAdmin("registro", array('action' => 'admin.php'));
-						$formulario->gestiona();
+						$formulario = new \es\ucm\fdi\aw\formularioAdmin("registro", array('action' => 'admin.php'));
+						echo $formulario->gestiona();
 					?>
 				</div>
 

@@ -1,10 +1,10 @@
 <?php
 	
-	require_once('config.php');
-	require_once('Aplicacion.php');
+	namespace es\ucm\fdi\aw;
+	require_once __DIR__.'/config.php';
 
-	$app = Aplicacion::getInstance();
-	$conn = $app->conexionBD();
+	$app = Aplicacion::getSingleton();
+    $conn = $app->conexionBD();
 	
 	
 	

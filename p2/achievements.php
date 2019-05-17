@@ -1,12 +1,8 @@
 <?php
 
+namespace es\ucm\fdi\aw;
 //Inicio del procesamiento
-require_once("includes/config.php");
-require_once("includes/Meme.php");
-require_once("includes/usuario.php");
-require_once("includes/aplicacion.php");
-require_once("includes/Logros.php");
-
+require_once __DIR__.'/includes/config.php';
 ?>
 
 <!DOCTYPE html>

@@ -2,10 +2,8 @@
 
 //Este fichero se encarga de guardar la información recibida por AJAX
 //del comentario, en la base de datos
-
-require_once("./config.php");
-require_once('./Aplicacion.php');
-require_once('./Comentarios.php');
+namespace es\ucm\fdi\aw;
+require_once __DIR__.'/config.php';
 
 
 $error = '';
@@ -27,7 +25,7 @@ else{
     $id_comment = isset($_POST['id_comment']) ? $_POST['id_comment'] : null;
     $autorComentario = isset($_POST['autorComentario']) ? $_POST['autorComentario'] : null;
 
-    $app = Aplicacion::getInstance();
+    $app = Aplicacion::getSingleton();
     $conn = $app->conexionBD();
 
     $consultaID = sprintf("SELECT U.id

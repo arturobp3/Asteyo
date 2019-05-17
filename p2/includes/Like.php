@@ -1,5 +1,8 @@
 <?php
-require_once('Aplicacion.php');
+
+namespace es\ucm\fdi\aw;
+
+
 
 class Like{
 	
@@ -21,7 +24,7 @@ class Like{
 
 	/* look if the pair user-meme is already in the liked table */
 	public static function searchLike($like){
-		$app = Aplicacion::getInstance();
+		$app = Aplicacion::getSingleton();
 		$conn = $app->conexionBD();
 		$query = sprintf("SELECT * FROM megustas WHERE id_user='%d' AND id_meme = '%d'"
 				, $conn->real_escape_string($like->idUser)
@@ -44,7 +47,7 @@ class Like{
 	public static function addLike($like){
 
 		
-		$app = Aplicacion::getInstance();
+		$app = Aplicacion::getSingleton();
 		$conn = $app->conexionBD();
 
 		$query = sprintf("INSERT INTO megustas(id_user, id_meme) VALUES ('%s', '%s')"
@@ -69,7 +72,7 @@ class Like{
 
 	/* remove the like given to a meme */
 	public static function removeLike($like){
-		$app = Aplicacion::getInstance();
+		$app = Aplicacion::getSingleton();
 		$conn = $app->conexionBD();
 
 		$query = sprintf("DELETE FROM megustas WHERE id_user='%s' AND id_meme = '%s'"

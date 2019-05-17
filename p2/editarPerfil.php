@@ -1,8 +1,7 @@
 <?php
 
 //Inicio del procesamiento
-require_once("includes/config.php");
-require_once("includes/FormularioEdit.php");
+require_once __DIR__.'/includes/config.php';
 
 ?>
 
@@ -32,8 +31,8 @@ require_once("includes/FormularioEdit.php");
 					<h4>Solo rellena los campos que quieras modificar</h4>
 
 					<?php
-						$formulario = new formularioEdit("edit", array( 'action' => 'editarPerfil.php'));
-						$formulario->gestiona();
+						$formulario = new \es\ucm\fdi\aw\formularioEdit("edit", array( 'action' => 'editarPerfil.php'));
+						echo $formulario->gestiona();
 					?>
 				</div>
 

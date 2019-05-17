@@ -1,10 +1,11 @@
 <?php
 
+namespace es\ucm\fdi\aw;
 //Inicio del procesamiento
-require_once("includes/config.php");
-require_once("includes/Meme.php");
-require_once("includes/usuario.php");
-require_once("includes/vistaReports.php");
+
+require_once __DIR__.'/includes/config.php';
+
+$app->doInclude("/vistaReports.php");
 ?>
 
 <!DOCTYPE html>
@@ -14,7 +15,7 @@ require_once("includes/vistaReports.php");
 	<link rel="stylesheet" type="text/css" href="assets/css/index.css" />
 	<!--script type="text/javascript" src="./assets/js/reports.js"></script-->
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<title>Inicio | Asteyo</title>
+	<title>Reportes | Asteyo</title>
 </head>
 
 <body>
@@ -39,7 +40,7 @@ require_once("includes/vistaReports.php");
 			echo	"</div>";
 			echo "<div id='caja'>
 					<h3>Reports de Memes</h3>";
-			getMemeReports();
+					getMemeReports();
 			echo "</div>";
 			
         ?>	

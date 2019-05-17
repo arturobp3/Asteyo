@@ -1,6 +1,6 @@
 <?php
 
-require_once('Aplicacion.php');
+namespace es\ucm\fdi\aw;
 
 class Usuario {
 
@@ -43,8 +43,7 @@ class Usuario {
     /* Devuelve un objeto Usuario con la información del usuario $username,
      o false si no lo encuentra*/
     public static function buscaUsuario($username){
-        $app = Aplicacion::getInstance();
-        $conn = $app->conexionBD();
+        $conn = \es\ucm\fdi\aw\Aplicacion::getSingleton()->conexionBD();
 
         $query = sprintf("SELECT * FROM users U WHERE U.username = BINARY '%s'", $conn->real_escape_string($username));
         $rs = $conn->query($query);
@@ -98,8 +97,7 @@ class Usuario {
     }
     
     private static function inserta($usuario){
-        $app = Aplicacion::getInstance();
-        $conn = $app->conexionBD();
+       $conn = \es\ucm\fdi\aw\Aplicacion::getSingleton()->conexionBD();
         $query=sprintf("INSERT INTO users(username, email, password, rol) VALUES('%s', '%s', '%s', '%s')"
             , $conn->real_escape_string($usuario->username)
             , $conn->real_escape_string($usuario->email)
@@ -116,8 +114,7 @@ class Usuario {
     }
     
     public static function update($usuario){
-        $app = Aplicacion::getInstance();
-        $conn = $app->conexionBD();
+        $conn = \es\ucm\fdi\aw\Aplicacion::getSingleton()->conexionBD();
         $query=sprintf("UPDATE users U SET U.username = '%s', U.email='%s', U.password='%s', U.rol='%s' WHERE U.id=%d"
             , $conn->real_escape_string($usuario->username)
             , $conn->real_escape_string($usuario->email)
@@ -138,8 +135,7 @@ class Usuario {
     }
 
     public static function cambiarRol($rol, $username){
-        $app = Aplicacion::getInstance();
-        $conn = $app->conexionBD();
+        $conn = \es\ucm\fdi\aw\Aplicacion::getSingleton()->conexionBD();
         $query=sprintf("UPDATE users U SET U.rol='%s' WHERE U.username='%s'"
             , $conn->real_escape_string($rol)
             , $conn->real_escape_string($username));
@@ -160,8 +156,7 @@ class Usuario {
 
     public static function memes($username){
         $usuario = self::buscaUsuario($username);
-        $app = Aplicacion::getInstance();
-        $conn = $app->conexionBD();
+        $conn = \es\ucm\fdi\aw\Aplicacion::getSingleton()->conexionBD();
         $query=sprintf("SELECT * FROM memes WHERE id_autor= '%s' ORDER BY id_meme DESC", $conn->real_escape_string($usuario->id()));
         $rs = $conn->query($query);
         $rt=false;
@@ -191,15 +186,14 @@ class Usuario {
     public static function top10(){
         $users = self::numUsers();
         for($i=0; $i< $users; $i++){
-        	$user=self::buscaId($i+1);
-        	if ($user) {
-        		$mg=self::numMegustas($i+1);
-            	$rt[]=array(
-              		'mg' => $mg,
-               		'user' => $user
-            	);
-        	}else $users++;
-            
+         $user=self::buscaId($i+1);
+            if ($user) {
+                $mg=self::numMegustas($i+1);
+                $rt[]=array(
+                    'mg' => $mg,
+                    'user' => $user
+                );
+            }else $users++;   
         }
 
         arsort($rt);
@@ -210,8 +204,7 @@ class Usuario {
     }
 
     public static function buscaId($id){
-        $app = Aplicacion::getInstance();
-        $conn = $app->conexionBD();
+        $conn = \es\ucm\fdi\aw\Aplicacion::getSingleton()->conexionBD();
 
         $query = sprintf("SELECT username FROM users U WHERE U.id = '%s'", $conn->real_escape_string($id));
         $rs = $conn->query($query);
@@ -230,8 +223,7 @@ class Usuario {
     }
 
     public static function numMegustas($id){
-        $app =Aplicacion::getInstance();
-        $conn= $app->conexionBD();
+        $conn = \es\ucm\fdi\aw\Aplicacion::getSingleton()->conexionBD();
         $query = sprintf("SELECT num_megustas FROM memes WHERE id_autor=".$id);
         $rs = $conn->query($query);
 
@@ -251,8 +243,7 @@ class Usuario {
     
 
     public static function numUsers(){
-        $app =Aplicacion::getInstance();
-        $conn= $app->conexionBD();
+        $conn = \es\ucm\fdi\aw\Aplicacion::getSingleton()->conexionBD();
         $query = sprintf("SELECT id FROM users");
         $rs = $conn->query($query);
         if (!$rs){
@@ -269,6 +260,7 @@ class Usuario {
 		else if($i==2)	$span = "<span>\u{1F948}</span>";
 		else if($i==3)	$span = "<span>\u{1F949}</span>";
 						
+        
         return 
         "<div id='info'>
             ".$span."

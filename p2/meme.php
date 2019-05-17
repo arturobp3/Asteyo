@@ -1,10 +1,7 @@
 <?php
 
 //Inicio del procesamiento
-require_once("includes/config.php");
-require_once("includes/Meme.php");
-require_once("includes/usuario.php");
-
+require_once __DIR__.'/includes/config.php';
 ?>
 
 <!DOCTYPE html>
@@ -35,7 +32,7 @@ require_once("includes/usuario.php");
             if(isset($_GET['userName']) && isset($_GET['id'])){
 
                 $userName = $_GET['userName'];
-                $usuario = Usuario::buscaUsuario($userName);
+                $usuario = es\ucm\fdi\aw\Usuario::buscaUsuario($userName);
                 $uID = $usuario->id();
                 $uName = $usuario->username();
                 $id_meme = $_GET['id'];
@@ -43,7 +40,7 @@ require_once("includes/usuario.php");
 
                 if (file_exists($url)) {
                     //Obtiene la información relevante del meme para mostrarla.
-                    $info_meme = Meme::getMeme($id_meme);
+                    $info_meme = es\ucm\fdi\aw\Meme::getMeme($id_meme);
                     $title = $info_meme->titulo();
                     $num_likes = $info_meme->num_megustas();
                     $date = $info_meme->fechaSubida();

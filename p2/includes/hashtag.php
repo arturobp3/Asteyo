@@ -1,5 +1,5 @@
 <?php
-require_once('Aplicacion.php');
+namespace es\ucm\fdi\aw;
 
 class Hashtag {
 
@@ -39,8 +39,7 @@ class Hashtag {
     }
 
     public static function searchHashtag($hashtag){
-        $app = Aplicacion::getInstance();
-        $conn = $app->conexionBD();
+        $conn = Aplicacion::getSingleton()->conexionBD();
 
 
         $query = sprintf("SELECT * FROM hashtags U WHERE U.name = '%s'", $conn->real_escape_string($hashtag->name()));
@@ -63,8 +62,7 @@ class Hashtag {
 
 
     private static function createRelation($hashtag){
-        $app = Aplicacion::getInstance();
-        $conn = $app->conexionBD();
+        $conn = Aplicacion::getSingleton()->conexionBD();
 
         $query=sprintf("INSERT INTO hashtag_meme(name_hash, id_meme)
                             VALUES('%s', '%s')",
@@ -79,8 +77,7 @@ class Hashtag {
     }
 
     private static function insert($hashtag){
-        $app = Aplicacion::getInstance();
-        $conn = $app->conexionBD();
+       $conn = Aplicacion::getSingleton()->conexionBD();
 
         $query=sprintf("INSERT INTO hashtags(name, n_memes, n_mg) VALUES('%s', '%d', '%d')"
             , $conn->real_escape_string($hashtag->name)
@@ -111,8 +108,7 @@ class Hashtag {
     //Elimina un meme de la base de datos (Funcion creada para el administrador)
     public static function eliminar($meme){
         
-        $app = Aplicacion::getInstance();
-        $conn = $app->conexionBD();
+       $conn = Aplicacion::getSingleton()->conexionBD();
 
 
         //Borramos el meme asociado a la tablas memes
@@ -131,9 +127,7 @@ class Hashtag {
 
     /* Esta funcion debe actualizar el numero de memes asociados a un hashtag */
     public static function update($hashtag){
-
-        $app = Aplicacion::getInstance();
-        $conn = $app->conexionBD();
+        $conn = Aplicacion::getSingleton()->conexionBD();
 
         $hashtag->n_memes+=1;
 
@@ -154,8 +148,7 @@ class Hashtag {
     }
     
     public static function deleteMeme ($nameHash, $nMg){
-        $app = APlicacion::getInstance();
-        $conn = $app->conexionBD();
+        $conn = Aplicacion::getSingleton()->conexionBD();
 
         $query =sprintf("UPDATE hashtags H SET H.n_memes= H.n_memes-1 , H.n_mg = H.n_mg-'%d' WHERE h.name = '%s'"
                         , $conn->real_escape_string($nMg)
@@ -174,8 +167,7 @@ class Hashtag {
     //Esta funcion debe actualizar el numero de likes asociados a un hashtag
     public static function updateLikes($hashtag, $accion){
         
-        $app = Aplicacion::getInstance();
-        $conn = $app->conexionBD();
+       $conn = Aplicacion::getSingleton()->conexionBD();
 
         if ($accion === "add") {
             $query=sprintf("UPDATE hashtags H SET H.n_mg = H.n_mg + 1 WHERE H.name='%s'"
@@ -202,8 +194,7 @@ class Hashtag {
 
 
     public static function hashtagsMeme($idMeme){
-        $app = Aplicacion::getInstance();
-        $conn = $app->conexionBD();
+        $conn = Aplicacion::getSingleton()->conexionBD();
 
         $query = sprintf("SELECT * FROM hashtag_meme WHERE id_meme = '%s' ", $conn->real_escape_string($idMeme));
         $rs = $conn->query($query);
@@ -215,6 +206,7 @@ class Hashtag {
                 $rt=array();
                 $i = 0;
                 while($row = mysqli_fetch_assoc($rs)){
+                    
                     $rt[$i] = $row['name_hash'];
                     $i = $i + 1;
                 }

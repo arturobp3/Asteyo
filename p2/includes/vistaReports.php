@@ -3,14 +3,11 @@
 //Este fichero se encarga de guardar la información recibida por AJAX
 //de los reports, en la base de datos
 
-require_once('config.php');
-require_once('Aplicacion.php');
-require_once('Comentarios.php');
+namespace es\ucm\fdi\aw;
 
 
 function getMemeReports(){
-	$app = Aplicacion::getInstance();
-	$conn = $app->conexionBD();
+	$conn = Aplicacion::getSingleton()->conexionBD();
 
 	$query = sprintf("SELECT U.id_report, U.cause, U.id_meme, V.usr_reported, W.username
                 FROM me_reports U JOIN reports V ON U.id_report=V.id_report
@@ -42,8 +39,7 @@ function getMemeReports(){
 }
 
 function getUserReports(){
-	$app = Aplicacion::getInstance();
-	$conn = $app->conexionBD();
+	$conn = Aplicacion::getSingleton()->conexionBD();
 
 	$query = sprintf("SELECT U.id_report, U.cause, V.usr_reported, W.username
                 FROM usr_reports U JOIN reports V ON U.id_report=V.id_report JOIN users W ON V.usr_reported=W.id");
@@ -70,8 +66,7 @@ function getUserReports(){
 }
 
 function getCommentReports(){
-	$app = Aplicacion::getInstance();
-	$conn = $app->conexionBD();
+	$conn = Aplicacion::getSingleton()->conexionBD();
 
 	$query = sprintf("SELECT U.id_report, U.cause, X.texto, W.username, U.id_comment
                 FROM co_reports U JOIN reports V ON U.id_report=V.id_report JOIN users W ON V.usr_reported=W.id

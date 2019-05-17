@@ -1,6 +1,6 @@
 <?php
 
-require_once('Logros.php');
+namespace es\ucm\fdi\aw;
 
 class Comentarios{
 
@@ -21,8 +21,8 @@ class Comentarios{
 
     public function addComment(){
 
-        $app = Aplicacion::getInstance();
-        $conn = $app->conexionBD();
+        $app = Aplicacion::getSingleton();
+    $conn = $app->conexionBD();
         
         $query=sprintf("INSERT INTO comments(id_autor, id_meme, texto, c_date)
                         VALUES('%s', '%s', '%s', '%s')",
@@ -77,7 +77,7 @@ class Comentarios{
 
 
     public function deleteComment($id_comment){
-        $app = Aplicacion::getInstance();
+        $app = Aplicacion::getSingleton();
         $conn = $app->conexionBD();
         
         $query=sprintf("DELETE FROM comments
@@ -94,7 +94,7 @@ class Comentarios{
     }
 
     public function deleteCommentsMeme($idMeme){
-        $app = Aplicacion::getInstance();
+        $app = Aplicacion::getSingleton();
         $conn = $app->conexionBD();
 
         $query = sprintf("DELETE FROM comments WHERE id_meme = '%s'", $idMeme);
@@ -106,7 +106,7 @@ class Comentarios{
     }
 
     public function reportComment($id_autor_comment, $id_session, $id_comment, $cause){
-        $app = Aplicacion::getInstance();
+        $app = Aplicacion::getSingleton();
         $conn = $app->conexionBD();
         
         $query=sprintf("INSERT INTO reports(usr_that_reports, usr_reported)

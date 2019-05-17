@@ -1,14 +1,12 @@
 <?php
 
-require_once('Aplicacion.php');
-require_once('usuario.php');
+namespace es\ucm\fdi\aw;
 
 class Logros{
 
     public static function logroSubir($datetime, $id_autor){
         //Conexión con la base de datos
-        $app = Aplicacion::getInstance();
-        $conn = $app->conexionBD();
+        $conn = Aplicacion::getSingleton()->conexionBD();
 
         $achievement = "submemes";
         /*Hace la suma de todos los likes del autor*/
@@ -44,8 +42,7 @@ class Logros{
 
     public static function logroComentar($datetime, $id_autor){
         //Cinexión con la base de datos
-        $app = Aplicacion::getInstance();
-        $conn = $app->conexionBD();
+        $conn = Aplicacion::getSingleton()->conexionBD();
 
         $achievement = "comentavario";
 
@@ -84,8 +81,7 @@ class Logros{
 
     public static function logroMeGusta($datetime, $id_meme){
 
-        $app = Aplicacion::getInstance();
-        $conn = $app->conexionBD();
+       $conn = Aplicacion::getSingleton()->conexionBD();
 
         $achievement = "nummg";
 
@@ -135,8 +131,7 @@ class Logros{
         //Buscamos sus datos en la bbdd
         $usuario = Usuario::buscaUsuario($username);
 
-        $app = Aplicacion::getInstance();
-        $conn = $app->conexionBD();
+        $conn = Aplicacion::getSingleton()->conexionBD();
         //Coge si existe el usuario en la tabla de logros con el nombre del meme
         $query = sprintf("SELECT * 
                             FROM achievement

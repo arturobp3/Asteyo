@@ -1,7 +1,6 @@
 var disable = 0;
-
 function deleteMeme(id){
-    if (disable == 0) {
+ if (disable == 0) {
         disable = 1;
         var r = confirm("¿Seguro que quiere borrar su meme?");
         if (r == true) {
@@ -22,7 +21,9 @@ function deleteMeme(id){
                         disable = 0;
                      }
                 }
+                 
             });
         }
-    }
+
+    } 
 }

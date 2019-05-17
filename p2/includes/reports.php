@@ -3,10 +3,8 @@
 //Este fichero se encarga de guardar la información recibida por AJAX
 //de los reports, en la base de datos
 
-require_once("./config.php");
-require_once('./Aplicacion.php');
-require_once('./Comentarios.php');
-
+namespace es\ucm\fdi\aw;
+require_once __DIR__.'/config.php';
 
 $error = '';
 $html = '';
@@ -21,8 +19,7 @@ $accion = isset($_POST['accion']) ? $_POST['accion'] : null;
 $id_meme = isset($_POST['id_meme']) ? $_POST['id_meme'] : null;
 
 
-$app = Aplicacion::getInstance();
-$conn = $app->conexionBD();
+$conn = Aplicacion::getSingleton()->conexionBD();
 
 $consultaID = sprintf("SELECT U.id
                 FROM users U

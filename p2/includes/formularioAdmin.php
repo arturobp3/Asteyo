@@ -1,9 +1,6 @@
 <?php
 
-require_once('Form.php');
-require_once('usuario.php');
-require_once('Meme.php');
-require_once('Hashtag.php');
+namespace es\ucm\fdi\aw;
 
 
 class formularioAdmin extends Form{

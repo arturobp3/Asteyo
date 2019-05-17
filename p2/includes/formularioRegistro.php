@@ -1,7 +1,6 @@
 <?php
 
-require_once('Form.php');
-require_once('usuario.php');
+namespace es\ucm\fdi\aw;
 
 class formularioRegistro extends Form{
 
@@ -91,7 +90,8 @@ class formularioRegistro extends Form{
                 $_SESSION['login'] = true;
                 $_SESSION['nombre'] = $username;
                 $_SESSION['esUser'] = strcmp($usuario->rol(), 'normal') == 0 ? true : false;
-
+                $_SESSION['esModerador'] = false;
+                $_SESSION['esAdmin'] = false;
                 //header('Location: index.php');
 
                 /*Crea la carpeta correspondiente al usuario en /mysql/img/ (relacionado con
