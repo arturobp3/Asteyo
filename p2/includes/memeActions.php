@@ -6,7 +6,7 @@ require_once __DIR__.'/config.php';
 
 if($_POST['accion'] === "delete"){
 	  
-    $meme = Meme::buscaMeme($_POST['idMeme']);
+    $meme = Meme::getMeme($_POST['idMeme']);
     $success = Meme::eliminar($meme);
     if ($success) {
         echo json_encode(array('success' => true));

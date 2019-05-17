@@ -84,10 +84,6 @@ class Meme {
             
         }
 
-
-        
-        Comentarios::deleteCommentsMeme($meme->id);
-
         //Borramos el meme asociado a la tablas memes
         $query=sprintf("DELETE FROM memes WHERE id_meme='%d'", $conn->real_escape_string($meme->id));
 
@@ -266,28 +262,6 @@ class Meme {
 
         return $result;
     }
-
-    public static function buscaMeme($id){
-        $conn = Aplicacion::getSingleton()->conexionBD();
-
-        $query = sprintf("SELECT * FROM memes U WHERE U.id_meme = BINARY '%s'", $conn->real_escape_string($id));
-        $rs = $conn->query($query);
-        $result = false;
-        if ($rs) {
-            if ( $rs->num_rows == 1) {
-                $fila = $rs->fetch_assoc();
-                $meme = new Meme($fila['title'], $fila['num_megustas'], $fila['id_autor'], $fila['upload_date']);
-                $meme->id = $fila['id_meme'];
-                $result = $meme;
-            }
-            $rs->free();
-        } else {
-            echo "Error al consultar en la BD: (" . $conn->errno . ") " . utf8_encode($conn->error);
-            exit();
-        }
-        return $result;
-    }
-
 
     //Devuelve los memes que utilicen dicho hashtag (UTILIZADO EN EL BUSCADOR)
     public static function searchMemeHashtag($nombreHashtag){

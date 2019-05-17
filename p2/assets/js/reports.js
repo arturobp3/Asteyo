@@ -23,7 +23,7 @@ function reportarComentario(autorComentario, id_comment, cause){
                     $('#mensaje').html(response.error);
                 }
             }
-        });
+        }); 
 
     });
 }

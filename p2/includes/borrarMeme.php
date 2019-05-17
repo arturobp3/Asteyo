@@ -21,7 +21,7 @@
 		$delete = sprintf("DELETE FROM reports WHERE id_report='%d'",
 				$fila['id_report']);
 		if($resultado = $conn->query($delete)){
-			$meme = Meme::buscaMeme($_GET['id_meme']);
+			$meme = Meme::getMeme($_GET['id_meme']);
 			$delete = Meme::eliminar($meme);
 			
 			
