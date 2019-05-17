@@ -90,6 +90,8 @@ class formularioRegistro extends Form{
             } else {
                 $_SESSION['login'] = true;
                 $_SESSION['nombre'] = $username;
+                $_SESSION['esUser'] = strcmp($usuario->rol(), 'normal') == 0 ? true : false;
+
                 //header('Location: index.php');
 
                 /*Crea la carpeta correspondiente al usuario en /mysql/img/ (relacionado con

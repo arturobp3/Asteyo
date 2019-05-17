@@ -2,6 +2,7 @@
 	
 	require_once('config.php');
 	require_once('Aplicacion.php');
+	require_once('meme.php');
 
 	$app = Aplicacion::getInstance();
 	$conn = $app->conexionBD();
@@ -21,9 +22,8 @@
 		$delete = sprintf("DELETE FROM reports WHERE id_report='%d'",
 				$fila['id_report']);
 		if($resultado = $conn->query($delete)){
-			$delete = sprintf("DELETE FROM memes WHERE id_meme='%d'",
-				$_GET['id_meme']);
-			$conn->query($delete);
+			$meme = Meme::buscaMeme($_GET['id_meme']);
+			$delete = Meme::eliminar($meme);
 			
 			unlink('../uploads/'.$fila['id_autor'].'/'.$_GET['id_meme']);
 			

@@ -141,7 +141,7 @@
 	border-bottom-right-radius: 8px;
 }
 
-.principal #contenido #meme-taInfo button{
+.principal #contenido #meme-taInfo input{
 	border: none;
 	background-color: white;
 	cursor: pointer;

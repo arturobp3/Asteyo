@@ -80,15 +80,20 @@
 									$info_meme = Meme::getMeme($value[2]);
 									$comments = $info_meme->comentarios();
 									$num_comments = sizeof($comments);
-									echo <<< END
-									<div id="meme">
-										<img id="imagen-meme"src=$meme>
-										<div id ="meme-taInfo">
-											<p> <b>$value[0]</b></p>
-											<p>$value[1] <span style='color:red;'>\u{2764}</span> $num_comments <span>\u{1F4AC}</span> <button type='button'  onclick='deleteMeme($value[2])'>\u{1F6AE}</button></p>
+									echo "
+									<div id='meme'>
+										<img id='imagen-meme'src=".$meme.">
+										<div id ='meme-taInfo'>
+											<p> <b>".$value[0]."</b></p>
+											<p>".$value[1]." <span style='color:red;'>\u{2764}</span> ".$num_comments." <span>\u{1F4AC}</span>";
+											if (isset($_SESSION['login']) && ($_SESSION['esUser'] || $_SESSION['esModerador'])
+												&& $_SESSION['nombre'] === $uUsername) {
+												echo " <input type='submit' value='\u{1F6AE}' onclick='deleteMeme(".$value[2].")'></button>";
+											}
+											echo "</p>
 										</div>
-									</div>
-									END;
+									</div>"
+									;
 								}
 							}
 						?>

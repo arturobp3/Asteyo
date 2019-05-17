@@ -83,28 +83,21 @@ class Meme {
         $conn = $app->conexionBD();
 
         $hashtags=Hashtag::hashtagsMeme($meme->id);
-        var_dump($hashtags);
         foreach($hashtags as $key=>$value){
-            var_dump($meme);
             if($meme->num_megustas>0){
                 Hashtag::deleteMeme($value,$meme->num_megustas);
             }
             
         }
-        var_dump("Hash bien");
         Comentarios::deleteCommentsMeme($meme->id);
 
         //Borramos el meme asociado a la tablas memes
         $query=sprintf("DELETE FROM memes WHERE id_meme='%d'", $conn->real_escape_string($meme->id));
-
         if (! $conn->query($query) ){
             echo "Error al borrar en la BD: (" . $conn->errno . ") " . utf8_encode($conn->error);
             exit();
             return false;
         } 
-        
-        unset($meme);
-
         return true;
     }
     

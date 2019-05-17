@@ -215,7 +215,6 @@ class Hashtag {
                 $rt=array();
                 $i = 0;
                 while($row = mysqli_fetch_assoc($rs)){
-                    var_dump($row['name_hash']);
                     $rt[$i] = $row['name_hash'];
                     $i = $i + 1;
                 }

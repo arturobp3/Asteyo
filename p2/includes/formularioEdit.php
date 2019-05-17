@@ -123,23 +123,21 @@ class formularioEdit extends Form{
 
                 $hacerUpdate=true;
 
-                $carpetaVieja='./uploads/'.$_SESSION['nombre'];
-                $carpetaNueva='./uploads/'.$username;
-                rename($carpetaVieja, $carpetaNueva);
-
                 echo "Nombre de usuario cambiado correctamente";
 
                 $_SESSION['nombre']=$username;
             }
 
             if($cambioImagen){
+                $usuario = Usuario::buscaUsuario($_SESSION['nombre']);
+                $uId = $usuario->id();
                 //Nombre temporal de la ruta en la cual se almacena el fichero subido.
                 $imagetemp = $_FILES["imagen"]["tmp_name"];
 
                 //Borramos la foto antigua: ./uploads/nombre/fotoPerfil.Extension
-                if (file_exists('./uploads/'.$_SESSION['nombre'].'/fotoPerfil.jpg')) {
-                    if(unlink('./uploads/'.$_SESSION['nombre'].'/fotoPerfil.jpg')){
-                        if(move_uploaded_file($imagetemp,"uploads/".$_SESSION['nombre']."/fotoPerfil.jpg")){
+                if (file_exists('./uploads/'.$uId.'/fotoPerfil.jpg')) {
+                    if(unlink('./uploads/'.$uId.'/fotoPerfil.jpg')){
+                        if(move_uploaded_file($imagetemp,"uploads/".$uId."/fotoPerfil.jpg")){
                             echo "Imagen cambiada correctamente";
                         }
                         else{
@@ -151,7 +149,7 @@ class formularioEdit extends Form{
                     }
                 }
                 else{
-                    if(move_uploaded_file($imagetemp,"uploads/".$_SESSION['nombre']."/fotoPerfil.jpg")){
+                    if(move_uploaded_file($imagetemp,"uploads/".$uId."/fotoPerfil.jpg")){
                         echo "Imagen subida correctamente";
                     }
                     else{
@@ -165,7 +163,6 @@ class formularioEdit extends Form{
                 $usuario->guarda($usuario);
 
             }
-            #return "index.php";
             
         }
 

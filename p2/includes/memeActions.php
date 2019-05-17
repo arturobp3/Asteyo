@@ -7,9 +7,8 @@ require_once('meme.php');
 
 if($_POST['accion'] === "delete"){
     $meme = Meme::buscaMeme($_POST['idMeme']);
-    $succes = Meme::eliminar($meme);
-    var_dump($succes);
-    if ($succes) {
+    $success = Meme::eliminar($meme);
+    if ($success) {
         echo json_encode(array('success' => true));
     }
     else {

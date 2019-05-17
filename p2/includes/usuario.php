@@ -191,12 +191,15 @@ class Usuario {
     public static function top10(){
         $users = self::numUsers();
         for($i=0; $i< $users; $i++){
-            $mg=self::numMegustas($i+1);
-            $user=self::buscaId($i+1);
-            $rt[]=array(
-                'mg' => $mg,
-                'user' => $user
-            );
+        	$user=self::buscaId($i+1);
+        	if ($user) {
+        		$mg=self::numMegustas($i+1);
+            	$rt[]=array(
+              		'mg' => $mg,
+               		'user' => $user
+            	);
+        	}else $users++;
+            
         }
 
         arsort($rt);
@@ -266,7 +269,6 @@ class Usuario {
 		else if($i==2)	$span = "<span>\u{1F948}</span>";
 		else if($i==3)	$span = "<span>\u{1F949}</span>";
 						
-        
         return 
         "<div id='info'>
             ".$span."
